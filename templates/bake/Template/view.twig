@@ -1,0 +1,523 @@
+{#
+/**
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
+ * @since         2.0.0
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+ */
+#}
+<?php
+/**
+ * @var \{{ namespace }}\View\AppView $this
+ * @var \{{ entityClass }} ${{ singularVar }}
+ */
+use Cake\Core\Configure;
+
+$prefix = strtolower( $this->request->getParam('prefix') ?? '' );
+$controller = $this->request->getParam('controller');
+$action = $this->request->getParam('action');
+
+$global_config = Configure::read('Theme.' . $prefix . '.config.view');
+$local_config = [
+	// #################################### More config params in: \JeffAdmin5\config\config.php ####################################
+	//'show_related_tables'	=> false,
+	//'show_id' 			=> false,	// for view form
+	//'show_pos' 	 		=> false,	// for view form
+	//'show_counters' 		=> false,	// for view form
+	//'index_show_id' 		=> false,	// for related tables
+	//'index_show_visible' 	=> false,	// for related tables
+	//'index_show_counters'	=> false,	// for related tables
+];
+$config = array_merge($global_config, $local_config);
+?>
+{% set commentXXX	= '// ' %}
+{% set associations = {'BelongsTo': [], 'HasOne': [], 'HasMany': [], 'BelongsToMany': []}|merge(associations) %}
+{% set fieldsData = Bake.getViewFieldsData(fields, schema, associations) %}
+{% set associationFields = fieldsData.associationFields %}
+{% set groupedFields = fieldsData.groupedFields %}
+{% set pK = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
+{% set done = [] %}
+				<div class="view row">
+					<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+						<div class="card mb-3">
+
+							<div class="card-header">
+								<div class="float-start">
+									<h3><i class="fa fa-plus"></i> <?= __('{{ action|humanize }}') ?>: <?= __('{{ singularHumanName }}') ?></h3>
+									<?= __('The data marked with * must be provided!') ?>
+								</div>
+								<div class="float-end ms-5">
+									<?= $this->Html->link('<span class="btn btn-outline-secondary mt-1 me-1"><i class="fa fa-times"></i></span>',
+										["controller" => "{{ pluralHumanName }}", "action" => "index", "_full" => true],
+										["escape" => false, "role" => "button"]
+									); ?>
+								</div>
+
+								<div class="form-tab float-end">
+									<ul class="nav nav-tabs mt-1" id="myTab" role="tablist">
+										<li class="nav-item" role="presentation">
+											<button class="nav-link active" id="tab-first" data-bs-toggle="tab" data-bs-target="#tab-panel-first" type="button" role="tab" aria-controls="tab-panel-first" aria-selected="true"><?= __('Basic data') ?></button>
+										</li>
+
+{% if groupedFields.text %}
+{% for field in groupedFields.text %}
+										<li class="nav-item" role="presentation">
+											<button class="nav-link" id="tab{{ field|humanize }}" data-bs-toggle="tab" data-bs-target="#tabPanel{{ field|humanize }}" type="button" role="tab" aria-controls="tabPanel{{ field|humanize }}" aria-selected="false"><?= __('{{ field|humanize }}') ?></button>
+										</li>
+{% endfor %}
+{% endif %}
+
+<?php /*
+										<li class="nav-item" role="presentation">
+											<button class="nav-link" id="tab-more" data-bs-toggle="tab" data-bs-target="#tab-panel-more" type="button" role="tab" aria-controls="tab-panel-more" aria-selected="false"><?= __('More') ?></button>
+										</li>
+*/ ?>
+
+{% set hasRelatedTable = false %}
+{% set relations = associations.BelongsToMany|merge(associations.HasMany) %}
+{% for alias, details in relations %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+{% 	set hasRelatedTable = true %}
+{% endfor %}
+{% if hasRelatedTable == true %}
+										<li class="nav-item dropdown">
+											<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?= __('Related tables') ?></a>
+											<ul class="dropdown-menu">
+{% for alias, details in relations %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+<?php if (!empty(${{ singularVar }}->{{ details.property }})) : ?>
+												<li><?= $this->Html->link(__('{{ otherPluralHumanName }}') . '...', ['controller' => '{{ otherPluralHumanName }}', 'action' => 'index', 'parent', '{{ singularVar }}', {{ pK }}], ['class' => 'dropdown-item']) ?></li>
+<?php endif; ?>
+{% endfor %}
+											</ul>
+										</li>
+{% endif %}
+
+									</ul>
+								</div>
+
+							</div><!-- /card header -->
+							
+							<div class="card-body">
+								<form>
+									<div class="tab-content" id="tabContent"><!-- T.1. -->
+										
+										<div class="tab-pane fade show active" id="tab-panel-first" role="tabpanel" aria-labelledby="tab-first" tabindex="0">
+<?php if($config['show_id']){ ?>
+											<div class="row"><!-- 3. -->
+												<label class="col-sm-2 col-form-label text-start text-sm-end">#<?= __('id') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= $this->Number->format({{ pK }}) ?><!-- 0.a -->
+												</div>
+											</div>
+<?php } ?>
+{% if groupedFields['string'] %}
+{% for field in groupedFields['string'] %}
+{% if associationFields[field] is defined %}
+{% set details = associationFields[field] %}
+											<div class="row"><!-- 1. -->
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ details.property|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-2 link">
+													<?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?><span class="external-link-icon"><i class="fa fa-external-link" aria-hidden="true"></i></span>
+												</div>
+											</div>
+{% else %}
+											<div class="row"><!-- 2. -->
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= h(${{ singularVar }}->{{ field }}) ?>
+
+												</div>
+											</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if associations.HasOne %}
+{% for alias, details in associations.HasOne %}
+{% endfor %}
+{% endif %}
+{% if groupedFields.number %}
+{% for field in groupedFields.number %}
+{% if field not in ['id', 'pos'] and '_count' not in field %}
+											<div class="row"><!-- 3. -->
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-2">
+{% set columnData = Bake.columnData(field, schema) %}
+{% 	if columnData.null %}
+													<?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?><!-- 3.a -->
+{% 	else %}
+													<?= $this->Number->format(${{ singularVar }}->{{ field }}) ?><!-- 3.b -->
+{% 	endif %}
+												</div>
+											</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if groupedFields.date %}
+{% for field in groupedFields.date %}
+{% 		if field not in ['created', 'modified', 'updated'] %}
+											<div class="row"><!-- 4. -->
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= h(${{ singularVar }}->{{ field }}) ?>
+
+												</div>
+											</div>
+{% 		endif %}
+{% endfor %}
+{% endif %}
+{% if groupedFields.boolean %}
+{% 	for field in groupedFields.boolean %}
+{% 		if field not in ['visible'] %}
+											<div class="row"><!-- 5. -->
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= ${{ singularVar }}->{{ field }} ? __('Yes') : __('No'); ?>
+
+												</div>
+											</div>
+{% 		endif %}
+{% 	endfor %}
+{% endif %}
+{% if groupedFields.text %}
+{% for field in groupedFields.text %}
+<?php /*
+											<div class="row"><!-- 6. -->
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= $this->Text->autoParagraph(h(${{ singularVar }}->{{ field }})); ?>
+
+												</div>
+											</div>
+*/ ?>
+{% endfor %}
+{% endif %}
+{% if field == 'visible' %}
+<?php if($config['show_visible']){ ?>
+
+											<div class="row">
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('Visible') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= ${{ singularVar }}->visible ? '<span class="visible-yes">' . __('Yes') : '<span class="visible-no">' . __('No'); ?></span>
+												</div>
+											</div>
+<?php } ?>
+{% endif %}
+{% if field == 'pos' %}
+<?php if($config['show_pos']){ ?>
+
+											<div class="row">
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('Pos') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= $this->Number->format(${{ singularVar }}->pos) ?>
+
+												</div>
+											</div>
+<?php } ?>
+{% endif %}
+{% for field in groupedFields.number %}
+{% if '_count' in field %}
+<?php if($config['show_counters']){ ?>
+											<div class="row"><!-- counter helper -->
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-2">
+{% set columnData = Bake.columnData(field, schema) %}
+{% 	if columnData.null %}
+													<?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?><!-- 3.a -->
+{% 	else %}
+													<?= $this->Number->format(${{ singularVar }}->{{ field }}) ?><!-- 3.b -->
+{% 	endif %}
+												</div>
+											</div>
+<?php } ?>
+
+{% endif %}
+{% endfor %}
+{% if field == 'created' %}
+<?php if($config['show_created']){ ?>
+
+											<div class="row">
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('Created') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= h(${{ singularVar }}->created) ?>
+
+												</div>
+											</div>
+<?php } ?>
+{% endif %}
+{% if field == 'modified' %}
+<?php if($config['show_modified']){ ?>
+
+											<div class="row">
+												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('Modified') ?>:</label>
+												<div class="col-sm-10 p-2">
+													<?= h(${{ singularVar }}->modified) ?>
+
+												</div>
+											</div>
+<?php } ?>
+{% endif %}
+
+										</div><!-- /.1.TAB -->
+										
+{% if groupedFields.text %}
+{% for field in groupedFields.text %}
+										<!-- TAB for: {{ field|humanize }} text field -->
+										<div class="tab-pane fade" id="tabPanel{{ field|humanize }}" role="tabpanel" aria-labelledby="tab{{ field|humanize }}" tabindex="0">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="row">
+														<div id="readMore{{ field|humanize }}" class="col-sm-12 p-2 text read-more">
+															<?= $this->Text->autoParagraph(${{ singularVar }}->{{ field }}); ?>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- /.TAB for: {{ field|humanize }} text field-->
+										
+{% endfor %}
+{% endif %}
+
+<?php /*
+											
+										<div class="tab-pane fade" id="tab-panel-more" role="tabpanel" aria-labelledby="tab-more" tabindex="0">
+											<div class="row"><!-- T.3. -->
+												<div class="col-sm-12">
+													<h3>Tab 3 content</h3>
+													
+												</div>
+											</div>
+										</div><!-- /.3.TAB -->
+*/ ?>
+
+									</div><!-- /.TAB PANEL -->
+
+								</form>
+							</div><!-- /card body -->
+									
+						    <div class="card-footer">
+								<!--button type="submit" class="btn btn-outline-secondary">&larr;&nbsp;Vissza a listához</button-->
+							</div><!-- /card footer -->
+
+						</div><!-- end card-->
+                    </div>
+
+				</div>
+
+<?php /*
+	############################################################################################################################################################
+	#################################################################                  #########################################################################
+	#################################################################  Related tebles  #########################################################################
+	#################################################################                  #########################################################################
+	############################################################################################################################################################
+*/ ?>
+<?php if($config['show_related_tables']): ?>
+{% set hasRelatedTable = false %}
+{% set tabCounter = 0 %}
+{% set tabContentCounter = 0 %}
+{% set activeTabClass = '' %}
+{% set activeTabContentClass = '' %}
+{% set relations = associations.BelongsToMany|merge(associations.HasMany) %}
+{% for alias, details in relations %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+{% set hasRelatedTable = true %}
+{% endfor %}
+{% if hasRelatedTable == true %}
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<div class="card mb-3">
+
+							<div class="card-header">
+							
+								<div class="float-start">
+									<h3><i class="fa fa-table"></i> <?= __('Related tables') ?></h3>
+									<?= __('Here you can see the latest records related to the above item.') ?>
+								</div>
+
+								<div class="form-tab float-end">
+									<nav>
+										<div class="nav nav-tabs mt-1" id="nav-tab" role="tablist">
+{% set activeTabClass = '' %}
+{% for alias, details in relations %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+<?php if (!empty(${{ singularVar }}->{{ details.property }})): ?>
+{% set tabCounter = tabCounter + 1 %}
+{% 	set activeTabClass = '' %}
+{% if tabCounter == 1 %}
+{% 	set activeTabClass = ' active' %}
+{% endif %}
+											<button class="nav-link{{ activeTabClass }}" id="nav-{{ details.property }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ details.property }}" type="button" role="tab" aria-controls="nav-{{ details.property }}" aria-selected="true">
+												<?= __('{{ otherPluralHumanName }}') ?>
+											</button>
+<?php endif; ?>
+{% endfor %}
+										</div>
+									</nav>
+								</div>
+
+							</div><!-- /card header -->
+								
+							<div class="card-body p-1 pb-0">
+
+								<div class="tab-content" id="nav-tabContent">
+
+{% for alias, details in relations %}
+{% set otherSingularVar = alias|variable %}
+{% set otherPluralHumanName = details.controller|underscore|humanize %}
+<?php if (!empty(${{ singularVar }}->{{ details.property }})): ?>
+
+{% set tabContentCounter = tabContentCounter + 1 %}
+{% set activeTabContentClass = '' %}
+{% if tabContentCounter == 1 %}
+{% 	set activeTabContentClass = ' show active' %}
+{% endif %}
+									<div class="tab-pane fade{{ activeTabContentClass }} p-0" id="nav-{{ details.property }}" role="tabpanel" aria-labelledby="nav-{{ details.property }}-tab" tabindex="0">
+
+										<table class="table table-responsive-xl table-hover table-striped" style="">
+											<thead class="thead-info">
+												<tr>
+{% for field in details.fields %}
+{% if field in ['id'] %}
+<?php if($config['index_show_id']){ ?>
+													<th class="number {{ field|replace({"_": "-"}) }}"><?= __('{{ field|humanize }}') ?></th>
+<?php } ?>
+{% endif %}
+{% if field in ['name', 'title'] %}
+													<th class="string {{ field|replace({"_": "-"}) }}"><?= __('{{ field|humanize }}') ?></th>
+{% endif %}
+{% if field not in ['id', 'name', 'title', 'visible', 'pos', 'created', 'modified', 'updated'] and '_count' not in field %}
+													<th class="please-change-type {{ field|replace({"_": "-"}) }}"><?= __('{{ field|humanize }}') ?></th>
+{% endif %}
+{% if field in ['visible'] %}
+<?php if($config['index_show_visible']){ ?>
+													<th class="boolean {{ field|replace({"_": "-"}) }}"><?= __('{{ field|humanize }}') ?></th>
+<?php } ?>
+{% endif %}
+{% if field in ['pos'] %}
+<?php if($config['index_show_pos']){ ?>
+													<th class="number {{ field|replace({"_": "-"}) }}"><?= __('{{ field|humanize }}') ?></th>
+<?php } ?>
+{% endif %}
+{% if '_count' in field %}
+<?php if($config['index_show_counters']){ ?>
+													<th class="number {{ field|replace({"_": "-"}) }}"><?= __('{{ field|humanize }}') ?></th>
+<?php } ?>
+{% endif %}
+{% if field in ['created'] %}
+<?php if($config['index_show_created']){ ?>
+													<th class="datetime {{ field|replace({"_": "-"}) }}"><?= __('{{ field|humanize }}') ?></th>
+<?php } ?>
+{% endif %}
+{% if field in ['modified', 'updated'] %}
+<?php if($config['index_show_modified']){ ?>
+													<th class="datetime {{ field|replace({"_": "-"}) }}"><?= __('{{ field|humanize }}') ?></th>
+<?php } ?>
+{% endif %}
+{% endfor %}
+													<th class="actions"><?= __('Actions') ?></th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php foreach (${{ singularVar }}->{{ details.property }} as ${{ otherSingularVar }}) : ?>
+
+												<tr>
+{% for field in details.fields %}
+{% if field in ['id'] %}
+<?php if($config['index_show_id']){ ?>
+													<td class="number {{ field|replace({"_": "-"}) }}" value="<?= ${{ otherSingularVar }}->{{ field }} ?>"><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+<?php } ?>
+{% endif %}
+{% if field in ['name', 'title'] %}
+													<td class="string {{ field|replace({"_": "-"}) }}" value="<?= ${{ otherSingularVar }}->{{ field }} ?>"><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+{% endif %}
+{% if field not in ['id', 'name', 'title', 'visible', 'pos', 'created', 'modified', 'updated'] and '_count' not in field %}
+													<td class="please-change-type {{ field|replace({"_": "-"}) }}" value="<?= ${{ otherSingularVar }}->{{ field }} ?>"><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+{% endif %}
+{% if field in ['visible'] %}
+<?php if($config['index_show_visible']){ ?>
+													<td class="boolean {{ field|replace({"_": "-"}) }}" value="<?= ${{ otherSingularVar }}->{{ field }} ?>"><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+<?php } ?>
+{% endif %}
+{% if field in ['pos'] %}
+<?php if($config['index_show_pos']){ ?>
+													<td class="number {{ field|replace({"_": "-"}) }}" value="<?= ${{ otherSingularVar }}->{{ field }} ?>"><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+<?php } ?>
+{% endif %}
+{% if '_count' in field %}
+<?php if($config['index_show_counters']){ ?>
+													<td class="number {{ field|replace({"_": "-"}) }}" value="<?= ${{ otherSingularVar }}->{{ field }} ?>"><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+<?php } ?>
+{% endif %}
+{% if field in ['created'] %}
+<?php if($config['index_show_created']){ ?>
+													<td class="datetime {{ field|replace({"_": "-"}) }}" value="<?= ${{ otherSingularVar }}->{{ field }} ?>"><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+<?php } ?>
+{% endif %}
+{% if field in ['modified', 'updated'] %}
+<?php if($config['index_show_modified']){ ?>
+													<td class="datetime {{ field|replace({"_": "-"}) }}" value="<?= ${{ otherSingularVar }}->{{ field }} ?>"><?= h(${{ otherSingularVar }}->{{ field }}) ?></td>
+<?php } ?>
+{% endif %}
+{% endfor %}
+{% set otherPk = '$' ~ otherSingularVar ~ '->' ~ details.primaryKey[0] %}
+													<td class="actions">
+														<?= $this->Html->link('<i class="fa fa-eye"></i>', ['controller' => '{{ details.controller }}', 'action' => 'view', {{ otherPk|raw }}], ["escape" => false, "role" => "button",  "class" => "btn btn-warning btn-sm", "data-toggle" => "tooltip", "data-placement" => "top", "title" => __('View this item'), "data-original-title" => ""]) ?><!-- view button -->
+														<?= $this->Html->link('<i class="fa fa-edit"></i>', ['controller' => '{{ details.controller }}', 'action' => 'edit', {{ otherPk|raw }}], ["escape" => false, "role" => "button", "class" => "btn btn-primary btn-sm", "data-toggle" => "tooltip", "data-placement" => "top", "title" => __('Edit this item'), "data-original-title" => ""]) ?><!-- edit button -->
+														<?= $this->Form->postLink('<i class="fa fa-times"></i>', ['controller' => '{{ details.controller }}', 'action' => 'delete', {{ otherPk|raw }}], ["escape" => false, "role" => "button", "class" => "btn btn-danger btn-sm", "data-toggle" =>"tooltip", "data-placement" => "top", "title" => __('Delete this item'), "data-original-title" => "", "confirm" => __("Are you sure you want to delete # {0}?", {{ otherPk|raw }})]) ?><!-- delete button -->
+													</td>
+												</tr>
+												<?php endforeach; ?>
+
+											</tbody>
+										</table>
+
+									</div><!-- /tab pane -->
+<?php endif; ?>
+{% endfor %}
+
+								</div><!-- /tab content -->
+
+							</div><!-- /card body -->
+
+						    <div class="card-footer">
+								<!-- Bottom text! -->
+							</div><!-- /card footer -->
+							
+						</div><!-- end card -->
+                    </div><!-- end col -->
+				</div><!-- end row -->
+{% endif %}
+<?php endif // $config['show_related_tables'] ?>
+
+<?php
+	$this->Html->css(
+		[
+			//{{ commentXXX }}'JeffAdmin5./assets/plugins/',
+		],
+		['block' => true]
+	);
+
+	$this->Html->script(
+		[
+			//{{ commentXXX }}'JeffAdmin5./assets/plugins/',
+		],
+		['block' => 'scriptBottom']
+	);
+?>
+
+<?php $this->Html->scriptStart(['block' => 'javaScriptBottom']); ?>
+
+<?php $this->Html->scriptEnd(); ?>

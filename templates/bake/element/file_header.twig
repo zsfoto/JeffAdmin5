@@ -1,0 +1,5 @@
+<?php
+declare(strict_types=1);
+{{- namespace ? "\n\nnamespace #{namespace};" : '' }}
+{% set uses = Bake.concat('\n', [Bake.classUses(classImports ?? []), Bake.functionUses(functionImports ?? []), Bake.constUses(constImports ?? [])], '\n\n') %}
+{{- uses|replace({'AppController': 'Admin\\AppController'}) }}

@@ -1,0 +1,261 @@
+{#
+/**
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
+ * @since         2.0.0
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+ */
+#}
+<?php
+/**
+ * @var \{{ namespace }}\View\AppView $this
+ * @var iterable<\{{ entityClass }}> ${{ pluralVar }}
+ */
+use Cake\Core\Configure;
+
+$prefix = strtolower( $this->request->getParam('prefix') ?? '' );
+$controller = $this->request->getParam('controller');
+$action = $this->request->getParam('action');
+
+$global_config = Configure::read('Theme.' . $prefix . '.config.index');
+// More config params in: \JeffAdmin5\config\config.php
+$local_config = [
+	'show_id' 		=> false,
+	'show_pos' 		=> false,
+	'show_counters'	=> false,
+];
+$config = array_merge($global_config, $local_config);
+?>
+{% set hasPos = false %}
+{% set hasVisible = false %}
+{% set hasCounters = false %}
+{% set hasCreatedModified = false %}
+{% set fields = Bake.filterFields(fields, schema, modelObject, indexColumns, ['binary', 'text']) %}
+{% for field in fields %}
+{% 	if field in ['pos'] %}
+{% 		set hasPos = true %}
+{% 	endif %}
+{% 	if field in ['visible'] %}
+{% 		set hasVisible = true %}
+{% 	endif %}
+{% 	if '_count' in field %}
+{% 		set hasCounters = true %}
+{% 	endif %}
+{% 	if field in ['created', 'modified'] %}
+{% 		set hasCreatedModified = true %}
+{% 	endif %}
+{% endfor %}
+{% set done = [] %}
+				<div class="{{ pluralVar }} index row">
+						
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+						<div class="card">
+							<div class="card-header">
+							
+								<div class="float-start">
+									<h3><i class="fa fa-table"></i> <?= __('Table') ?>: <?= __('{{ pluralHumanName }}') ?></h3>
+<?php
+	if($config['action_db_click'] == 'edit'){
+									echo __('Double clik to edit row');
+	}
+	if($config['action_db_click'] == 'view'){
+									echo __('Double clik to view row');
+	}
+?>
+
+								</div>
+								
+								<div class="float-end">
+									<?= $this->element('jeffAdmin5.paginator') ?>
+									
+								</div>
+							</div>
+
+<?php ####################################################################################################################################################### ?>
+<?php ###################### CARD BODY ###################################################################################################################### ?>
+<?php ####################################################################################################################################################### ?>
+
+							<div class="card-body p-0 p-1">
+								
+								<table class="table table-responsive-xl table-hover table-striped mb-0" style="">
+									<thead class="thead-info">
+										<tr>
+<?php if($config['show_id']){ ?>
+											<th class="number id"><?= $this->Paginator->sort('id') ?></th>
+<?php } ?>
+{% for field in fields %}
+{% 	set isKey = false %}
+{% 	if associations.BelongsTo is defined %}
+{% 		for alias, details in associations.BelongsTo %}
+{% 			if field == details.foreignKey %}
+{% 				set isKey = true %}
+											<th class="string {{ field|replace({'_': '-'}) }}"><?= $this->Paginator->sort('{{ field }}') ?></th><!-- H.0. -->
+{% 			endif %}
+{% 		endfor %}
+{% 	endif %}
+{% 	if isKey is not same as(true) %}
+{%- 		if field not in ['id', 'created', 'modified', 'updated', 'pos', 'visible'] and '_count' not in field %}	
+{%- 			if isKey is not same as(true) %}
+{% 				set columnData = Bake.columnData(field, schema) %}
+{% 				if columnData.type not in ['integer', 'float', 'decimal', 'biginteger', 'smallinteger', 'tinyinteger'] %}
+											<th class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}"><?= $this->Paginator->sort('{{ field }}') ?></th><!-- H.1. -->
+{% 				elseif columnData.null %}
+											<th class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}"><?= $this->Paginator->sort('{{ field }}') ?></th><!-- H.2. -->
+{% 				else %}
+											<th class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}"><?= $this->Paginator->sort('{{ field }}') ?></th><!-- H.3. -->
+{% 				endif %}
+{% 			endif %}
+{%- 		endif %}
+{%- 	endif %}
+{% endfor %}
+{% if hasVisible == true %}
+<?php if($config['show_pos']){ ?>
+											<th class="number pos"><?= $this->Paginator->sort('pos') ?></th>
+<?php } ?>
+{% endif %}
+{% if hasVisible == true %}
+<?php if($config['show_visible']){ ?>
+											<th class="boolean visible"><?= $this->Paginator->sort('visible') ?></th>
+<?php } ?>
+{% endif %}
+{% if hasCounters == true %}
+<?php if($config['show_counters']){ ?>
+{% for field in fields %}
+	{%- if '_count' in field %}
+											<th class="number counter {{ field }}"><?= $this->Paginator->sort('{{ field }}') ?></th>
+	{%- endif %}
+{% endfor %}
+<?php } ?>
+{% endif %}
+{% if hasCreatedModified == true %}
+<?php if($config['show_created'] || $config['show_modified']){ ?>
+											<th class="datetime created modified">
+<?php if($config['show_created']){ ?>
+												<?= $this->Paginator->sort('created') ?>
+<?php } ?>
+<?php if($config['show_created'] && $config['show_modified']){ ?>
+												&nbsp;/&nbsp;
+<?php } ?>
+<?php if($config['show_modified']){ ?>
+												<?= $this->Paginator->sort('modified') ?>
+<?php } ?>
+											</th>
+<?php } ?>
+{% endif %}
+<?php if($config['show_button_view'] || $config['show_button_edit'] || $config['show_button_delete'] ){ ?>
+											<th class="actions"><?= __('Actions') ?></th>
+<?php } ?>
+										</tr>
+									</thead>
+									<tbody>
+										<?php foreach (${{ pluralVar }} as ${{ singularVar }}): ?>
+<?php
+	//$classLastVisited = ' class="last-visited"';	// later...
+	$classLastVisited = '';
+?>										
+										<tr<?= $classLastVisited ?>>
+<?php if($config['show_id']){ ?>
+											<td class="number id" value="<?= ${{ singularVar }}->id ?>"><?= h(${{ singularVar }}->id) ?></td>
+<?php } ?>
+{% for field in fields %}
+{%- if field not in ['id', 'created', 'modified', 'updated', 'pos', 'visible'] and '_count' not in field %}
+{% set isKey = false %}
+{% if associations.BelongsTo is defined %}
+{% for alias, details in associations.BelongsTo %}
+{% if field == details.foreignKey %}
+{% set isKey = true %}
+											<td class="string link {{ field|replace({'_': '-'}) }}" value="<?= ${{ singularVar }}->{{ field }} ?>"><?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?><span class="external-link-icon"><i class="fa fa-external-link" aria-hidden="true"></i></span></td>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if isKey is not same as(true) %}
+{% set columnData = Bake.columnData(field, schema) %}
+{% if columnData.type not in ['integer', 'float', 'decimal', 'biginteger', 'smallinteger', 'tinyinteger'] %}
+											<td class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}" value="<?= ${{ singularVar }}->{{ field }} ?>"><?= h(${{ singularVar }}->{{ field }}) ?></td>
+{% elseif columnData.null %}
+											<td class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}" value="<?= ${{ singularVar }}->{{ field }} ?>"><?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}, ['places' => 0, 'precision' => 0, 'before' => '', 'after' => '']) ?></td>
+{% else %}
+											<td class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}" value="<?= ${{ singularVar }}->{{ field }} ?>"><?= $this->Number->format(${{ singularVar }}->{{ field }}, ['places' => 0, 'precision' => 0, 'before' => '', 'after' => '']) ?></td>
+{% endif %}
+{% endif %}
+{%- endif %}
+{% endfor %}
+{% if hasPos == true %}
+<?php if($config['show_pos']){ ?>
+											<td class="number pos" value="<?= ${{ singularVar }}->pos ?>"><?= h(${{ singularVar }}->pos) ?></td>
+<?php } ?>
+{% endif %}
+{% if hasVisible == true %}
+<?php if($config['show_visible']){ ?>
+											<td class="boolean visible" value="<?= ${{ singularVar }}->visible ?>"><?= h(${{ singularVar }}->visible) ?></td>
+<?php } ?>
+{% endif %}
+{% if hasCounters == true %}
+<?php if($config['show_counters']){ ?>
+{% for field in fields %}
+	{%- if '_count' in field %}
+											<td class="number counter {{ field|replace({'_': '-'}) }}" value="<?= ${{ singularVar }}->{{ field }} ?>"><?= h(${{ singularVar }}->{{ field }}) ?></td>
+	{%- endif %}
+{% endfor %}
+<?php } ?>
+{% endif %}
+{% if hasCreatedModified == true %}
+<?php if($config['show_created'] || $config['show_modified']){ ?>
+											<td class="datetime">
+<?php if($config['show_created']){ ?>
+												<b><?= h(${{ singularVar }}->created) ?></b>
+<?php } ?>
+<?php if($config['show_created'] && $config['show_modified']){ ?>
+												<br>
+<?php } ?>
+<?php if($config['show_modified']){ ?>
+												<?= h(${{ singularVar }}->modified) ?>
+<?php } ?>
+											</td>
+<?php } ?>
+{% endif %}
+{% set pk = '$' ~ singularVar ~ '->' ~ primaryKey[0] %}
+<?php if($config['show_button_view'] || $config['show_button_edit'] || $config['show_button_delete'] ){ ?>
+
+											<td class="actions">
+<?php if($config['show_button_view']){ ?>
+												<?= $this->Html->link('<i class="fa fa-eye"></i>', ['action' => 'view', {{ pk|raw }}], ['escape' => false, 'role' => 'button', 'class' => 'btn btn-warning btn-sm', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('View this item'), 'data-original-title' => __('View this item')]) ?>
+<?php } ?>
+
+<?php if($config['show_button_edit']){ ?>
+												<?= $this->Html->link('<i class="fa fa-edit"></i>', ['action' => 'edit', {{ pk|raw }}], ['escape' => false, 'role' => 'button', 'class' => 'btn btn-primary btn-sm', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Edit this item'), 'data-original-title' => __('Edit this item')]) ?>
+<?php } ?>
+
+<?php if($config['show_button_delete']){ ?>
+												<?= $this->Form->postLink('<i class="fa fa-times"></i>', ['action' => 'delete', {{ pk|raw }}], ['confirm' => __('Are you sure you want to delete # {0}?', {{ pk|raw }}), 'escape' => false, 'role' => 'button', 'class' => 'btn btn-danger btn-sm', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Delete this item'), 'data-original-title' => __('Delete this item')]) ?>
+<?php } ?>
+
+											</td>
+<?php } ?>
+										</tr>
+										<?php endforeach; ?>
+
+									</tbody>
+								</table>
+
+							</div>
+							<div class="card-footer text-center">
+								<div class="float-start">
+									<?= $this->Paginator->counter(__('Page {{ '{{' }}page{{ '}}' }} of {{ '{{' }}pages{{ '}}' }}, showing {{ '{{' }}current{{ '}}' }} record(s) out of {{ '{{' }}count{{ '}}' }} total')) ?>
+								</div>								
+								<div class="float-end mb-1">							
+									<?= $this->element('jeffAdmin5.paginator') ?>
+									
+								</div>								
+							</div>
+						</div><!-- end card-->					
+					</div>
+
+				</div>			

@@ -1,0 +1,322 @@
+{#
+/**
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
+ * @since         2.0.0
+ * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+ */
+#}
+<?php
+use Cake\I18n\FrozenTime;
+?>
+{% set hasNumberField 		= false %}
+{% set hasStringField		= false %}
+{% set hasTextField 		= false %}
+{% set hasBooleanField 		= false %}
+{% set hasDateField 		= false %}
+{% set hasTimeField 		= false %}
+{% set hasDateTimeField		= false %}
+{% set hasSelectField		= false %}
+{% set hasMultiSelectField	= false %}
+{% set fields = Bake.filterFields(fields, schema, modelObject) %}
+{% for field in fields %}
+{% set fieldData = Bake.columnData(field, schema) %}
+{% if fieldData.type in ['integer'] %}
+{% 	set hasNumberField = true %}
+{% endif %}
+{% if fieldData.type in ['string'] %}
+{% 	set hasStringField = true %}
+{% endif %}
+{% if fieldData.type in ['text'] %}
+{% 	set hasTextField = true %}
+{% endif %}
+{% if fieldData.type in ['boolean'] %}
+{% 	set hasBooleanField = true %}
+{% endif %}
+{% if fieldData.type in ['date'] %}
+{% 	set hasDateField = true %}
+{% endif %}
+{% if fieldData.type in ['time'] %}
+{% 	set hasTimeField = true %}
+{% endif %}
+{% if fieldData.type in ['datetime'] %}
+{% 	set hasDateTimeField = true %}
+{% endif %}
+{% endfor %}
+				<div id="form-row" class="{{ pluralVar }} row">
+{%- set done = [] %}
+
+					<div class="col-xs-12 col-xl-10">
+						<div class="card mb-3">
+							<div class="card-header">
+
+								<div class="float-start">
+									<h3><i class="fa fa-plus"></i> <?= __('{{ action|humanize }}') ?>: <?= __('{{ singularHumanName }}') ?></h3>
+									<?= __('The data marked with * must be provided!') ?>
+								</div>
+
+								<div class="float-end ms-5">
+									<?= $this->Html->link('<span class="btn btn-outline-secondary mt-1 me-1"><i class="fa fa-times"></i></span>',
+										["controller" => "{{ pluralHumanName }}", "action" => "index", "_full" => true],
+										["escape" => false, "role" => "button"]
+									); ?>
+
+								</div>
+
+								<div class="form-tab float-end">
+									<ul class="nav nav-tabs mt-1" id="myTab" role="tablist">
+										<li class="nav-item" role="presentation">
+											<button class="nav-link active" id="tab-first" data-bs-toggle="tab" data-bs-target="#tab-panel-first" type="button" role="tab" aria-controls="tab-panel-first" aria-selected="true"><?= __('Basic data') ?></button>
+										</li>
+{% for field in fields %}
+{% set fieldData = Bake.columnData(field, schema) %}
+{% if fieldData.type in ['text'] %}
+
+										<li class="nav-item" role="presentation">
+											<button class="nav-link" id="tab{{ field|humanize }}" data-bs-toggle="tab" data-bs-target="#tabPanel{{ field|humanize }}" type="button" role="tab" aria-controls="tabPanel{{ field|humanize }}" aria-selected="false"><?= __('{{ field|humanize }}') ?></button>
+										</li>
+{% endif %}
+{% endfor %}
+
+<?php /*
+										<li class="nav-item" role="presentation">
+											<button class="nav-link" id="tab-second" data-bs-toggle="tab" data-bs-target="#tab-panel-second" type="button" role="tab" aria-controls="tab-panel-second" aria-selected="false"><?= __('Memo') ?></button>
+										</li>
+										<li class="nav-item" role="presentation">
+											<button class="nav-link" id="tab-more" data-bs-toggle="tab" data-bs-target="#tab-panel-more" type="button" role="tab" aria-controls="tab-panel-more" aria-selected="false"><?= __('More') ?></button>
+										</li>
+*/ ?>
+
+									</ul>
+								</div>
+
+							</div>
+
+							<?= $this->Form->create(${{ singularVar }}) ?>
+
+								<div class="card-body">
+								
+									<div class="tab-content" id="tabContent">
+										
+										<div class="tab-pane fade show active" id="tab-panel-first" role="tabpanel" aria-labelledby="tab-first" tabindex="0">
+											<?php
+{% for field in fields %}
+{%- if '_count' not in field %}
+{%- if field not in primaryKey %}
+    {%- if keyFields[field] is defined %}
+		{% set hasSelectField = true %}
+        {%- set fieldData = Bake.columnData(field, schema) %}
+        {%- if fieldData.null %}
+										echo $this->Form->control('{{ field }}', ['label' => __('{{field|humanize}}'), 'options' => ${{ keyFields[field] }}, 'data-live-search' => false, 'data-container' => 'body', 'data-size' => '6', 'empty' => true]);
+        {%- else %}
+										echo $this->Form->control('{{ field }}', ['label' => __('{{field|humanize}}'), 'options' => ${{ keyFields[field] }}, 'data-live-search' => false, 'data-container' => 'body', 'data-size' => '6']);
+        {%- endif %}
+		{{- "\n" }}
+    {%- elseif field not in ['created', 'modified', 'updated'] %}
+        {%- set fieldData = Bake.columnData(field, schema) %}
+		{%- if fieldData.type not in ['text'] %}
+			{%- if fieldData.type in ['date', 'datetime', 'time'] and fieldData.null %}
+				{%- set autococus = '' %}
+				{%- if 'name' == field %}
+				{%- set autococus = ", 'autofocus' => true" %}
+				{%- endif %}
+				{%- set value = "" %}
+				{%- if fieldData.type in ['time'] %}
+				{%- set value = ", 'value' => ''" %}
+				{%- endif %}
+												echo $this->Form->control('{{ field }}', ['label' => __('{{field|humanize}}'), 'empty' => true{{ value }}{{ autococus }}]);
+												{{- "\n" }}
+			{%- else %}
+				{%- set autococus = '' %}
+				{%- if 'name' == field %}
+					{%- set autococus = ", 'autofocus' => true" %}
+				{%- endif %}
+												echo $this->Form->control('{{ field }}', ['label' => __('{{field|humanize}}'){{ autococus }}]);
+												{{- "\n" }}
+			{%- endif %}
+		{%- endif %}		
+    {%- endif %}
+{%- endif %}
+{%- endif %}
+{%- endfor %}
+
+{%- if associations.BelongsToMany is defined %}
+{%- for assocName, assocData in associations.BelongsToMany %}
+{% set hasMultiSelectField = true %}
+												echo $this->Form->control('{{ assocData.property }}._ids', ['label' => __('{{assocData.property|humanize}}'), 'options' => ${{ assocData.variable }}, 'data-live-search' => false, 'data-actions-box' => false, 'data-container' => 'body', 'data-size' => '6',]);
+												{{- "\n" }}
+{%- endfor %}
+{% endif %}
+											?>
+
+										</div><!-- /.1.TAB -->
+{% if hasTextField == true %}
+{% for field in fields %}
+{% set fieldData = Bake.columnData(field, schema) %}
+{% if fieldData.type in ['text'] %}
+
+										<div class="tab-pane fade" id="tabPanel{{ field|humanize }}" role="tabpanel" aria-labelledby="tab{{ field|humanize }}" tabindex="0">
+											<div class="row mb-3">
+												<div class="col-sm-12">
+													<?= $this->Form->control('{{ field }}', ['label' => __('{{ field|humanize }}'), 'class' => 'summernote']); ?>
+													
+												</div>
+											</div>
+										</div><!-- /. {{ field|humanize }} TAB-->
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<?php /*											
+										<div class="tab-pane fade" id="tab-panel-more" role="tabpanel" aria-labelledby="tab-more" tabindex="0">
+											<h3>More content come here...</h3>
+
+										</div><!-- /.3.TAB -->
+*/ ?>
+
+									</div><!-- /.TAB PANEL -->
+										
+								</div>
+
+								<div class="card-footer text-center">
+									<?= $this->Form->button('<span class="btn-label"><i class="fa fa-save"></i></span>' . __('Save'), ["escapeTitle" => false, "type" => "submit", "class" => "btn btn-success me-4"]) ?>
+									
+									<?= $this->Html->link('<span class="btn-label"><i class="fa fa-arrow-up"></i></span>' . __("Cancel"),
+										["controller" => "{{ pluralHumanName }}", "action" => "index", "_full" => true],
+										["escape" => false, "role" => "button", "class" => "btn btn-outline-secondary"]
+									); ?>
+									
+								</div>
+
+							<?= $this->Form->end() ?>
+
+						</div><!-- end card-->
+                    </div>
+
+
+				</div>			
+
+{% set commentNumber 	= '// ' %}
+{% set commentString 	= '// ' %}
+{% set commentText 		= '// ' %}
+{% set commentReadMore	= '// ' %}
+{% set commentBoolean 	= '// ' %}
+{% set commentDate 		= '// ' %}
+{% set commentTime 		= '// ' %}
+{% set commentDateTime 	= '// ' %}
+{% if hasNumberField == true %}
+{% set commentNumber = '' %}
+{% endif %}
+{% if hasStringField == true %}
+{% set commentString = '' %}
+{% endif %}
+{% if hasTextField == true %}
+{% set commentText = '' %}
+{% if action in ['view'] %}
+{% set commentReadMore	= '' %}
+{% endif %}
+{% endif %}
+{% if hasBooleanField == true %}
+{% set commentBoolean = '' %}
+{% endif %}
+{% if hasSelectField == true %}
+{% endif %}
+{% if hasMultiSelectField == true %}
+{% set commentSelect = '' %}
+{% set commentMultiSelect = '' %}
+{% endif %}
+{% if hasDateField == true or hasTimeField == true or hasDateTimeField == true %}
+{% set commentDate = '' %}
+{% set commentTime = '' %}
+{% set commentDateTime = '' %}
+{% endif %}
+
+<?php
+	$this->Html->css(
+		[
+			{{ commentDate }}"jeffAdmin5./assets/plugins/tempus-dominus-6.0.0/dist/css/tempus-dominus.min",
+			{{ commentDate }}"jeffAdmin5./assets/plugins/summernote-0.8.18-dist/summernote-lite.min",
+			{{ commentSelect }}"jeffAdmin5./assets/plugins/bootstrap-select-main/docs/docs/dist/css/bootstrap-select.min",
+
+			// "jeffAdmin5./assets/plugins/select2-4.1.0-rc.0/dist/css/select2.min",	// If you want to use Select 2, but it's not finish!!!
+			// "jeffAdmin5./assets/css/select2-bootstrap-5-theme.min",					// If you want to use Select 2, but it's not finish!!!
+		],
+		['block' => true]);
+
+
+	$this->Html->script(
+		[
+			{{ commentDate }}"jeffAdmin5./assets/js/popper",
+			{{ commentDate }}"jeffAdmin5./assets/plugins/tempus-dominus-6.0.0/dist/js/tempus-dominus.min",	// Must be loaded the popper.js !!
+			{{ commentNumber }}"jeffAdmin5./assets/plugins/bootstrap-input-spinner-bs-5/src/bootstrap-input-spinner",
+			{{ commentText }}"jeffAdmin5./assets/plugins/summernote-0.8.18-dist/summernote-lite.min",
+			{{ commentText }}"jeffAdmin5./assets/plugins/summernote-0.8.18-dist/lang/summernote-hu-HU",
+			{{ commentReadMore }}'jeffAdmin5./assets/plugins/jReadMore-master/dist/read-more.min',
+			{{ commentSelect }}"jeffAdmin5./assets/plugins/bootstrap-select-main/docs/docs/dist/js/bootstrap-select.min",
+			{{ commentSelect }}"jeffAdmin5./assets/plugins/bootstrap-select-main/docs/docs/dist/js/i18n/defaults-hu_HU.min",
+
+			//'jeffAdmin5./assets/plugins/select2-4.1.0-rc.0/dist/js/select2.full.min',	// If you want to use Select 2, but it's not finish!!!
+			//'jeffAdmin5./assets/plugins/select2-4.1.0-rc.0/dist/js/i18n/hu',			// If you want to use Select 2, but it's not finish!!!
+		],
+		['block' => 'scriptBottom']
+	); ?>
+		
+<?php
+	// SELECT: https://developer.snapappointments.com/bootstrap-select/examples/
+?>
+
+<?php $this->Html->scriptStart(['block' => 'javaScriptBottom']); ?>
+
+{% if hasSelectField == true or hasMultiSelectField == true %}
+	jeffAdminInitSelectPicker()
+{% endif %}
+{% if hasNumberField == true %}
+	jeffAdminInitInputSpinner()
+{% endif %}
+{% if hasTextField == true %}
+{% for field in fields %}
+{% set fieldData = Bake.columnData(field, schema) %}
+{% if fieldData.type in ['text'] %}
+	jeffAdminInitSummerNote('{{ field }}', 400, '<?= __("Here you can write the note") ?>...') // Init SummerNote for {{ field }}.
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if hasDateField == true or hasTimeField == true or hasDateTimeField == true %}
+{% for field in fields %}
+{%- if field not in ['created', 'modified', 'updated'] %}
+{%- set fieldData = Bake.columnData(field, schema) %}
+{%- if fieldData.type in ['date'] %}
+{% if action in ['add'] %}
+	jeffAdminInitDatePicker('{{ field }}')
+{% endif %}
+{% if action in ['edit'] %}
+	jeffAdminInitDatePicker('{{ field }}', '<?= FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("yyyy-MM-dd") ?>')
+{% endif %}
+{% endif %}
+{%- if fieldData.type in ['time'] %}
+{% if action in ['add'] %}
+	jeffAdminInitTimePicker('{{ field }}')
+{% endif %}
+{% if action in ['edit'] %}
+	jeffAdminInitTimePicker('{{ field }}', '<?= FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("HH:mm:ss") ?>')
+{% endif %}
+{% endif %}
+{%- if fieldData.type in ['datetime'] %}
+{% if action in ['add'] %}
+	jeffAdminInitDateTimePicker('{{ field }}')
+{% endif %}
+{% if action in ['edit'] %}
+	jeffAdminInitDateTimePicker('{{ field }}', '<?= FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("yyyy-MM-dd HH:mm:ss") ?>')
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %}
+<?php $this->Html->scriptEnd(['block' => 'javaScriptBottom']); ?>
