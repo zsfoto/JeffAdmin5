@@ -20,16 +20,23 @@
  */
 use Cake\Core\Configure;
 
+$session = $this->getRequest()->getSession();
 $prefix = strtolower( $this->request->getParam('prefix') ?? '' );
 $controller = $this->request->getParam('controller');
 $action = $this->request->getParam('action');
 
-$global_config = Configure::read('Theme.' . $prefix . '.config.index');
-// More config params in: \JeffAdmin5\config\config.php
+$layout{{ pluralHumanName }}LastId = -1;
+if($session->check('Layout.{{ pluralHumanName }}.LastId')){
+	$layout{{ pluralHumanName }}LastId = $session->read('Layout.{{ pluralHumanName }}.LastId');
+}
+
+$global_config = (array) Configure::read('Theme.' . $prefix . '.config.template.index');
 $local_config = [
-	'show_id' 		=> false,
-	'show_pos' 		=> false,
-	'show_counters'	=> false,
+	'show_id' 			=> true,
+	'show_pos' 			=> false,
+	'show_counters'		=> false,
+	'action_db_click'	=> 'edit',	// none, edit or view
+	// ... more config params in: \JeffAdmin5\config\config.php
 ];
 $config = array_merge($global_config, $local_config);
 ?>
@@ -60,22 +67,23 @@ $config = array_merge($global_config, $local_config);
 							<div class="card-header">
 							
 								<div class="float-start">
-									<h3><i class="fa fa-table"></i> <?= __('Table') ?>: <?= __('{{ pluralHumanName }}') ?></h3>
-<?php
-	if($config['action_db_click'] == 'edit'){
-									echo __('Double clik to edit row');
-	}
-	if($config['action_db_click'] == 'view'){
-									echo __('Double clik to view row');
-	}
-?>
-
+									<h3><i id="card-icon" class="fa fa-table fa-spin"></i> <?= __('Table') ?>: <?= __('{{ pluralHumanName }}') ?></h3>
+									<div><?php
+										if($config['action_db_click'] == 'edit'){
+																		echo __('Double clik to edit row');
+										}
+										if($config['action_db_click'] == 'view'){
+																		echo __('Double clik to view row');
+										}
+									?></div>
 								</div>
 								
 								<div class="float-end">
-									<?= $this->element('jeffAdmin5.paginator') ?>
-									
+									<!-- Paginator page links -->
+									<?= $this->element('JeffAdmin5.paginator') ?>
+									<!-- /.Pginator page links -->
 								</div>
+								
 							</div>
 
 <?php ####################################################################################################################################################### ?>
@@ -87,6 +95,7 @@ $config = array_merge($global_config, $local_config);
 								<table class="table table-responsive-xl table-hover table-striped mb-0" style="">
 									<thead class="thead-info">
 										<tr>
+											<th class="row-id-anchor"></th>
 <?php if($config['show_id']){ ?>
 											<th class="number id"><?= $this->Paginator->sort('id') ?></th>
 <?php } ?>
@@ -136,16 +145,19 @@ $config = array_merge($global_config, $local_config);
 {% endif %}
 {% if hasCreatedModified == true %}
 <?php if($config['show_created'] || $config['show_modified']){ ?>
+
 											<th class="datetime created modified">
-<?php if($config['show_created']){ ?>
-												<?= $this->Paginator->sort('created') ?>
-<?php } ?>
-<?php if($config['show_created'] && $config['show_modified']){ ?>
-												&nbsp;/&nbsp;
-<?php } ?>
-<?php if($config['show_modified']){ ?>
-												<?= $this->Paginator->sort('modified') ?>
-<?php } ?>
+												<?php 
+													if($config['show_created']){ 
+														echo $this->Paginator->sort('created');
+													}
+													if($config['show_created'] && $config['show_modified']){
+														echo "&nbsp;/&nbsp;";
+													}
+													if($config['show_modified']){
+														echo $this->Paginator->sort('modified');
+													} ?>
+
 											</th>
 <?php } ?>
 {% endif %}
@@ -158,11 +170,13 @@ $config = array_merge($global_config, $local_config);
 										<?php foreach (${{ pluralVar }} as ${{ singularVar }}): ?>
 <?php
 	//$classLastVisited = ' class="last-visited"';	// later...
-	$classLastVisited = '';
-?>										
-										<tr<?= $classLastVisited ?>>
+	//$classLastVisited = '';
+?>
+
+										<tr row-id="<?= ${{ singularVar }}->id ?>"<?php if(${{ singularVar }}->id == $layout{{ pluralHumanName }}LastId){ echo 'class="table-tr-last-id"'; } ?>" prefix="<?= $prefix ?>" controller="<?= $controller ?>" action="<?= $action ?>" aria-expanded="true">
+											<td class="row-id-anchor" value="<?= ${{ singularVar }}->id ?>"><a name="<?= ${{ singularVar }}->id ?>" class="anchor"></a></td>
 <?php if($config['show_id']){ ?>
-											<td class="number id" value="<?= ${{ singularVar }}->id ?>"><?= h(${{ singularVar }}->id) ?></td>
+											<td class="number id" value="<?= ${{ singularVar }}->id ?>"><?= h(${{ singularVar }}->id) ?><a name="<?= ${{ singularVar }}->id ?>"></a></td>
 <?php } ?>
 {% for field in fields %}
 {%- if field not in ['id', 'created', 'modified', 'updated', 'pos', 'visible'] and '_count' not in field %}
@@ -217,6 +231,7 @@ $config = array_merge($global_config, $local_config);
 <?php } ?>
 <?php if($config['show_modified']){ ?>
 												<?= h(${{ singularVar }}->modified) ?>
+
 <?php } ?>
 											</td>
 <?php } ?>
@@ -234,7 +249,9 @@ $config = array_merge($global_config, $local_config);
 <?php } ?>
 
 <?php if($config['show_button_delete']){ ?>
-												<?= $this->Form->postLink('<i class="fa fa-times"></i>', ['action' => 'delete', {{ pk|raw }}], ['confirm' => __('Are you sure you want to delete # {0}?', {{ pk|raw }}), 'escape' => false, 'role' => 'button', 'class' => 'btn btn-danger btn-sm', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Delete this item'), 'data-original-title' => __('Delete this item')]) ?>
+												<?= $this->Form->postLink('', ['action' => 'delete', {{ pk|raw }}], ['class'=>'hide-postlink index-delete-button-class']) ?>
+												<a href="javascript:;" class="btn btn-sm btn-danger postlink-delete" data-bs-tooltip="tooltip" data-bs-placement="top" title="<?= __("Delete this record!") ?>" text="<?= h(${{ singularVar }}->name) ?>" subText="<?= __("You will not be able to revert this!") ?>" confirmButtonText="<?= __("Yes, delete it!") ?>" cancelButtonText="<?= __("Cancel") ?>"><i class="fa fa-minus"></i></a>
+
 <?php } ?>
 
 											</td>
@@ -259,3 +276,28 @@ $config = array_merge($global_config, $local_config);
 					</div>
 
 				</div>			
+
+	<?php
+	if(isset($config['index_show_actions']) && $config['index_show_actions'] && isset($config['index_enable_delete']) && $config['index_enable_delete']){ 
+		$this->Html->script(
+			[
+				'JeffAdmin5./assets/plugins/swettalert2/dist/sweetalert2.all.min',
+			],
+			['block' => 'scriptBottom']
+		);
+	}	
+	?>
+
+<?php $this->Html->scriptStart(['block' => 'javaScriptBottom']); ?>
+
+	$(document).ready( function(){
+		$('tr').dblclick( function(){
+			let id = $(this).attr("row-id")
+			window.location.href = '<?= $this->Url->build(['controller' => $controller, 'action' => $config['action_db_click']]) ?>/' + id;
+		})
+		
+	})
+<?php $this->Html->scriptEnd(); ?>
+
+
+

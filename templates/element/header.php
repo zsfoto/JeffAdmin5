@@ -1,3 +1,7 @@
+<?php
+	$controller = $this->request->getParam('controller');
+	$action = $this->request->getParam('action');
+?>
 	<!-- top bar navigation -->
 	<div class="headerbar">
 
@@ -17,7 +21,7 @@
 				</li>
 				<li class="float-start d-none d-md-block">
 					<span class="button-menu-mobile">
-						Controller name elements
+						<?= __($controller) ?> <?= __($action) ?>
 					</span>
 				</li>
 				

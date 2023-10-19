@@ -2,12 +2,49 @@ $(document).ready(function() {
     $(function() {  
 		$('[data-bs-toggle="tooltip"]').tooltip()
 
-
 		$('#collapseSearch').on('shown.bs.collapse', function () {
 			$("#search").focus();
 		});
 		
-		$(".card-body").animate({opacity: 1}, 500);
+		$(".card-header").animate({opacity: 1}, 1000, function(){
+			$('#card-icon').removeClass('fa-spin');
+			$('#card-icon').css('color', '#777');
+		});
+
+		$(".card-body").animate({opacity: 1}, 500, function(){
+			//$('#card-icon').removeClass('fa-spin');			
+		});
+
+		
+		//-- Index-nél a postLinkes törlés összekombinálása a SWAL-lal...
+		// https://stackoverflow.com/questions/41683256/cakephp-3-3-confirm-deletion-of-a-record-using-sweetalert
+		
+		$(".index-delete-button-class").attr("onclick", "").unbind("click"); //remove function onclick button
+		
+		$(document).on('click', '.postlink-delete', function () {
+			var delete_form = $(this).parent().find('form');
+			var title = $(this).attr('title');
+			var text = $(this).attr('text');		
+			var subText = $(this).attr('subText');
+			var confirmButtonText = $(this).attr('confirmButtonText');
+			var cancelButtonText = $(this).attr('cancelButtonText');		
+
+			Swal.fire({
+			  title: title,
+			  text: text,
+			  icon: 'question',	// warning, error, success, info, and question
+			  animation: false,
+			  showCancelButton: true,
+			  confirmButtonColor: 'red',
+			  //cancelButtonColor: '#d33',
+			  cancelButtonText: cancelButtonText,
+			  confirmButtonText: confirmButtonText
+			}).then((result) => {
+				if (result.value) {
+					delete_form.submit();					
+				}			  
+			})
+		});
 
 	});
 });

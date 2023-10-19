@@ -26,6 +26,9 @@
      */
     public function view($id = null)
     {
+		$this->set('title', __('View the') . ': ' . __('{{ singularName }}') . ' ' . __('record'));
         ${{ singularName }} = $this->{{ currentModelName }}->get($id, contain: {{ Bake.exportArray(allAssociations)|raw }});
-        $this->set(compact('{{ singularName }}'));
+		$this->session->write('Layout.' . $this->controller . '.LastId', $id);
+		$name = ${{ singularName }}->name;
+        $this->set(compact('{{ singularName }}', 'id', 'name'));
     }

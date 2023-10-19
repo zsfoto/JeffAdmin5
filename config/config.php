@@ -3,35 +3,41 @@ return [
 	'Theme' => [
 		'admin' => [
 			'config' => [
-				'index' => [
-					'show_id' 					=> true,
-					'show_pos' 					=> true,
-					'show_visible' 				=> true,
-					'show_counters'				=> true,
-					'show_created' 				=> true,
-					'show_modified' 			=> true,
-					'show_button_view'			=> true,
-					'show_button_edit'			=> true,
-					'show_button_delete'		=> true,
-					'action_db_click'			=> 'edit',	// none, edit or view
+				'controller' => [
+					'paginate_limit' 			=> 20,
+				
 				],
-				'view' => [
-					'show_related_tables'		=> true,
-					'show_id' 					=> true,
-					'show_pos' 					=> true,
-					'show_visible' 				=> true,
-					'show_counters'				=> true,
-					'show_created' 				=> true,
-					'show_modified' 			=> true,
-					'index_show_id' 			=> true,
-					'index_show_pos' 			=> true,
-					'index_show_visible' 		=> true,
-					'index_show_counters'		=> true,
-					'index_show_created' 		=> true,
-					'index_show_modified' 		=> true,
-					'index_show_button_view'	=> true,
-					'index_show_button_edit'	=> true,
-					'index_show_button_delete'	=> true,
+				'template' => [
+					'index' => [
+						'show_id' 					=> true,
+						'show_pos' 					=> true,
+						'show_visible' 				=> true,
+						'show_counters'				=> true,
+						'show_created' 				=> true,
+						'show_modified' 			=> true,
+						'show_button_view'			=> true,
+						'show_button_edit'			=> true,
+						'show_button_delete'		=> true,
+						'action_db_click'			=> 'edit',	// none, edit or view
+					],
+					'view' => [
+						'show_related_tables'		=> true,
+						'show_id' 					=> true,
+						'show_pos' 					=> true,
+						'show_visible' 				=> true,
+						'show_counters'				=> true,
+						'show_created' 				=> true,
+						'show_modified' 			=> true,
+						'index_show_id' 			=> true,
+						'index_show_pos' 			=> true,
+						'index_show_visible' 		=> true,
+						'index_show_counters'		=> true,
+						'index_show_created' 		=> true,
+						'index_show_modified' 		=> true,
+						'index_show_button_view'	=> true,
+						'index_show_button_edit'	=> true,
+						'index_show_button_delete'	=> true,
+					],
 				],
 				
 				// Standard actions buttons. If yíou want to add new, you can take it in controller action... later... ;-)

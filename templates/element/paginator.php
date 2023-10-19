@@ -20,7 +20,7 @@ $this->Paginator->setTemplates(Configure::read('Templates.paginator'));
 													//'ellipsis' => '.-.-.',
 													//'ellipsis' => '<i class="fa fa-ellipsis-h" title="' . __d('jeff_admin5', 'Lots of page') . '"></i>',
 													//'separator' => ' ',
-													'modulus' => 2,
+													'modulus' => 7,
 													'first' => 1,
 													'last' => 1
 												]

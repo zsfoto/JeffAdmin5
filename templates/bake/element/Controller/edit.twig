@@ -25,15 +25,24 @@
      */
     public function edit($id = null)
     {
+		$this->set('title', __('Edit the') . ': ' . __('{{ singularName }}') . ' ' . __('record'));
+		$this->session->write('Layout.' . $this->controller . '.LastId', $id);
+		
         ${{ singularName }} = $this->{{ currentModelName }}->get($id, contain: {{ Bake.exportArray(belongsToMany)|raw }});
         if ($this->request->is(['patch', 'post', 'put'])) {
             ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $this->request->getData());
             if ($this->{{ currentModelName }}->save(${{ singularName }})) {
-                $this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'));
+                $this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'), ['plugin' => 'JeffAdmin5']);
 
-                return $this->redirect(['action' => 'index']);
+                //return $this->redirect(['action' => 'index']);
+                return $this->redirect([
+					'controller' => $this->controller,
+					'action' => 'index',
+					'#' => ${{ singularName }}->id
+				]);
+
             }
-            $this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'));
+            $this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
         }
 {% for assoc in belongsTo|merge(belongsToMany) %}
     {%- set otherName = Bake.getAssociatedTableAlias(modelObj, assoc) %}
@@ -42,5 +51,6 @@
         {{- "\n" }}
     {%- set compact = compact|merge(["'#{otherPlural}'"]) %}
 {% endfor %}
-        $this->set(compact({{ compact|join(', ')|raw }}));
+		$name = ${{ singularName }}->name;
+        $this->set(compact({{ compact|join(', ')|raw }}, 'id', 'name'));
     }

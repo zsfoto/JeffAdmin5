@@ -7,7 +7,7 @@
 	<?= $this->Html->meta('csrfToken', $this->request->getAttribute('csrfToken')) ?>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>The New Pike Admin - Free Bootstrap 5 Admin Template</title>
+	<title><?= h($this->fetch('title')) ?></title>
 	<meta name="description" content="Free Bootstrap 5.3.2 Admin Theme | Jeff Admin">
 	<meta name="author" content="Jeff Web Development - https://www.vzsfoto.hu">
 	<?= $this->Html->meta('favicon.ico', 'jeffAdmin5./assets/images/favicon.ico', ['type' => 'icon']) ?>
@@ -18,7 +18,7 @@
 		'jeffAdmin5./assets/plugins/sweetalert2/dist/sweetalert2.min',
 	]); ?>
 	<?= $this->fetch('css') ?>
-<?= $this->Html->css('jeffAdmin5./assets/css/style'); ?>
+<?= $this->Html->css('jeffAdmin5./assets/css/jeffadmin5'); ?>
 <?php /*
 	<!-- FORM -->
 	<link href="assets/plugins/select2-4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" type="text/css" />		
@@ -74,6 +74,10 @@
 <?= $this->fetch('javaScriptBottom'); ?>
 
 <!-- END Custom JavaScript for this page -->
+
+<script>
+<?= $this->Flash->render(); ?>
+</script>
 
 </body>
 </html>

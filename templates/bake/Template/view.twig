@@ -24,7 +24,7 @@ $prefix = strtolower( $this->request->getParam('prefix') ?? '' );
 $controller = $this->request->getParam('controller');
 $action = $this->request->getParam('action');
 
-$global_config = Configure::read('Theme.' . $prefix . '.config.view');
+$global_config = (array) Configure::read('Theme.' . $prefix . '.config.template.view');
 $local_config = [
 	// #################################### More config params in: \JeffAdmin5\config\config.php ####################################
 	//'show_related_tables'	=> false,
@@ -50,14 +50,14 @@ $config = array_merge($global_config, $local_config);
 
 							<div class="card-header">
 								<div class="float-start">
-									<h3><i class="fa fa-plus"></i> <?= __('{{ action|humanize }}') ?>: <?= __('{{ singularHumanName }}') ?></h3>
+									<h3><i id="card-icon" class="fa fa-eye fa-spin"></i> <?= __('{{ action|humanize }}') ?>: <?= __('{{ singularHumanName }}') ?></h3>
 									<?= __('The data marked with * must be provided!') ?>
 								</div>
 								<div class="float-end ms-5">
 									<?= $this->Html->link('<span class="btn btn-outline-secondary mt-1 me-1"><i class="fa fa-times"></i></span>',
 										["controller" => "{{ pluralHumanName }}", "action" => "index", "_full" => true],
 										["escape" => false, "role" => "button"]
-									); ?>
+									) ?>
 								</div>
 
 								<div class="form-tab float-end">
@@ -96,7 +96,7 @@ $config = array_merge($global_config, $local_config);
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
 <?php if (!empty(${{ singularVar }}->{{ details.property }})) : ?>
 												<li><?= $this->Html->link(__('{{ otherPluralHumanName }}') . '...', ['controller' => '{{ otherPluralHumanName }}', 'action' => 'index', 'parent', '{{ singularVar }}', {{ pK }}], ['class' => 'dropdown-item']) ?></li>
-<?php endif; ?>
+<?php endif ?>
 {% endfor %}
 											</ul>
 										</li>
@@ -114,9 +114,9 @@ $config = array_merge($global_config, $local_config);
 										<div class="tab-pane fade show active" id="tab-panel-first" role="tabpanel" aria-labelledby="tab-first" tabindex="0">
 <?php if($config['show_id']){ ?>
 											<div class="row"><!-- 3. -->
-												<label class="col-sm-2 col-form-label text-start text-sm-end">#<?= __('id') ?>:</label>
-												<div class="col-sm-10 p-2">
-													<?= $this->Number->format({{ pK }}) ?><!-- 0.a -->
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end">#<?= __('id') ?>:</label>
+												<div class="col-sm-10 p-1">
+													<?= {{ pK }} ?><!-- 0.a -->
 												</div>
 											</div>
 <?php } ?>
@@ -125,15 +125,15 @@ $config = array_merge($global_config, $local_config);
 {% if associationFields[field] is defined %}
 {% set details = associationFields[field] %}
 											<div class="row"><!-- 1. -->
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ details.property|humanize }}') ?>:</label>
-												<div class="col-sm-10 p-2 link">
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('{{ details.property|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-1 link">
 													<?= ${{ singularVar }}->hasValue('{{ details.property }}') ? $this->Html->link(${{ singularVar }}->{{ details.property }}->{{ details.displayField }}, ['controller' => '{{ details.controller }}', 'action' => 'view', ${{ singularVar }}->{{ details.property }}->{{ details.primaryKey[0] }}]) : '' ?><span class="external-link-icon"><i class="fa fa-external-link" aria-hidden="true"></i></span>
 												</div>
 											</div>
 {% else %}
 											<div class="row"><!-- 2. -->
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
-												<div class="col-sm-10 p-2">
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-1">
 													<?= h(${{ singularVar }}->{{ field }}) ?>
 
 												</div>
@@ -149,8 +149,8 @@ $config = array_merge($global_config, $local_config);
 {% for field in groupedFields.number %}
 {% if field not in ['id', 'pos'] and '_count' not in field %}
 											<div class="row"><!-- 3. -->
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
-												<div class="col-sm-10 p-2">
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-1">
 {% set columnData = Bake.columnData(field, schema) %}
 {% 	if columnData.null %}
 													<?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?><!-- 3.a -->
@@ -166,8 +166,8 @@ $config = array_merge($global_config, $local_config);
 {% for field in groupedFields.date %}
 {% 		if field not in ['created', 'modified', 'updated'] %}
 											<div class="row"><!-- 4. -->
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
-												<div class="col-sm-10 p-2">
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-1">
 													<?= h(${{ singularVar }}->{{ field }}) ?>
 
 												</div>
@@ -179,9 +179,9 @@ $config = array_merge($global_config, $local_config);
 {% 	for field in groupedFields.boolean %}
 {% 		if field not in ['visible'] %}
 											<div class="row"><!-- 5. -->
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
-												<div class="col-sm-10 p-2">
-													<?= ${{ singularVar }}->{{ field }} ? __('Yes') : __('No'); ?>
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-1">
+													<?= ${{ singularVar }}->{{ field }} ? '<i class="fa fa-check-square boolean-yes" aria-hidden="true"></i>' : '<i class="fa fa-square boolean-no" aria-hidden="false"></i>' ?>
 
 												</div>
 											</div>
@@ -192,9 +192,9 @@ $config = array_merge($global_config, $local_config);
 {% for field in groupedFields.text %}
 <?php /*
 											<div class="row"><!-- 6. -->
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
-												<div class="col-sm-10 p-2">
-													<?= $this->Text->autoParagraph(h(${{ singularVar }}->{{ field }})); ?>
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-1">
+													<?= $this->Text->autoParagraph(h(${{ singularVar }}->{{ field }})) ?>
 
 												</div>
 											</div>
@@ -205,9 +205,10 @@ $config = array_merge($global_config, $local_config);
 <?php if($config['show_visible']){ ?>
 
 											<div class="row">
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('Visible') ?>:</label>
-												<div class="col-sm-10 p-2">
-													<?= ${{ singularVar }}->visible ? '<span class="visible-yes">' . __('Yes') : '<span class="visible-no">' . __('No'); ?></span>
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('Visible') ?>:</label>
+												<div class="col-sm-10 p-1">
+													<?= ${{ singularVar }}->visible ? '<i class="fa fa-check-square boolean-yes" aria-hidden="true"></i>' : '<i class="fa fa-square boolean-no" aria-hidden="false"></i>' ?>
+n
 												</div>
 											</div>
 <?php } ?>
@@ -216,8 +217,8 @@ $config = array_merge($global_config, $local_config);
 <?php if($config['show_pos']){ ?>
 
 											<div class="row">
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('Pos') ?>:</label>
-												<div class="col-sm-10 p-2">
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('Pos') ?>:</label>
+												<div class="col-sm-10 p-1">
 													<?= $this->Number->format(${{ singularVar }}->pos) ?>
 
 												</div>
@@ -228,8 +229,8 @@ $config = array_merge($global_config, $local_config);
 {% if '_count' in field %}
 <?php if($config['show_counters']){ ?>
 											<div class="row"><!-- counter helper -->
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
-												<div class="col-sm-10 p-2">
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('{{ field|humanize }}') ?>:</label>
+												<div class="col-sm-10 p-1">
 {% set columnData = Bake.columnData(field, schema) %}
 {% 	if columnData.null %}
 													<?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?><!-- 3.a -->
@@ -246,8 +247,8 @@ $config = array_merge($global_config, $local_config);
 <?php if($config['show_created']){ ?>
 
 											<div class="row">
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('Created') ?>:</label>
-												<div class="col-sm-10 p-2">
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('Created') ?>:</label>
+												<div class="col-sm-10 p-1">
 													<?= h(${{ singularVar }}->created) ?>
 
 												</div>
@@ -258,8 +259,8 @@ $config = array_merge($global_config, $local_config);
 <?php if($config['show_modified']){ ?>
 
 											<div class="row">
-												<label class="col-sm-2 col-form-label text-start text-sm-end"><?= __('Modified') ?>:</label>
-												<div class="col-sm-10 p-2">
+												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end"><?= __('Modified') ?>:</label>
+												<div class="col-sm-10 p-1">
 													<?= h(${{ singularVar }}->modified) ?>
 
 												</div>
@@ -277,7 +278,7 @@ $config = array_merge($global_config, $local_config);
 												<div class="col-sm-12">
 													<div class="row">
 														<div id="readMore{{ field|humanize }}" class="col-sm-12 p-2 text read-more">
-															<?= $this->Text->autoParagraph(${{ singularVar }}->{{ field }}); ?>
+															<?= $this->Text->autoParagraph(${{ singularVar }}->{{ field }}) ?>
 
 														</div>
 													</div>
@@ -362,7 +363,7 @@ $config = array_merge($global_config, $local_config);
 											<button class="nav-link{{ activeTabClass }}" id="nav-{{ details.property }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ details.property }}" type="button" role="tab" aria-controls="nav-{{ details.property }}" aria-selected="true">
 												<?= __('{{ otherPluralHumanName }}') ?>
 											</button>
-<?php endif; ?>
+<?php endif ?>
 {% endfor %}
 										</div>
 									</nav>
@@ -479,13 +480,13 @@ $config = array_merge($global_config, $local_config);
 														<?= $this->Form->postLink('<i class="fa fa-times"></i>', ['controller' => '{{ details.controller }}', 'action' => 'delete', {{ otherPk|raw }}], ["escape" => false, "role" => "button", "class" => "btn btn-danger btn-sm", "data-toggle" =>"tooltip", "data-placement" => "top", "title" => __('Delete this item'), "data-original-title" => "", "confirm" => __("Are you sure you want to delete # {0}?", {{ otherPk|raw }})]) ?><!-- delete button -->
 													</td>
 												</tr>
-												<?php endforeach; ?>
+												<?php endforeach ?>
 
 											</tbody>
 										</table>
 
 									</div><!-- /tab pane -->
-<?php endif; ?>
+<?php endif ?>
 {% endfor %}
 
 								</div><!-- /tab content -->
@@ -518,6 +519,6 @@ $config = array_merge($global_config, $local_config);
 	);
 ?>
 
-<?php $this->Html->scriptStart(['block' => 'javaScriptBottom']); ?>
+<?php $this->Html->scriptStart(['block' => 'javaScriptBottom']) ?>
 
-<?php $this->Html->scriptEnd(); ?>
+<?php $this->Html->scriptEnd() ?>

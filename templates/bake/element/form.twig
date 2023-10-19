@@ -50,6 +50,12 @@ use Cake\I18n\FrozenTime;
 {% 	set hasDateTimeField = true %}
 {% endif %}
 {% endfor %}
+{% if action in ['add'] %}
+{% 	set cardIcon = 'plus' %}
+{% endif %}
+{% if action in ['edit'] %}
+{% 	set cardIcon = 'edit' %}
+{% endif %}
 				<div id="form-row" class="{{ pluralVar }} row">
 {%- set done = [] %}
 
@@ -58,7 +64,7 @@ use Cake\I18n\FrozenTime;
 							<div class="card-header">
 
 								<div class="float-start">
-									<h3><i class="fa fa-plus"></i> <?= __('{{ action|humanize }}') ?>: <?= __('{{ singularHumanName }}') ?></h3>
+									<h3><i id="card-icon" class="fa fa-{{ cardIcon }} fa-spin"></i> <?= __('{{ action|humanize }}') ?>: <?= __('{{ singularHumanName }}') ?></h3>
 									<?= __('The data marked with * must be provided!') ?>
 								</div>
 
@@ -99,7 +105,7 @@ use Cake\I18n\FrozenTime;
 
 							</div>
 
-							<?= $this->Form->create(${{ singularVar }}) ?>
+							<?= $this->Form->create(${{ singularVar }}, ['id' => 'main-form']) ?>
 
 								<div class="card-body">
 								
@@ -297,7 +303,7 @@ use Cake\I18n\FrozenTime;
 	jeffAdminInitDatePicker('{{ field }}')
 {% endif %}
 {% if action in ['edit'] %}
-	jeffAdminInitDatePicker('{{ field }}', '<?= FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("yyyy-MM-dd") ?>')
+	jeffAdminInitDatePicker('{{ field }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("yyyy-MM-dd") . "'" : "" ?>)
 {% endif %}
 {% endif %}
 {%- if fieldData.type in ['time'] %}
@@ -305,7 +311,7 @@ use Cake\I18n\FrozenTime;
 	jeffAdminInitTimePicker('{{ field }}')
 {% endif %}
 {% if action in ['edit'] %}
-	jeffAdminInitTimePicker('{{ field }}', '<?= FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("HH:mm:ss") ?>')
+	jeffAdminInitTimePicker('{{ field }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("HH:mm:ss") . "'" : "" ?>)
 {% endif %}
 {% endif %}
 {%- if fieldData.type in ['datetime'] %}
@@ -313,10 +319,15 @@ use Cake\I18n\FrozenTime;
 	jeffAdminInitDateTimePicker('{{ field }}')
 {% endif %}
 {% if action in ['edit'] %}
-	jeffAdminInitDateTimePicker('{{ field }}', '<?= FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("yyyy-MM-dd HH:mm:ss") ?>')
+	jeffAdminInitDateTimePicker('{{ field }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . FrozenTime::parse(${{ singularVar }}->{{ field }})->i18nFormat("yyyy-MM-dd HH:mm:ss") . "'" : "" ?>)
 {% endif %}
 {% endif %}
 {% endif %}
 {% endfor %}
 {% endif %}
+
+	$('#button-submit').click( function(){
+		$('#main-form').submit();
+	});			
+
 <?php $this->Html->scriptEnd(['block' => 'javaScriptBottom']); ?>
