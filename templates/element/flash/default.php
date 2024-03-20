@@ -12,4 +12,4 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
 }
 ?>
-	$().toastmessage('showNoticeToast', '<?= $message ?>')
+		flashMessage('<?= __('Message') ?>', '<?= $message ?>', 'success');

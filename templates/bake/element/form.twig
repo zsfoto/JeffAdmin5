@@ -15,6 +15,7 @@
 #}
 <?php
 use Cake\I18n\FrozenTime;
+$this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanName }}'));
 ?>
 {% set hasNumberField 		= false %}
 {% set hasStringField		= false %}
