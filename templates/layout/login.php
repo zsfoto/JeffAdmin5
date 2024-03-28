@@ -14,15 +14,16 @@
 	<!--link rel="stylesheet" type="text/css" href="/login/css/sweetalert2.min.css"/-->
 	<!--link rel="stylesheet" type="text/css" href="/login/css/font-awesome.min.css"-->
 	<!--link rel="stylesheet" type="text/css" href="/login/css/main.css"-->
-	<title><?= __('Site Admin') ?></title>
+	<title>PDF számlák</title>
 </head>
 <body>
 	<section class="material-half-bg">
 		<div class="cover"></div>
 	</section>
-	<?= $this->fetch('content') ?>
+	<section class="login-content">
+		<?= $this->fetch('content') ?>
+	</section>
 
-</section>
 	<!-- Essential javascripts for application to work-->
 	<?= $this->Html->script([
 		'/login/js/jquery-3.2.1.min',
@@ -34,13 +35,15 @@
 		'/login/js/plugins/pace.min'
 	]); ?>
 
-<?php if (!empty($this->getRequest()->getSession()->read('Flash'))) { ?>
-	<script>
-<?= $this->element('script_flash') ?>
-<?= $this->Flash->render() ?>
-	</script>
-<?php } ?>
-
+<?php /*
+	<script src="/login/js/jquery-3.2.1.min.js"></script>
+	<script src="/login/js/popper.min.js"></script>
+	<script src="/login/js/bootstrap.min.js"></script>
+	<script src="/login/js/sweetalert2.all.min.js"></script>
+	<script src="/login/js/bootstrap-notify.min.js"></script>
+	<script src="/login/js/main.js"></script>
+	<script src="/login/js/plugins/pace.min.js"></script>
+*/ ?>
 	<script type="text/javascript">
 		$('.login-content [data-toggle="flip"]').click(function() {
 			$('.login-box').toggleClass('flipped');
@@ -52,6 +55,9 @@
 		});
 
 	</script>
+
+	<?= $this->element('loginFlashMessage') ?>
+
 
 </body>
 </html>
