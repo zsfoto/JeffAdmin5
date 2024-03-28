@@ -18,7 +18,7 @@ use Cake\Core\Configure;
 			<div class="card-header text-center">
 				<a href="/login" class="h1">
 					<?= $this->Html->image('logo.png', ['style' => 'width: 60px; float: left; margin-right: 15px;']) ?>
-					<span style="font-weight: bold; float: left;"><?= Configure::read('Theme.main.title') ?></span>
+					<span style="font-weight: bold; float: left;"><?= __('Sign Up') ?></span>
 				</a>
 			</div>
 			<div class="card-body">

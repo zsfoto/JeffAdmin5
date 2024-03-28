@@ -18,7 +18,7 @@ use Cake\Core\Configure;
 			<div class="card-header text-center">
 				<a href="/login" class="h1">
 					<?= $this->Html->image('logo.png', ['style' => 'width: 60px; float: left; margin-right: 15px;']) ?>
-					<span style="font-weight: bold; float: left;"><?= Configure::read('Theme.main.title') ?></span>
+					<span style="font-weight: bold; float: left;"><?= __('Change Password') ?></span>
 				</a>
 			</div>
 			<div class="card-body">
@@ -57,15 +57,17 @@ use Cake\Core\Configure;
 						</div>
 					</div>
 
+					<hr>
 
 					<div class="row">
-						<div class="col-8">
-							&nbsp;
-						</div>
-						<div class="col-4">
+						<div class="col-6">
 							<?= $this->Form->button(__d('cake_d_c/users', 'Submit'), ['class' => 'btn btn-primary btn-block']); ?>
 						</div>
+						<div class="col-6">
+							<?= $this->Html->link(__('Cancel'), '/admin', ['class' => 'btn btn-outline-secondary btn-block']); ?>
+						</div>
 					</div>
+
 
 				<?= $this->Form->end() ?>
 
@@ -86,6 +88,9 @@ use Cake\Core\Configure;
 
 			</div>
 			<!-- /.card-body -->
+			
+			
+			
 		</div>
 		<!-- /.card -->
 	</div>

@@ -30,7 +30,7 @@
 					)
 				?></h3>
 
-                <p class="text-muted text-center"><?= __d('cake_d_c/users', 'Role') ?>:&nbsp;<b><?= $roles[$user->role] ?></b></p>
+                <p class="text-muted text-center"><?= __d('cake_d_c/users', 'Role') ?>:&nbsp;<b><?= $user->role ?></b></p>
 
                 <p class="text-muted text-center"><?= __d('cake_d_c/users', 'Email') ?>:&nbsp;<b><a href="mailto:<?= $user->email ?>"><?= $user->email ?></a></b></p>
 				
@@ -50,6 +50,8 @@
 */ ?>
 				
 				<?= $this->Html->link('<b>' . __d('cake_d_c/users', 'Change Password') . '</b>', ['plugin' => 'CakeDC/Users', 'controller' => 'Users', 'action' => 'changePassword'], ['escape' => false, 'class' => 'btn btn-danger btn-block']); ?>
+
+				<?= $this->Html->link('<b>' . __('Back to Admin') . '</b>', '/admin', ['escape' => false, 'class' => 'btn btn-outline-secondary btn-block']); ?>
 				
               </div>
               <!-- /.card-body -->
