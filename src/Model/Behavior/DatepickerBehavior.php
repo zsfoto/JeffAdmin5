@@ -49,7 +49,10 @@ class DatepickerBehavior extends Behavior
 								$data[$field] = $date;
 								break;
 							case 'time': 
-								$data[$field] = str_replace(" ", "", $data[$field]);
+								$data[$field] = trim(str_replace(" ", "", $data[$field]));
+								if(strlen($data[$field]) == 5){
+									$data[$field] .= ':00';
+								}
 								$data[$field] = (string) date('H:i:s', strtotime($data[$field]));
 								$data[$field] = (string) DateTime::parseTime($data[$field], 'HH:mm:ss')->i18nFormat('HH:mm:ss');
 								break;

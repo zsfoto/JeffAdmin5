@@ -69,7 +69,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 
 								<div class="float-start">
 									<h3><i id="card-icon" class="fa fa-{{ cardIcon }} fa-spin"></i> <?= __('{{ action|humanize }}') ?>: <?= __('{{ singularHumanName }}') ?></h3>
-									<?= __('The data marked with * must be provided!') ?>
+									<?= __('The data marked with <span class="fw-bold text-danger">*</span> must be provided!') ?>
 								</div>
 
 								<div class="float-end ms-5">
@@ -176,7 +176,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<!-- 3. INTEGER: {{ field }}: {{ fieldData.type }} {{ required }} -->
 											<div class="mb-3 form-group row number required">
 												<label class="col-form-label col-md-2 pt-1 text-start text-md-end{{ required }}" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
-												<div class="col-md-5 col-xl-4 col-lg-4">
+												<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 col-xxl-4">
 													<?= $this->Form->control('{{ field }}', ['class' => 'form-control', 'data-decimals' => '0', 'min' => '0', 'max' => '999999999999', 'step' => '1', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
 
 												</div>
@@ -188,7 +188,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<!-- 4. DATETIME: {{ field }}: {{ fieldData.type }} {{ required }} -->
 											<div class="mb-3 row required">
 												<label class="pt-2 col-form-label col-md-2 pt-1 text-start text-md-end{{ required }}" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
-												<div class="col-xs-12 col-sm-12 col-md-5 col-xl-4 col-xxl-3">
+												<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 col-xxl-4">
 													<div class="form-group datetime">
 														<div class="input-group {{field|replace({'_': '-'})}}" id="{{field|replace({'_': '-'})}}" data-target-input="nearest">
 															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
@@ -207,7 +207,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<!-- 5. DATE: {{ field }}: {{ fieldData.type }} {{ required }} -->
 											<div class="mb-3 row required">
 												<label class="pt-2 col-form-label col-md-2 pt-1 text-start text-md-end{{ required }}" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
-												<div class="col-xs-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+												<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 col-xxl-4">
 													<div class="form-group date">
 														<div class="input-group {{field|replace({'_': '-'})}}" id="{{field|replace({'_': '-'})}}" data-target-input="nearest">
 															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
@@ -226,7 +226,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<!-- 6. TIME: {{ field }}: {{ fieldData.type }} {{ required }} -->
 											<div class="mb-3 row required">
 												<label class="pt-2 col-form-label col-md-2 pt-1 text-start text-md-end{{ required }}" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
-												<div class="col-xs-12 col-sm-12 col-md-4 col-xl-3 col-xxl-3">
+												<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 col-xxl-4">
 													<div class="form-group time">
 														<div class="input-group {{field|replace({'_': '-'})}}" id="{{field|replace({'_': '-'})}}" data-target-input="nearest">
 															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>

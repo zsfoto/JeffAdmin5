@@ -186,10 +186,10 @@ function jeffAdminInitSelectPicker(){
 	$('select').selectpicker();
 }
 
-// Date picker
+// Date picker: L
 function jeffAdminInitDatePicker(field, value){
 	const datepicker = new tempusDominus.TempusDominus(document.getElementById(field), {		
-		localization: {locale: 'hu', format: 'L', dayViewHeaderFormat: { month: 'long', year: 'numeric' } },
+		localization: {locale: 'hu', format: 'yyyy.MM.dd.', dayViewHeaderFormat: { month: 'long', year: 'numeric' } },
 		display: {
 			icons: {type: 'icons', time: 'fa fa-clock-o', date: 'fa fa-calendar', up: 'fa fa-arrow-up', down: 'fa fa-arrow-down', previous: 'fa fa-chevron-left', next: 'fa fa-chevron-right', today: 'fa fa-calendar-check-o', clear: 'fa fa-times', close: 'fa fa-check'},
 			buttons: {today: true, clear: true,close: true},
@@ -201,10 +201,10 @@ function jeffAdminInitDatePicker(field, value){
 	}
 }
 
-// DateTime picker
+// DateTime picker: L LTS
 function jeffAdminInitDateTimePicker(field, value){
 	const datetimepicker = new tempusDominus.TempusDominus(document.getElementById(field), {
-		localization: { locale: 'hu', format: 'L LTS', dayViewHeaderFormat: { month: 'long', year: 'numeric' }},
+		localization: { locale: 'hu', format: 'yyyy.MM.dd HH:mm:ss', dayViewHeaderFormat: { month: 'long', year: 'numeric' }},
 		display: {
 			//dayViewHeaderFormat: { month: 'long', year: '4-digit' },	
 			icons: {type: 'icons', time: 'fa fa-clock-o', date: 'fa fa-calendar', up: 'fa fa-arrow-up', down: 'fa fa-arrow-down', previous: 'fa fa-chevron-left', next: 'fa fa-chevron-right', today: 'fa fa-calendar-check-o', clear: 'fa fa-times', close: 'fa fa-check'},
@@ -219,10 +219,10 @@ function jeffAdminInitDateTimePicker(field, value){
 }
 
 
-// Time picker
+// Time picker: LTS
 function jeffAdminInitTimePicker(field, value){
 	const timepicker = new tempusDominus.TempusDominus(document.getElementById(field), {
-		localization: {locale: 'hu', format: 'LTS'},
+		localization: {locale: 'hu', format: 'HH:mm:ss'},
 		display: {
 			//viewMode: 'clock',
 			icons: { type: 'icons', time: 'fa fa-clock-o', date: 'fa fa-calendar', up: 'fa fa-arrow-up', down: 'fa fa-arrow-down', previous: 'fa fa-chevron-left', next: 'fa fa-chevron-right', today: 'fa fa-clock-o', clear: 'fa fa-times', close: 'fa fa-check' },

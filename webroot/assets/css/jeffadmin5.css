@@ -1848,6 +1848,10 @@ table tr td{
   height: 42px;
 }
 
+.form-group.datetime .input.text, .form-group.date .input.text, .form-group.time .input.text {
+  width: calc(100% - 45px);
+}
+
 /* DateTime input-group icon */
 .input-group-text {
   width: 42px;

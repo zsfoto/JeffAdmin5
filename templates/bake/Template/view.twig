@@ -51,7 +51,7 @@ $config = array_merge($global_config, $local_config);
 							<div class="card-header">
 								<div class="float-start">
 									<h3><i id="card-icon" class="fa fa-eye fa-spin"></i> <?= __('{{ action|humanize }}') ?>: <?= __('{{ singularHumanName }}') ?></h3>
-									<?= __('The data marked with * must be provided!') ?>
+									<?= __('The data marked with <span class="fw-bold text-danger">*</span> must be provided!') ?>
 								</div>
 								<div class="float-end ms-5">
 									<?= $this->Html->link('<span class="btn btn-outline-secondary mt-1 me-1"><i class="fa fa-times"></i></span>',
