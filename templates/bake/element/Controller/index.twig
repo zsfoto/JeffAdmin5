@@ -15,8 +15,6 @@
 #}
 {% set belongsTo = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
 
-	public $config = [];
-	
     /**
      * Initialize controller
      *
@@ -26,11 +24,6 @@
     {
         parent::initialize();
 
-		//$global_config = Configure::read('Theme.' . $this->prefix . '.config.index');
-		$global_config = (array) Configure::read('Theme.' . $this->prefix . '.config.controller');
-		$local_config = [];
-		//$local_config = ['paginate_limit' => 3];	// update default value
-		$this->config = array_merge($global_config, $local_config);
 	}
 
     /**

@@ -63,13 +63,13 @@ $config = array_merge($global_config, $local_config);
 								<div class="form-tab float-end">
 									<ul class="nav nav-tabs mt-1" id="myTab" role="tablist">
 										<li class="nav-item" role="presentation">
-											<button class="nav-link active" id="tab-first" data-bs-toggle="tab" data-bs-target="#tab-panel-first" type="button" role="tab" aria-controls="tab-panel-first" aria-selected="true"><?= __('Basic data') ?></button>
+											<button class="nav-link active" id="tab-first" data-bs-toggle="tab" data-bs-target="#tabPanelMain" type="button" role="tab" aria-controls="tabPanelMain" aria-selected="true"><?= __('Basic data') ?></button>
 										</li>
 
 {% if groupedFields.text %}
 {% for field in groupedFields.text %}
 										<li class="nav-item" role="presentation">
-											<button class="nav-link" id="tab{{ field|humanize }}" data-bs-toggle="tab" data-bs-target="#tabPanel{{ field|humanize }}" type="button" role="tab" aria-controls="tabPanel{{ field|humanize }}" aria-selected="false"><?= __('{{ field|humanize }}') ?></button>
+											<button class="nav-link" id="tab{{ field|humanize|replace({' ': ''}) }}" data-bs-toggle="tab" data-bs-target="#tabPanel{{ field|humanize|replace({' ': ''}) }}" type="button" role="tab" aria-controls="tabPanel{{ field|humanize|replace({' ': ''}) }}" aria-selected="false"><?= __('{{ field|humanize }}') ?></button>
 										</li>
 {% endfor %}
 {% endif %}
@@ -111,7 +111,7 @@ $config = array_merge($global_config, $local_config);
 								<form>
 									<div class="tab-content" id="tabContent"><!-- T.1. -->
 										
-										<div class="tab-pane fade show active" id="tab-panel-first" role="tabpanel" aria-labelledby="tab-first" tabindex="0">
+										<div class="tab-pane fade show active" id="tabPanelMain" role="tabpanel" aria-labelledby="tab-first" tabindex="0">
 <?php if($config['show_id']){ ?>
 											<div class="row"><!-- 3. -->
 												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end">#<?= __('id') ?>:</label>
@@ -273,7 +273,7 @@ n
 {% if groupedFields.text %}
 {% for field in groupedFields.text %}
 										<!-- TAB for: {{ field|humanize }} text field -->
-										<div class="tab-pane fade" id="tabPanel{{ field|humanize }}" role="tabpanel" aria-labelledby="tab{{ field|humanize }}" tabindex="0">
+										<div class="tab-pane fade" id="tabPanel{{ field|humanize|replace({' ': ''}) }}" role="tabpanel" aria-labelledby="tab{{ field|humanize|replace({' ': ''}) }}" tabindex="0">
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="row">

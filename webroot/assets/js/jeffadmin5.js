@@ -49,6 +49,14 @@ $(document).ready(function() {
 	});
 });
 
+function jeffAdminInitICheck(theme){
+	$(document).ready(function(){
+		$('input[type="checkbox"]').iCheck({
+			checkboxClass: theme,
+		});
+	});
+}
+
 
 function jeffAdminInitShowMore(content){
 
@@ -134,7 +142,6 @@ function jeffAdminToastMessage(text, type, stayTime, position, sticky){
 
 // https://summernote.org/getting-started/#installation
 function jeffAdminInitSummerNote(field, height, placeholder, lang, tabsize){
-	
 	if(field === undefined){
 		field = 'missing-field'
 	}
