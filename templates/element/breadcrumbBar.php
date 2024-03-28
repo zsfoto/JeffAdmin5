@@ -57,7 +57,7 @@ if($controller == 'Users'){
 	if( $config['header_buttons_in_action'][$action]["save"]){
 		echo $this->Html->link('<span class="btn-label"><i class="fa fa-save"></i></span>' . __d('jeff_admin', 'Save'), '#', 
 			[
-				'id' => 'button-submit', 'class'=>'btn btn-success mt-1 me-1', 'role'=>'button', 'escape'=>false,  
+				'id' => 'button-submit', 'class'=>'btn btn-primary mt-1 me-1', 'role'=>'button', 'escape'=>false,  
 				'data-bs-tooltip' => 'tooltip', 'data-bs-placement' => 'bottom', 'title'=>__d('jeff_admin', 'Save and back to list')
 			]
 		);		

@@ -10,9 +10,12 @@ use Cake\Core\Configure;
 use Cake\Event\EventInterface;
 use ArrayObject;
 use Cake\Datasource\ConnectionManager;
-use Cake\I18n\FrozenDate;
-use Cake\I18n\FrozenTime;
+//use Cake\I18n\FrozenDate;
+//use Cake\I18n\FrozenTime;
 use Cake\I18n\I18n;
+use Cake\I18n\Date;
+use Cake\I18n\Time;
+use Cake\I18n\DateTime;
 
 class DatepickerBehavior extends Behavior
 {
@@ -30,19 +33,37 @@ class DatepickerBehavior extends Behavior
 		//$name = $tableSchema->name();
 		
 		foreach($data as $field => $value){	// Nincs benne a created és a modified mező. Hmm!
+
 			$type = $tableSchema->getColumnType($field);
 			if (in_array($type, ['date', 'time', 'datetime'])) {
 				if ($locale == 'hu_HU') {
-					switch( $type ){
-						case 'date': 
-							$data[$field] = FrozenDate::parseDate($data[$field], 'yyyy-MM-dd')->i18nFormat('yyyy-MM-dd');
-							break;
-						case 'time': 
-							$data[$field] = FrozenTime::parseTime($data[$field], 'HH:mm:ss')->i18nFormat('HH:mm:ss');
-							break;
-						case 'datetime':
-							$data[$field] = FrozenTime::parseDateTime($data[$field], 'yyyy-MM-dd HH:mm:ss')->i18nFormat('yyyy-MM-dd HH:mm:ss');
-							break;
+					if(trim($data[$field]) !== ''){
+						switch( $type ){
+							case 'date': 
+								$date = $data[$field];
+								$date = str_replace(" ", "", $date);
+								$date = str_replace(".", "-", $date);
+								if(substr($date, -1) == '-'){
+									$date = substr($date, 0, strlen($date)-1);	
+								}
+								$data[$field] = $date;
+								break;
+							case 'time': 
+								$data[$field] = str_replace(" ", "", $data[$field]);
+								$data[$field] = (string) date('H:i:s', strtotime($data[$field]));
+								$data[$field] = (string) DateTime::parseTime($data[$field], 'HH:mm:ss')->i18nFormat('HH:mm:ss');
+								break;
+							case 'datetime':
+								$date = trim(substr($data[$field], 0, strlen($data[$field])-8));
+								if(substr($date, -1) == '-'){
+									$date = substr($date, 0, strlen($date)-1);
+								}
+								$date = str_replace(" ", "", $date);
+								$date = str_replace(".", "-", $date);
+								$time = substr($data[$field], -8);							
+								$data[$field] = $date . ' ' .  $time;
+								break;
+						}
 					}
 				}
 				

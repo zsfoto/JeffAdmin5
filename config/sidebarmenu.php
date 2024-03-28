@@ -11,15 +11,15 @@ return [
 					[
 						'type' 		=> 'menu',
 						'icon' 		=> 'fa fa-fw fa-bars',
-						'title'		=> __('Categories'),
-						'controller'=> 'Categories',
+						'title'		=> __('Posts'),
+						'controller'=> 'Posts',
 						'action' 	=> 'index',
 					],
 					[
 						'type' 		=> 'menu',
 						'icon' 		=> 'fa fa-fw fa-bars',
-						'title'		=> __('Posts'),
-						'controller'=> 'Posts',
+						'title'		=> __('Categories'),
+						'controller'=> 'Categories',
 						'action' 	=> 'index',
 					],
 					[
@@ -28,13 +28,13 @@ return [
 						'icon'		=> 'fa fa-fw fa-table',
 						'items'		=> [
 							[
-								'title' 		=> __('Categories'),
-								'controller' 	=> 'Categories',
+								'title' 		=> __('Posts'),
+								'controller' 	=> 'Posts',
 								'action' 		=> 'index',								
 							],
 							[
-								'title' 		=> __('Posts'),
-								'controller' 	=> 'Posts',
+								'title' 		=> __('Categories'),
+								'controller' 	=> 'Categories',
 								'action' 		=> 'index',								
 							],
 						]

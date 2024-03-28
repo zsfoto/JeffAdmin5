@@ -25,9 +25,9 @@ $prefix = strtolower( $this->request->getParam('prefix') ?? '' );
 $controller = $this->request->getParam('controller');
 $action = $this->request->getParam('action');
 
-$layout{{ pluralHumanName }}LastId = -1;
-if($session->check('Layout.{{ pluralHumanName }}.LastId')){
-	$layout{{ pluralHumanName }}LastId = $session->read('Layout.{{ pluralHumanName }}.LastId');
+$layout{{ pluralHumanName|replace({' ': ''}) }}LastId = -1;
+if($session->check('Layout.{{ pluralHumanName|replace({' ': ''}) }}.LastId')){
+	$layout{{ pluralHumanName|replace({' ': ''}) }}LastId = $session->read('Layout.{{ pluralHumanName|replace({' ': ''}) }}.LastId');
 }
 
 $global_config = (array) Configure::read('Theme.' . $prefix . '.config.template.index');
@@ -173,7 +173,7 @@ $config = array_merge($global_config, $local_config);
 	//$classLastVisited = '';
 ?>
 
-										<tr row-id="<?= ${{ singularVar }}->id ?>"<?php if(${{ singularVar }}->id == $layout{{ pluralHumanName }}LastId){ echo 'class="table-tr-last-id"'; } ?>" prefix="<?= $prefix ?>" controller="<?= $controller ?>" action="<?= $action ?>" aria-expanded="true">
+										<tr row-id="<?= ${{ singularVar }}->id ?>"<?php if(${{ singularVar }}->id == $layout{{ pluralHumanName|replace({' ': ''}) }}LastId){ echo 'class="table-tr-last-id"'; } ?>" prefix="<?= $prefix ?>" controller="<?= $controller ?>" action="<?= $action ?>" aria-expanded="true">
 											<td class="row-id-anchor" value="<?= ${{ singularVar }}->id ?>"><a name="<?= ${{ singularVar }}->id ?>" class="anchor"></a></td>
 <?php if($config['show_id']){ ?>
 											<td class="number id" value="<?= ${{ singularVar }}->id ?>"><?= h(${{ singularVar }}->id) ?><a name="<?= ${{ singularVar }}->id ?>"></a></td>
@@ -192,7 +192,18 @@ $config = array_merge($global_config, $local_config);
 {% if isKey is not same as(true) %}
 {% set columnData = Bake.columnData(field, schema) %}
 {% if columnData.type not in ['integer', 'float', 'decimal', 'biginteger', 'smallinteger', 'tinyinteger'] %}
-											<td class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}" value="<?= ${{ singularVar }}->{{ field }} ?>"><?= h(${{ singularVar }}->{{ field }}) ?></td>
+{%- set dateTimeFormat = '' %}
+{%- if columnData.type in ['date'] %}
+{%- 	set dateTimeFormat = "->format('Y-m-d')" %}  
+{%- endif %}
+{%- if columnData.type in ['time'] %}
+{%- 	set dateTimeFormat = "->format('H:i:s')" %}  
+{%- endif %}
+{%- if columnData.type in ['datetime'] %}
+{%- 	set dateTimeFormat = "->format('Y-m-d H:i:s')" %}  
+{%- endif %}
+{%- set dateTimeFormat = '' %}
+											<td class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}" value="<?= ${{ singularVar }}->{{ field }} ?>"><?= h(${{ singularVar }}->{{ field }}{{ dateTimeFormat }}) ?></td>
 {% elseif columnData.null %}
 											<td class="{{ columnData.type }} {{ field|replace({'_': '-'}) }}" value="<?= ${{ singularVar }}->{{ field }} ?>"><?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}, ['places' => 0, 'precision' => 0, 'before' => '', 'after' => '']) ?></td>
 {% else %}
@@ -224,14 +235,13 @@ $config = array_merge($global_config, $local_config);
 <?php if($config['show_created'] || $config['show_modified']){ ?>
 											<td class="datetime">
 <?php if($config['show_created']){ ?>
-												<b><?= h(${{ singularVar }}->created) ?></b>
+												<span class="fw-bold"><?= h(${{ singularVar }}->created) ?></span>
 <?php } ?>
 <?php if($config['show_created'] && $config['show_modified']){ ?>
 												<br>
 <?php } ?>
 <?php if($config['show_modified']){ ?>
-												<?= h(${{ singularVar }}->modified) ?>
-
+												<span class="fw-normal"><?= h(${{ singularVar }}->modified) ?></span>
 <?php } ?>
 											</td>
 <?php } ?>

@@ -20,126 +20,48 @@ return [
 			//'sortDescLocked' => '<a class="desc locked" href="{{url}}">{{text}}</a>',
 		],
 		'form' => [
-/*
-            'formStart' => '<form{{attrs}}>',
-            'formEnd' => '</form>',
-            'hiddenBlock' => '
-								<div style="display:none;">{{content}}</div>
-								',
+			'label' 				=> '',
 
-            'requiredClass' => 'required',
 
-            'inputContainer' => '
-											<div class="row mb-3 input {{type}}{{required}}">
-												{{label}}
-												<div class="col-sm-9">
-													{{content}}
-												</div>
-											</div>
-											',
-
-			'inputContainerError' => 	'
-											<div class="row mb-3 input {{type}}{{required}} position-relative">
-												{{label}}
-												<div class="col-sm-9">
-													{{content}}
-													{{error}}														
-												</div>
-											</div>
-											',
-
-            'formGroup' => '{{input}}',
-			
-            'label' => '<label {{attrs}} class="col-sm-2 col-form-label text-start text-sm-end">{{text}}:</label>',			
-			
-            'input' => '<input id="{{name}}" name="{{name}}" type="{{type}}" class="form-control is-invalid" aria-describedby="{{name}}-error" {{attrs}}>',
-
-			'error' => '<div id="{{id}}" class="invalid-feedback">
-														{{content}}
-													</div>',
-
-            'button' => '<button role="button"{{attrs}}>{{text}}</button>',
-
-			//'textarea' => '<textarea id="{{name}}" name="{{name}}"{{attrs}}>{{value}}</textarea>',
-			
-			'selectedClass' => 'selected',
-            'select' => '
-												<select class="form-control select2 is-invalid" id="{{name}}" name="{{name}}{{attrs}}">
-													{{content}}
-												</select>',
-			'selectMultiple' => '
-												<select id="{{name}} name="{{name}}[]" class="form-control select-multi is-invalid"{{attrs}}>
-													{{content}}
-												</select>',
-			
-			'option' => '<option value="{{value}}{{attrs}}">{{text}}</option>',
-
-            //'checkbox' => '<input zs="checkbox" type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            //'checkboxFormGroup' => 'zs="checkBoxFormGroup" {{label}}',
-            //'checkboxWrapper' => '<div zs="checkboxWrapper" class="checkbox">{{label}}</div>',
-            'checkbox' => '<input zs="checkbox" type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'checkboxFormGroup' => '{{label}}',
-            'checkboxWrapper' => '<div zs="checkboxWrapper" class="checkbox">{{label}}</div>',
-*/
-
-            //'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
-            //'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',            
-            //'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
-			
-/*
-            
-            'errorList' => '<ul zs="errorList">{{content}}</ul>',
-            'errorItem' => '<li zs="errorItem">{{text}}</li>',
-            'file' => '<input zs="file" type="file" name="{{name}}"{{attrs}}>',
-            'fieldset' => '<fieldset zs="fieldset"{{attrs}}>{{content}}</fieldset>',
-			
-            'inputSubmit' => '<input zs="inputSubmit" type="{{type}}"{{attrs}}>',			
-            'nestingLabel' => '{{hidden}}<label zs="nestingLabel"{{attrs}}>{{input}}{{text}}</label>',
-            'legend' => '<legend zs="legend">{{text}}</legend>',
-            'multicheckboxTitle' => '<legend zs="multicheckboxTitle">{{text}}</legend>',
-            'multicheckboxWrapper' => '<fieldset zs="multicheckboxWrapper"{{attrs}}>{{content}}</fieldset>',
-            'radio' => '<input zs="radio" type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'radioWrapper' => 'zs="radioWrapper" {{label}}',            
-            'submitContainer' => '<div zs="submitContainer" class="submit">{{content}}</div>',
-            'confirmJs' => 'zs="confirmJs" {{confirm}}',
-*/
-		],
+		/*
+			'label' 				=> '<label{{attrs}}>{{text}}</label>',			
 		
-		'formOriginal' => [
-            'button' => '<button{{attrs}}>{{text}}</button>',
-            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'checkboxFormGroup' => '{{label}}',
-            'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-            'error' => '<div class="error-message" id="{{id}}">{{content}}</div>',
-            'errorList' => '<ul>{{content}}</ul>',
-            'errorItem' => '<li>{{text}}</li>',
-            'file' => '<input type="file" name="{{name}}"{{attrs}}>',
-            'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
-            'formStart' => '<form{{attrs}}>',
-            'formEnd' => '</form>',
-            'formGroup' => '{{label}}{{input}}',
-            'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
-            'input' => '<input type="{{type}}" class="form-control" id="{{name}}"{{attrs}}>',
-            'inputSubmit' => '<input type="{{type}}"{{attrs}}>',			
-            'inputContainer' => '<div zs="02" class="input {{type}}{{required}}">{{content}}</div>',
-            'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>',
-            'label' => '<label{{attrs}}>{{text}}</label>',
-            'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
-            'legend' => '<legend>{{text}}</legend>',
-            'multicheckboxTitle' => '<legend>{{text}}</legend>',
-            'multicheckboxWrapper' => '<fieldset{{attrs}}>{{content}}</fieldset>',
-            'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
-            'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
-            'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
-            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
-            'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'radioWrapper' => '{{label}}',
-            'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
-            'submitContainer' => '<div class="submit">{{content}}</div>',
-            'confirmJs' => '{{confirm}}',
-            'selectedClass' => 'selected',
-            'requiredClass' => 'required',
-		]
+            'button' 				=> '<button{{attrs}}>{{text}}</button>',
+            'checkbox' 				=> '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+            'checkboxFormGroup' 	=> '{{label}}',
+            'checkboxWrapper' 		=> '<div class="checkbox">{{label}}</div>',
+            'error' 				=> '<div class="error-message" id="{{id}}">{{content}}</div>',
+            'errorList' 			=> '<ul>{{content}}</ul>',
+            'errorItem' 			=> '<li>{{text}}</li>',
+            'file' 					=> '<input type="file" name="{{name}}"{{attrs}}>',
+            'fieldset' 				=> '<fieldset{{attrs}}>{{content}}</fieldset>',
+            'formStart' 			=> '<form{{attrs}}>',
+            'formEnd' 				=> '</form>',
+            'formGroup' 			=> '{{input}}',
+            'hiddenBlock' 			=> '<div style="display:none;">{{content}}</div>',
+            'input' 				=> '<input type="{{type}}" id="{{name}}"{{attrs}}>',
+            'inputSubmit' 			=> '<input type="{{type}}"{{attrs}}>',			
+            'inputContainer' 		=> '{{content}}',
+            'inputContainerError' 	=> 'inputContainerError <div class="input {{type}}{{required}} error">{{content}}{{error}}</div>',
+            'label' 				=> '<label{{attrs}}>{{text}}</label>',
+            'nestingLabel' 			=> '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+            'legend' 				=> '<legend>{{text}}</legend>',
+            'multicheckboxTitle' 	=> '<legend>{{text}}</legend>',
+            'multicheckboxWrapper' 	=> '<fieldset{{attrs}}>{{content}}</fieldset>',
+            'option' 				=> '<option value="{{value}}"{{attrs}}>{{text}}</option>',
+            'optgroup' 				=> '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
+            'select' 				=> '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+            'selectMultiple' 		=> '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
+            'radio' 				=> '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
+            'radioWrapper' 			=> '{{label}}',
+            'textarea' 				=> '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+            'submitContainer' 		=> '<div class="submit">{{content}}</div>',
+            'confirmJs' 			=> '{{confirm}}',
+            'selectedClass' 		=> 'selected',
+            'requiredClass' 		=> 'required',
+		*/
+		],
+
 	]
 
 ];

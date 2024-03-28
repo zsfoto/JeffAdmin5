@@ -1394,41 +1394,6 @@ table tr td.name {
 	/* font-weight: bold; */
 }
 
-table tr th.visible, table tr td.visible {
-	text-align: center;
-	width: 60px;
-}
-table tr td.visible {
-	/* font-weight: bold; */
-}
-
-td[visible='']::after, td[visible='0']::after {
-	font: normal normal normal 14px/1 FontAwesome;
-	content: "\f070";	/*EYE*/
-	font-size: inherit;
-	font-size: 22px;
-	text-rendering: auto;
-	text-align: center;
-	text-indent: 0;
-	display: block;
-	line-height: initial;
-	color: red;
-	color: lightgray;
-}
-td[visible='1']::after {
-	font: normal normal normal 14px/1 FontAwesome;
-	content: "\f111";	/*CIRCLE*/
-	content: "\f06e";	/*EYE*/
-	font-size: inherit;
-	font-size: 22px;
-	text-rendering: auto;
-	text-align: center;
-	text-indent: 0;
-	display: block;
-	line-height: initial;
-	color: green;
-}
-
 
 
 table tr th.number, table tr th.integer, table tr th.decimal {
@@ -1531,6 +1496,44 @@ table tr td.boolean{
 	/* font-weight: bold; */
 	border-right: 1px solid #dadada;
 }
+
+table tr th.visible, table tr td.visible {
+	text-align: center;
+	width: 100px;
+}
+table tr td.visible {
+	/* font-weight: bold; */
+}
+
+td[visible='']::after, td[visible='0']::after {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: "\f070";	/*EYE*/
+	font-size: inherit;
+	font-size: 22px;
+	text-rendering: auto;
+	text-align: center;
+	text-indent: 0;
+	display: block;
+	line-height: initial;
+	color: red;
+	color: lightgray;
+	margin-bottom: -10px;
+}
+td[visible='1']::after {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: "\f111";	/*CIRCLE*/
+	content: "\f06e";	/*EYE*/
+	font-size: inherit;
+	font-size: 22px;
+	text-rendering: auto;
+	text-align: center;
+	text-indent: 0;
+	display: block;
+	line-height: initial;
+	color: green;
+	margin-bottom: -10px;
+}
+
 
 
 table tr th.date, table tr td.date, th.date, td.date{
@@ -1713,12 +1716,18 @@ table tr td{
 	min-height: 500px;
 }
 
+/* Date, Time and DateTime input */
+.form-group.datetime input, .form-group.date input, .form-group.time input{
+	border-radius: 5px 0 0 5px; 
+	height: 42px;
+}
 
 /* DateTime input-group icon */
 .input-group-text {
-  width: 42px;
-  height: 42px;
-  padding: 8px;
+	width: 42px;
+	height: 42px;
+	padding: 8px;
+	border-radius: 0 5px 5px 0;
 }
 .input-group-text i{
 	font-size: 26px;
@@ -1766,7 +1775,8 @@ th.string > .asc::after, th.char > .asc::after {
 	font-weight: 700;
 	float: right;
 	margin-right: 3px;
-	margin-top: 2px;
+	margin-left: 3px;
+	margin-top: 4px;
 	content: "\f15d";
 }
 
@@ -1779,7 +1789,8 @@ th.string > .desc::after, th.char > .desc::after {
 	font-weight: 700;
 	float: right;
 	margin-right: 3px;
-	margin-top: 2px;
+	margin-left: 3px;
+	margin-top: 4px;
 	content: "\f15e";
 }
 
@@ -1794,7 +1805,8 @@ th.integer > .asc::after, th.number > .asc::after, th.id > .asc::after {
 	font-weight: 900;
 	float: right;
 	margin-right: 3px;
-	margin-top: 2px;
+	margin-left: 3px;
+	margin-top: 4px;
 	content: "\f162";
 }
 
@@ -1805,7 +1817,8 @@ th.integer > .desc::after, th.number > .desc::after, th.id > .desc::after {
 	float: right;
 	font-weight: 900;
 	margin-right: 3px;
-	margin-top: 2px;
+	margin-left: 3px;
+	margin-top: 4px;
 	content: "\f163";
 }
 
@@ -1816,7 +1829,8 @@ th.boolean > .asc::after, th.datetime > .asc::after, th.date > .asc::after, th.t
 	font-weight: 900;
 	float: right;
 	margin-right: 3px;
-	margin-top: 2px;
+	margin-left: 3px;
+	margin-top: 4px;
 	content: "\f160";
 }
 
@@ -1827,7 +1841,8 @@ th.boolean > .desc::after, th.datetime > .desc::after, th.date > .desc::after, t
 	float: right;
 	font-weight: 900;
 	margin-right: 3px;
-	margin-top: 2px;
+	margin-left: 3px;
+	margin-top: 4px;
 	content: "\f161";
 }
 
@@ -1866,6 +1881,9 @@ td.boolean[boolean='0']::after, td.boolean[value='0']::after {
 	line-height: initial;
 	color: red;
 	color: lightgray;
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 4px;
 }
 td.boolean[boolean='1']::after, td.boolean[value='1']::after {
 	font: normal normal normal 14px/1 FontAwesome;
@@ -1879,7 +1897,10 @@ td.boolean[boolean='1']::after, td.boolean[value='1']::after {
 	line-height: initial;
 	color: green;
 	color: #067CC8;
-	color: #4980B5;	
+	color: #4980B5;
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 4px;
 }
 td.boolean[visible='']::after, td.boolean[visible='0']::after {
 	font: normal normal normal 14px/1 FontAwesome;
@@ -1893,6 +1914,9 @@ td.boolean[visible='']::after, td.boolean[visible='0']::after {
 	line-height: initial;
 	color: red;
 	color: lightgray;
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 4px;
 }
 td.boolean[visible='1']::after {
 	font: normal normal normal 14px/1 FontAwesome;
@@ -1906,6 +1930,9 @@ td.boolean[visible='1']::after {
 	display: block;
 	line-height: initial;
 	color: green;
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 4px;
 }
 
 td.boolean[to-delete='']::after, td.boolean[to-delete='0']::after {
@@ -1921,6 +1948,9 @@ td.boolean[to-delete='']::after, td.boolean[to-delete='0']::after {
 	line-height: initial;
 	color: red;
 	color: lightgray;
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 4px;
 }
 td.boolean[to-delete='1']::after {
 	font: normal normal normal 14px/1 FontAwesome;
@@ -1936,6 +1966,9 @@ td.boolean[to-delete='1']::after {
 	line-height: initial;
 	color: green;
 	color: red;
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 4px;
 }
 
 /* ##################### /.BOOLEAN ####################### */
@@ -2016,11 +2049,20 @@ a {
 }
 /* ################# /.SELECT ################### */
 
+/* JeffAdmin5 miatt másként kell */
+/*
 .required > label::before {
 	color: red;
 	margin-right: 3px;
 	content: "*";
 }
+*/
+label.required::before{
+	color: red;
+	margin-right: 3px;
+	content: "*";
+}
+/* /.JeffAdmin5 miatt másként kell */
 
 /* is-invalid: textarea */
 .is-invalid .note-editor.note-airframe, .is-invalid .note-editor.note-frame {
@@ -2126,11 +2168,20 @@ a {
 
 
 /* iCheck */
+/*
 .icheckbox_flat-green, .iradio_flat-green,
 .icheckbox_flat-blue, .iradio_flat-blue,
-.icheckbox_flat-red, .iradio_flat-red {
+.icheckbox_flat-red, .iradio_flat-red
+*/
+label [class^="icheckbox_flat"] {
 	height: 23px;
-	margin-right: 3px;
+	margin-right: 5px !important;
+	margin-top: -1px !important;
+	
+}
+
+label {
+	font-weight: bold !important;
 }
 
 .sn-notify {
@@ -2139,8 +2190,36 @@ a {
 	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);	
 }
 
+.error-message {
+	color: red;
+	font-size: 14px;
+	font-weight: bold;
+}
 
+.tempus-dominus-widget.light.show,
+.tempus-dominus-widget.timepicker-sbs.light.show {
+	-webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);	
+}
 
+.tempus-dominus-widget.light.show .toolbar,
+.tempus-dominus-widget.timepicker-sbs.light.show .toolbar{
+	background-color: #eee;
+}
 
+.tempus-dominus-widget.light.show .toolbar div[data-action="today"]:hover,
+.tempus-dominus-widget.timepicker-sbs.light.show .toolbar div[data-action="today"]:hover,
+.tempus-dominus-widget.light.show .toolbar div[data-action="clear"]:hover,
+.tempus-dominus-widget.timepicker-sbs.light.show .toolbar div[data-action="clear"]:hover,
+.tempus-dominus-widget.light.show .toolbar div[data-action="close"]:hover,
+.tempus-dominus-widget.timepicker-sbs.light.show .toolbar div[data-action="close"]:hover{
+	background-color: #ccc;
+}
 
+.tempus-dominus-widget.light.show .dow.no-highlight,
+.tempus-dominus-widget.timepicker-sbs.light.show .dow.no-highlight{
+	font-weight: bold;
+	color: black;
+}
 
