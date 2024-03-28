@@ -298,12 +298,12 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 {#
 <?php /*
 												<div class="col-sm-12">
-													<label class="col-form-label col-md-2 text-start text-md-end" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
+													<label class="col-form-label col-md-2 text-start text-md-end" for="{{ field|replace({' ': '', '_': '-'}) }}"><?= __('{{field|humanize}}') ?>:</label>
 												</div>
 */ ?>
 #}
 												<div class="col-sm-12">
-													<?= $this->Form->control('{{ field|replace({' ': ''}) }}', ['label' => false, 'class' => 'summernote', 'empty' => {{empty}}]); ?>
+													<?= $this->Form->control('{{ field }}', ['id' => '{{ field|replace({' ': '', '_': '-'}) }}', 'label' => false, 'class' => 'summernote', 'empty' => {{empty}}]); ?>
 
 												</div>
 											</div>
@@ -424,7 +424,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 {% for field in fields %}
 {% set fieldData = Bake.columnData(field, schema) %}
 {% if fieldData.type in ['text'] %}
-	jeffAdminInitSummerNote('{{ field|replace({' ': ''}) }}', 400, '<?= __("Here you can write the note") ?>...') // Init SummerNote for {{ field }}.
+	jeffAdminInitSummerNote('{{ field|replace({' ': '', '_': '-'}) }}', 400, '<?= __("Here you can write the note") ?>...') // Init SummerNote for {{ field }}.
 {% endif %}
 {% endfor %}
 {% endif %}
