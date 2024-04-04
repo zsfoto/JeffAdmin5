@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<?= $this->Html->css([
-		'/login/css/sweetalert2.min',
-		'/login/css/font-awesome.min',
-		'/login/css/main.css'
+		'jeffAdmin5./assets/login/css/sweetalert2.min',
+		'jeffAdmin5./assets/login/css/font-awesome.min',
+		'jeffAdmin5./assets/login/css/main.css'
 	]); ?>
 
 	<!--link rel="stylesheet" type="text/css" href="/login/css/sweetalert2.min.css"/-->
@@ -26,13 +26,13 @@
 
 	<!-- Essential javascripts for application to work-->
 	<?= $this->Html->script([
-		'/login/js/jquery-3.2.1.min',
-		'/login/js/popper.min',
-		'/login/js/bootstrap.min',
-		'/login/js/sweetalert2.all.min',
-		'/login/js/bootstrap-notify.min',
-		'/login/js/main',
-		'/login/js/plugins/pace.min'
+		'jeffAdmin5./assets/login/js/jquery-3.2.1.min',
+		'jeffAdmin5./assets/login/js/popper.min',
+		'jeffAdmin5./assets/login/js/bootstrap.min',
+		'jeffAdmin5./assets/login/js/sweetalert2.all.min',
+		'jeffAdmin5./assets/login/js/bootstrap-notify.min',
+		'jeffAdmin5./assets/login/js/main',
+		'jeffAdmin5./assets/login/js/plugins/pace.min'
 	]); ?>
 
 <?php /*

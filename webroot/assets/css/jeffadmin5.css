@@ -1633,11 +1633,13 @@ table tr td.string {
   border-right: 1px solid #dadada;
 }
 
-table tr th.boolean, table tr td.boolean {
-  text-align: center;
-  width: 60px;
+/*
+table tr th.boolean, table tr td.boolean{
+	text-align: center;
+	width: 100px;
 }
-
+ lejjebb is van...
+*/
 table tr td.boolean {
   /* font-weight: bold; */
   border-right: 1px solid #dadada;
@@ -1987,7 +1989,7 @@ th.pos, td.pos, th.counter, td.counter {
 /* ####################### BOOLEAN ####################### */
 th.boolean {
   text-align: center;
-  width: 80px;
+  width: 100px;
 }
 
 td.boolean {

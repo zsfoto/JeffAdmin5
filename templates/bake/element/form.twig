@@ -461,9 +461,10 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 {% endif %}
 	{{ commentBoolean }}jeffAdminInitICheck('icheckbox_flat-blue');
 
-	$('#button-submit').click( function(){
-		$('#main-form').submit();
+	$(document).ready( function(){
+		$('#button-submit').click( function(){
+			$('#main-form').submit();
+		});			
 	});			
-
 
 <?php $this->Html->scriptEnd(['block' => 'javaScriptBottom']); ?>

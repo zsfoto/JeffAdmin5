@@ -18,13 +18,16 @@ $controller = $this->request->getParam('controller');
 $action = $this->request->getParam('action');
 $sidebarMenu = Configure::read('Theme.' . $prefix . '.sidebarMenu');
 
-$onlySuperAdmin = false;	// A login után kiderül, hogy az illető superadmin-e.
-$cakeDC = false;
-$cakeDC = true;				// Just for test...
-if($controller == 'Users'){
-	$cakeDC = true;
+//$user = $this->request->getAttribute('identity');
+//$user = $this->request->getAttribute('identity')->getOriginalData() ?? false;
+//$isSuperUser = $user->is_superuser;
+$isSuperUser = false;
+
+if($controller == 'MyUsers'){
+	//$isSuperUser = true;
+	$isSuperUser = false;
 }
-if($cakeDC){
+if($isSuperUser){
 	$db = ConnectionManager::get('default');
 	$collection = $db->getSchemaCollection();
 	$tables = $collection->listTables();
@@ -97,7 +100,7 @@ if($cakeDC){
 	##################################################         Tables only for SuperUser         ##########################################################
 	#######################################################################################################################################################
 */ ?>
-<?php if($cakeDC){ ?>
+<?php if($isSuperUser){ ?>
 					<li class="submenu">
 <?php
 						foreach($tables as $table){

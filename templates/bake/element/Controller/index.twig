@@ -172,6 +172,10 @@
 
         $this->set('search', $search);
         $this->set('showSearchBar', $showSearchBar);
+
+		if(empty(${{ pluralName }}->toArray())){
+			return $this->redirect(['action' => 'add']);
+		}
 		
-		$this->set(compact('{{ pluralName }}'));		
+		$this->set(compact('{{ pluralName }}'));
     }

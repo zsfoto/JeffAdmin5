@@ -22,10 +22,10 @@ try {
 }
 
 try {
-    Configure::load('config', 'default');
+    Configure::load('jeffadmin5', 'default');
 } catch (\Exception $e) {
 	try {
-		Configure::load('jeffAdmin5.config', 'default');
+		Configure::load('jeffAdmin5.jeffadmin5', 'default');
 	} catch (\Exception $e) {
 		exit($e->getMessage() . "\n");
 	}
