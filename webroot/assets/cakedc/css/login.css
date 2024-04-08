@@ -1,0 +1,109 @@
+.material-half-bg {
+  background-color: #E7E2D8;
+}
+.material-half-bg .cover {
+  background-color: #296095;
+}
+.login-content .login-box {
+	border: 1px solid #337;
+	-webkit-box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.5);
+	-moz-box-shadow: 	0px 0px 15px 3px rgba(0,0,0,0.5);
+	box-shadow: 		0px 0px 15px 3px rgba(0,0,0,0.5);	
+}
+
+.login-content .login-box .sign-up-form {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.login-content .login-box .sign-up-form {
+  opacity: 0;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.login-content .login-box.signup .login-form {
+  opacity: 0;
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.login-content .login-box.flipped .forget-form {
+  opacity: 1;
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+}
+
+.login-content .login-box.signup {
+  min-height: 500px;
+}
+
+.login-content .login-box.signup .sign-up-form {
+  opacity: 1;
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+}
+
+@media (max-width: 351px) {
+	.login-content .login-box .sign-up-form {
+		width: 100%;
+	}
+}
+
+
+
+.login-content .logo {
+	/* font-family: "Niconne"; */
+}
+
+.login-content .login-box {
+  min-height: 440px;
+}
+
+
+
+.btn-primary {
+  --bs-btn-color: #FFF;
+  --bs-btn-bg: #4980B5;
+  --bs-btn-border-color: #0073A6;
+  --bs-btn-hover-color: #FFF;
+  --bs-btn-hover-bg: #296095;
+  --bs-btn-hover-border-color: #094075;
+  --bs-btn-focus-shadow-rgb: 38, 116, 128;
+/*
+  --bs-btn-active-color: #FFF;
+  --bs-btn-active-bg: #00544a;
+  --bs-btn-active-border-color: #004f45;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #FFF;
+  --bs-btn-disabled-bg: #00695C;
+  --bs-btn-disabled-border-color: #00695C;
+*/
+}
+
+.form-control:focus {
+  border-color: #094075;
+}
+
+.form-check-input:checked {
+  background-color: #296095;
+  border-color: #296095;
+}
+
+a {
+  color: #0073A6;
+  text-decoration: none;
+}
+a:hover {
+  color: #094075;
+}
+

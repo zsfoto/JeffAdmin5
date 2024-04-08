@@ -1,0 +1,490 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2024-04-08 08:45+0000\n"
+"PO-Revision-Date: 2024-04-08 11:09+0200\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: templates/plugin/CakeDC/Users/Users/__login.php:24
+#: templates/plugin/CakeDC/Users/Users/change_password.php:24
+#: templates/plugin/CakeDC/Users/Users/profile.php:52
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:27
+#: templates/plugin/CakeDC/Users/Users_/change_password.php:21
+#: templates/plugin/CakeDC/Users/Users_/profile.php:52
+msgid "Change Password"
+msgstr "Jelszó változtatás"
+
+#: templates/plugin/CakeDC/Users/Users/__login.php:27
+#: templates/plugin/CakeDC/Users/Users/profile.php:35
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:24
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:37
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:23
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:32
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:21
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:35
+#: templates/plugin/CakeDC/Users/Users_/add.php:82
+#: templates/plugin/CakeDC/Users/Users_/edit.php:82
+#: templates/plugin/CakeDC/Users/Users_/index.php:49
+#: templates/plugin/CakeDC/Users/Users_/profile.php:35
+#: templates/plugin/CakeDC/Users/Users_/register.php:62
+#: templates/plugin/CakeDC/Users/Users_/view.php:76
+msgid "Email"
+msgstr "E-mail"
+
+#: templates/plugin/CakeDC/Users/Users/__login.php:31
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:25
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/login.php:38
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:22
+#: templates/plugin/CakeDC/Users/Users_/add.php:91
+#: templates/plugin/CakeDC/Users/Users_/register.php:71
+msgid "Password"
+msgstr "Jelszó"
+
+#: templates/plugin/CakeDC/Users/Users/__login.php:49
+#: templates/plugin/CakeDC/Users/Users/change_password.php:53
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:34
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/change_password.php:25
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:58
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:38
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/request_reset_password.php:23
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/resend_token_validation.php:20
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/social_email.php:19
+#: templates/plugin/CakeDC/Users/Users_/add.php:123
+#: templates/plugin/CakeDC/Users/Users_/change_password.php:66
+#: templates/plugin/CakeDC/Users/Users_/edit.php:118
+#: templates/plugin/CakeDC/Users/Users_/register.php:106
+#: templates/plugin/CakeDC/Users/Users_/request_reset_password.php:46
+#: templates/plugin/CakeDC/Users/Users_/resend_token_validation.php:20
+#: templates/plugin/CakeDC/Users/Users_/social_email.php:19
+msgid "Submit"
+msgstr "Mentés"
+
+#: templates/plugin/CakeDC/Users/Users/change_password.php:27
+#: templates/plugin/CakeDC/Users/Users/change_password.php:28
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/change_password.php:10
+#: templates/plugin/CakeDC/Users/Users_/change_password.php:35
+msgid "Current password"
+msgstr "Jelenlegi jelszó"
+
+#: templates/plugin/CakeDC/Users/Users/change_password.php:31
+#: templates/plugin/CakeDC/Users/Users/change_password.php:32
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/change_password.php:16
+#: templates/plugin/CakeDC/Users/Users_/change_password.php:45
+msgid "New password"
+msgstr "Új jelszó"
+
+#: templates/plugin/CakeDC/Users/Users/change_password.php:35
+#: templates/plugin/CakeDC/Users/Users/change_password.php:36
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/change_password.php:21
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:26
+#: templates/plugin/CakeDC/Users/Users_/add.php:100
+#: templates/plugin/CakeDC/Users/Users_/change_password.php:54
+#: templates/plugin/CakeDC/Users/Users_/register.php:80
+msgid "Confirm password"
+msgstr "Új jelszó ismét"
+
+#: templates/plugin/CakeDC/Users/Users/login.php:81
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/login.php:93
+#: templates/plugin/CakeDC/Users/Users_/request_reset_password.php:27
+msgid "Reset Password"
+msgstr "Jelszó alaphelyzetbe állítása"
+
+#: templates/plugin/CakeDC/Users/Users/login.php:131
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:31
+#: templates/plugin/CakeDC/Users/Users_/register.php:95
+msgid "Accept TOS conditions?"
+msgstr "Szerződési feltételek elfogadása?"
+
+#: templates/plugin/CakeDC/Users/Users/profile.php:28
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:21
+#: templates/plugin/CakeDC/Users/Users_/profile.php:28
+msgid "{0} {1}"
+msgstr ""
+
+#: templates/plugin/CakeDC/Users/Users/profile.php:33
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:41
+#: templates/plugin/CakeDC/Users/Users_/index.php:46
+#: templates/plugin/CakeDC/Users/Users_/profile.php:33
+#: templates/plugin/CakeDC/Users/Users_/view.php:91
+msgid "Role"
+msgstr "Szerepkör"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:13
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:17
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:13
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:26
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:15
+#: templates/plugin/CakeDC/Users/Users_/index.php:55
+msgid "Actions"
+msgstr "Műveletek"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:15
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:28
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:23
+msgid "List Users"
+msgstr "Felhasználók listázája"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:21
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:18
+msgid "Add User"
+msgstr "Új felhasználó"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:23
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:36
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:22
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/login.php:30
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:30
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:20
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:33
+#: templates/plugin/CakeDC/Users/Users_/add.php:55
+#: templates/plugin/CakeDC/Users/Users_/edit.php:55
+msgid "Username"
+msgstr "Felhasználó név"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:26
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:38
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:24
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:28
+#: templates/plugin/CakeDC/Users/Users_/add.php:73
+#: templates/plugin/CakeDC/Users/Users_/edit.php:73
+#: templates/plugin/CakeDC/Users/Users_/register.php:53
+msgid "First name"
+msgstr "Keresztnév"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:27
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:39
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:25
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/register.php:29
+#: templates/plugin/CakeDC/Users/Users_/add.php:64
+#: templates/plugin/CakeDC/Users/Users_/edit.php:64
+#: templates/plugin/CakeDC/Users/Users_/register.php:44
+msgid "Last name"
+msgstr "Vezetéknév"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/add.php:30
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:54
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:49
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:74
+#: templates/plugin/CakeDC/Users/Users_/add.php:115
+#: templates/plugin/CakeDC/Users/Users_/edit.php:110
+#: templates/plugin/CakeDC/Users/Users_/index.php:50
+#: templates/plugin/CakeDC/Users/Users_/view.php:37
+msgid "Active"
+msgstr "Aktív"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/change_password.php:5
+msgid "Please enter the new password"
+msgstr "Kérem adja meg az új jelszavát"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:22
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:40
+msgid "Delete"
+msgstr "Törlés"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:24
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:40
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:21
+msgid "Are you sure you want to delete # {0}?"
+msgstr "Valóban törölni szeretné # {0}?"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:34
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:17
+msgid "Edit User"
+msgstr "Felhasználó módosítása"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:40
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:43
+msgid "Token"
+msgstr "Token"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:42
+msgid "Token expires"
+msgstr "Token lejárata"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:45
+msgid "API token"
+msgstr "API token"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:48
+msgid "Activation date"
+msgstr "Aktiválás dátuma"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:51
+msgid "TOS date"
+msgstr "Szerződési feltételek elfogadási dátuma"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:64
+msgid "Reset Google Authenticator Token"
+msgstr "Google Authenticator token alaphelyzetbe állítása"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/edit.php:70
+msgid "Are you sure you want to reset token for user \"{0}\"?"
+msgstr "Biztosan visszaállítja a(z) \"{0}\" felhasználó tokenjét?"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:15
+msgid "New {0}"
+msgstr "Új {0}"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:37
+msgid "View"
+msgstr "Megnéz"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:38
+msgid "Change password"
+msgstr "Jelszó módosítása"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:39
+#: templates/plugin/CakeDC/Users/Users_/edit.php:27
+msgid "Edit"
+msgstr "Módosítás"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:49
+msgid "previous"
+msgstr "előző"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/index.php:51
+msgid "next"
+msgstr "következő"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/login.php:25
+msgid "Please enter your username and password"
+msgstr "Kérem írja be a felhasználónevét és jelszavát"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/login.php:56
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/login.php:63
+msgid "Remember me"
+msgstr "Emlékezzen rám"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/login.php:67
+msgid "Login"
+msgstr "Bejelentkezés"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/login.php:100
+#: templates/plugin/CakeDC/Users/Users_/register.php:27
+msgid "Register"
+msgstr "Regisztráció"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:39
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:68
+msgid "Social Accounts"
+msgstr "Közösségi fiók"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:43
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:73
+msgid "Avatar"
+msgstr "Avatár"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:44
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:72
+msgid "Provider"
+msgstr "Szolgáltató"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:45
+msgid "Link"
+msgstr "Link"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/profile.php:52
+msgid "Link to {0}"
+msgstr "Link: {0}"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/request_reset_password.php:20
+msgid "Please enter your email or username to reset your password"
+msgstr ""
+"Kérjük, adja meg e-mail címét vagy felhasználónevét a jelszó "
+"visszaállításához"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/resend_token_validation.php:15
+#: templates/plugin/CakeDC/Users/Users_/resend_token_validation.php:15
+msgid "Resend Validation email"
+msgstr "Érvényesítési e-mail újraküldése"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/resend_token_validation.php:17
+#: templates/plugin/CakeDC/Users/Users_/resend_token_validation.php:17
+msgid "Email or username"
+msgstr "E-mail vagy felhasználó név"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/social_email.php:16
+#: templates/plugin/CakeDC/Users/Users_/social_email.php:16
+msgid "Please enter your email"
+msgstr "Kérem, írja be az e-mail címét"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_authenticate.php:22
+#: templates/plugin/CakeDC/Users/Users_/u2f_authenticate.php:22
+msgid "Verify your registered yubico key"
+msgstr "Ellenőrizze a regisztrált yubico kulcsot"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_authenticate.php:23
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_register.php:23
+#: templates/plugin/CakeDC/Users/Users_/u2f_authenticate.php:23
+#: templates/plugin/CakeDC/Users/Users_/u2f_register.php:23
+msgid "Please insert and tap your yubico key"
+msgstr "Kérjük, helyezze be és koppintson a yubico kulcsára"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_authenticate.php:25
+#: templates/plugin/CakeDC/Users/Users_/u2f_authenticate.php:25
+msgid ""
+"When the YubiKey starts blinking, press the golden disc to activate it. "
+"Depending on the web browser you might need to confirm the use of extended "
+"information from the YubiKey."
+msgstr ""
+"Amikor a YubiKey villogni kezd, nyomja meg az arany korongot az "
+"aktiváláshoz. A webböngészőtől függően előfordulhat, hogy meg kell "
+"erősítenie a YubiKey kiterjesztett információinak használatát."
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_authenticate.php:27
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_register.php:27
+#: templates/plugin/CakeDC/Users/Users_/u2f_authenticate.php:27
+#: templates/plugin/CakeDC/Users/Users_/u2f_register.php:27
+msgid "Reload"
+msgstr "Újratöltés"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_authenticate.php:51
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_register.php:56
+#: templates/plugin/CakeDC/Users/Users_/u2f_authenticate.php:51
+#: templates/plugin/CakeDC/Users/Users_/u2f_register.php:56
+msgid "Yubico key check has failed, please try again"
+msgstr "A Yubico kulcsellenőrzése nem sikerült, próbálja újra"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/u2f_register.php:22
+#: templates/plugin/CakeDC/Users/Users_/u2f_register.php:22
+msgid "Registering your yubico key"
+msgstr "A yubico kulcs regisztrálása"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/verify.php:13
+#: templates/plugin/CakeDC/Users/Users_/verify.php:13
+msgid "Verification Code"
+msgstr "Ellenőrző kód"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/verify.php:15
+#: templates/plugin/CakeDC/Users/Users_/verify.php:15
+msgid ""
+"<span class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></span> "
+"Verify"
+msgstr ""
+"<span class=\"glyphicon glyphicon-log-in\" aria-hidden=\"true\"></span> "
+"Verify"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:19
+msgid "Delete User"
+msgstr ""
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:24
+msgid "New User"
+msgstr ""
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:31
+msgid "Id"
+msgstr "#ID"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:37
+#: templates/plugin/CakeDC/Users/Users_/index.php:47
+#, fuzzy
+msgid "First Name"
+msgstr "Keresztnév"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:39
+#: templates/plugin/CakeDC/Users/Users_/index.php:47
+#, fuzzy
+msgid "Last Name"
+msgstr "Vezetéknév"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:45
+#, fuzzy
+msgid "Api Token"
+msgstr "API token"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:53
+#: templates/plugin/CakeDC/Users/Users_/view.php:106
+#, fuzzy
+msgid "Token Expires"
+msgstr "Token lejárata"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:55
+#, fuzzy
+msgid "Activation Date"
+msgstr "Aktiválás dátuma"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:57
+#, fuzzy
+msgid "Tos Date"
+msgstr "Szerződési feltételek elfogadási dátuma"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:59
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:75
+#: templates/plugin/CakeDC/Users/Users_/view.php:121
+msgid "Created"
+msgstr "Létrehozva"
+
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:61
+#: templates/plugin/CakeDC/Users/Users_/BACKUP/view.php:76
+#: templates/plugin/CakeDC/Users/Users_/view.php:136
+msgid "Modified"
+msgstr "Módosítva"
+
+#: templates/plugin/CakeDC/Users/Users_/add.php:21
+#: templates/plugin/CakeDC/Users/Users_/edit.php:21
+msgid "User"
+msgstr "Felhasználó"
+
+#: templates/plugin/CakeDC/Users/Users_/add.php:27
+msgid "Add"
+msgstr "Új felhasználó"
+
+#: templates/plugin/CakeDC/Users/email/html/reset_password.php:14
+#: templates/plugin/CakeDC/Users/email/html/social_account_validation.php:14
+#: templates/plugin/CakeDC/Users/email/html/validation.php:13
+#: templates/plugin/CakeDC/Users/email/text/reset_password.php:12
+#: templates/plugin/CakeDC/Users/email/text/social_account_validation.php:12
+#: templates/plugin/CakeDC/Users/email/text/validation.php:12
+msgid "Hi {0}"
+msgstr "Szia {0}"
+
+#: templates/plugin/CakeDC/Users/email/html/reset_password.php:17
+msgid "Reset your password here"
+msgstr "Állítsa vissza jelszavát itt"
+
+#: templates/plugin/CakeDC/Users/email/html/reset_password.php:20
+#: templates/plugin/CakeDC/Users/email/html/social_account_validation.php:23
+#: templates/plugin/CakeDC/Users/email/html/validation.php:19
+msgid ""
+"If the link is not correctly displayed, please copy the following address in "
+"your web browser {0}"
+msgstr ""
+
+#: templates/plugin/CakeDC/Users/email/html/reset_password.php:27
+#: templates/plugin/CakeDC/Users/email/html/social_account_validation.php:30
+#: templates/plugin/CakeDC/Users/email/html/validation.php:26
+#: templates/plugin/CakeDC/Users/email/text/reset_password.php:20
+#: templates/plugin/CakeDC/Users/email/text/social_account_validation.php:20
+#: templates/plugin/CakeDC/Users/email/text/validation.php:20
+msgid "Thank you"
+msgstr "Köszönöm"
+
+#: templates/plugin/CakeDC/Users/email/html/social_account_validation.php:18
+msgid "Activate your social login here"
+msgstr ""
+
+#: templates/plugin/CakeDC/Users/email/html/validation.php:16
+msgid "Activate your account here"
+msgstr ""
+
+#: templates/plugin/CakeDC/Users/email/text/reset_password.php:14
+#: templates/plugin/CakeDC/Users/email/text/validation.php:14
+msgid "Please copy the following address in your web browser {0}"
+msgstr ""
+
+#: templates/plugin/CakeDC/Users/email/text/social_account_validation.php:14
+msgid ""
+"Please copy the following address in your web browser to activate your "
+"social login {0}"
+msgstr ""
