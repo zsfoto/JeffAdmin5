@@ -41,7 +41,7 @@
 {%- for assoc in associations %}
     {%- set otherName = Bake.getAssociatedTableAlias(modelObj, assoc) %}
     {%- set otherPlural = otherName|variable %}
-        ${{ otherPlural }} = $this->{{ currentModelName }}->{{ otherName }}->find('list', limit: 200)->all();
+        ${{ otherPlural }} = $this->{{ currentModelName }}->{{ otherName }}->find('list', limit: 200, order: ['pos' => 'asc', 'name' => 'asc'])->all();
         {{- "\n" }}
     {%- set compact = compact|merge(["'#{otherPlural}'"]) %}
 {% endfor %}

@@ -136,7 +136,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<div class="mb-3 form-group row select required">
 												<label class="col-form-label col-md-2 pt-1 text-start text-md-end{{ required }}" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
 												<div class="col-md-4">
-													<?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'class' => 'form-control select2', 'data-live-search' => false, 'data-container' => 'body', 'data-size' => '6', 'empty' => {{ empty }}]);	?>
+													<?= $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'placeholder' => __('{{field|humanize}}'), 'class' => 'form-control select2', 'data-live-search' => false, 'data-container' => 'body', 'data-size' => '6', 'empty' => {{ empty }}]);	?>
 
 												</div>
 											</div>
@@ -165,7 +165,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<div class="mb-3 form-group row text required">
 												<label class="col-form-label col-md-2 pt-1 text-start text-md-end{{ required }}" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
 												<div class="col-md-9">
-													<?= $this->Form->control('{{ field }}', ['label' => __('{{field|humanize}}'), 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
+													<?= $this->Form->control('{{ field }}', ['label' => __('{{field|humanize}}'), 'placeholder' => __('{{field|humanize}}'), 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
 
 												</div>
 											</div>
@@ -177,7 +177,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<div class="mb-3 form-group row number required">
 												<label class="col-form-label col-md-2 pt-1 text-start text-md-end{{ required }}" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
 												<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 col-xxl-4">
-													<?= $this->Form->control('{{ field }}', ['class' => 'form-control', 'data-decimals' => '0', 'min' => '0', 'max' => '999999999999', 'step' => '1', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
+													<?= $this->Form->control('{{ field }}', ['class' => 'form-control', 'placeholder' => __('{{field|humanize}}'), 'data-decimals' => '0', 'min' => '0', 'max' => '999999999999', 'step' => '1', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
 
 												</div>
 											</div>
@@ -191,7 +191,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 												<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 col-xxl-4">
 													<div class="form-group datetime">
 														<div class="input-group {{field|replace({'_': '-'})}}" id="{{field|replace({'_': '-'})}}" data-target-input="nearest">
-															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
+															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'placeholder' => __('{{field|humanize}}'), 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
 
 															<div class="input-group-append" data-target="#{{field|replace({'_': '-'})}}" data-toggle="{{field|replace({'_': '-'})}}">
 																<div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -210,7 +210,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 												<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 col-xxl-4">
 													<div class="form-group date">
 														<div class="input-group {{field|replace({'_': '-'})}}" id="{{field|replace({'_': '-'})}}" data-target-input="nearest">
-															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
+															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'placeholder' => __('{{field|humanize}}'), 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
 
 															<div class="input-group-append" data-target="#{{field|replace({'_': '-'})}}" data-toggle="{{field|replace({'_': '-'})}}">
 																<div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -229,7 +229,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 												<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 col-xxl-4">
 													<div class="form-group time">
 														<div class="input-group {{field|replace({'_': '-'})}}" id="{{field|replace({'_': '-'})}}" data-target-input="nearest">
-															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
+															<?= $this->Form->control('{{ field }}', ['type' => 'text', 'placeholder' => __('{{field|humanize}}'), 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
 
 															<div class="input-group-append" data-target="#{{field|replace({'_': '-'})}}" data-toggle="{{field|replace({'_': '-'})}}">
 																<div class="input-group-text"><i class="fa fa-clock-o"></i></div>
@@ -270,7 +270,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<div class="mb-3 form-group row select">
 												<label class="col-form-label col-md-2 pt-1 text-start text-md-end" for="{{assocData.property|replace({'_': '-'})}}"><?= __('{{assocData.property|humanize}}') ?>:</label>
 												<div class="col-md-9">
-													<?= $this->Form->control('{{ assocData.property }}._ids', ['class' => 'form-control', 'options' => ${{ assocData.variable }}, 'data-live-search' => false, 'data-actions-box' => false, 'data-container' => 'body', 'data-size' => '6']); ?>
+													<?= $this->Form->control('{{ assocData.property }}._ids', ['class' => 'form-control', 'placeholder' => __('{{field|humanize}}'), 'options' => ${{ assocData.variable }}, 'data-live-search' => false, 'data-actions-box' => false, 'data-container' => 'body', 'data-size' => '6']); ?>
 												</div>
 											</div>
 											{{- "\n" }}
@@ -324,7 +324,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 								</div>
 
 								<div class="card-footer text-center">
-									<?= $this->Form->button('<span class="btn-label"><i class="fa fa-save"></i></span>' . __('Save'), ["escapeTitle" => false, "type" => "submit", "class" => "btn btn-success me-4"]) ?>
+									<?= $this->Form->button('<span class="btn-label"><i class="fa fa-save"></i></span>' . __('Save'), ["escapeTitle" => false, "type" => "submit", "class" => "btn btn-primary me-4"]) ?>
 									
 									<?= $this->Html->link('<span class="btn-label"><i class="fa fa-arrow-up"></i></span>' . __("Cancel"),
 										["controller" => "{{ pluralHumanName }}", "action" => "index", "_full" => true],
