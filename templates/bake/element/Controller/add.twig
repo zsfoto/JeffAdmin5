@@ -26,12 +26,14 @@
         if ($this->request->is('post')) {
             ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $this->request->getData());
             if ($this->{{ currentModelName }}->save(${{ singularName }})) {
-                $this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'), ['plugin' => 'JeffAdmin5']);
+                //$this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'), ['plugin' => 'JeffAdmin5']);
+                $this->Flash->success(__('The save has been: OK'), ['plugin' => 'JeffAdmin5']);
 				$this->session->write('Layout.' . $this->controller . '.LastId', ${{ singularName }}->id);
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
+            //$this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
+            $this->Flash->error(__('The save has been not. Please check the datas try again.'), ['plugin' => 'JeffAdmin5']);
         }
 {% set associations = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
 {% set associations = associations|merge(Bake.aliasExtractor(modelObj, 'BelongsToMany')) %}
