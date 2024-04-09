@@ -44,7 +44,7 @@
 
             }
             //$this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
-            $this->Flash->error(__('The save has been not. Please check the datas try again.'), ['plugin' => 'JeffAdmin5']);
+            $this->Flash->error(__('The save has been not. Please check the datas and try again.'), ['plugin' => 'JeffAdmin5']);
         }
 {% for assoc in belongsTo|merge(belongsToMany) %}
     {%- set otherName = Bake.getAssociatedTableAlias(modelObj, assoc) %}

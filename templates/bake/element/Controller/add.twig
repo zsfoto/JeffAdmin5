@@ -33,7 +33,7 @@
                 return $this->redirect(['action' => 'index']);
             }
             //$this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
-            $this->Flash->error(__('The save has been not. Please check the datas try again.'), ['plugin' => 'JeffAdmin5']);
+            $this->Flash->error(__('The save has been not. Please check the datas and try again.'), ['plugin' => 'JeffAdmin5']);
         }
 {% set associations = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
 {% set associations = associations|merge(Bake.aliasExtractor(modelObj, 'BelongsToMany')) %}
