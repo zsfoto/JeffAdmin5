@@ -111,6 +111,8 @@
 		}
 		// ############################# SEARCH ############################################		
 
+		$conditions = [];
+
 		// ############################# QUERY #############################################
 		if($search !== ''){
 			$showSearchBar	 = true;
@@ -136,9 +138,9 @@
 {% endif %}
 		}else{
 {% if belongsTo %}
-			$query = $this->{{ currentModelName }}->find()->contain({{ Bake.exportArray(belongsTo)|raw }});
+			$query = $this->{{ currentModelName }}->find()->contain({{ Bake.exportArray(belongsTo)|raw }})->where($conditions);
 {% else %}
-			$query = $this->{{ currentModelName }}->find();
+			$query = $this->{{ currentModelName }}->find()->where($conditions);
 {% endif %}
 		}
 		// ############################# /.QUERY ###########################################

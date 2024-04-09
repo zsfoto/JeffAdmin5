@@ -57,6 +57,13 @@ class AppController extends BaseController
 		//$local_config = ['paginate_limit' => 3];	// update default value
 		$this->config = array_merge($global_config, $local_config);
 
+
+		$this->set('session', $this->session);
+		$this->set('controller', $this->controller);
+		$this->set('action', $this->action);
+		$this->set('prefix', $this->prefix);
+		$this->set('paging', $this->paging);
+
 	}
 
 }
