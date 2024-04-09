@@ -101,6 +101,13 @@ class AppController extends JeffAdmin5
 }
 ```
 
+**Configuration of side menu and operations:**
+And configure it!
+```
+#cp (or copy) /vendor/zsfoto/jeffadmin5/config/jeffadmin5.php /config/jeffadmin5.php
+#cp (or copy) /vendor/zsfoto/jeffadmin5/config/sidebarmenu.php /config/sidebarmenu.php
+```
+
 
 **In bake dont forget the admin prefix:**
 ```
