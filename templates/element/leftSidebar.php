@@ -19,9 +19,11 @@ $action = $this->request->getParam('action');
 $sidebarMenu = Configure::read('Theme.' . $prefix . '.sidebarMenu');
 
 //$user = $this->request->getAttribute('identity');
-//$user = $this->request->getAttribute('identity')->getOriginalData() ?? false;
+$user = $this->request->getAttribute('identity')->getOriginalData() ?? false;
 //$isSuperUser = $user->is_superuser;
 $isSuperUser = false;
+
+$isSuperAdmin = (isset($user->role) && $user->role == 'superadmin') ? true : false;
 
 if($controller == 'MyUsers'){
 	//$isSuperUser = true;
@@ -135,6 +137,13 @@ if($isSuperUser){
 	#######################################################################################################################################################
 */ ?>
 <?php } ?>
+
+<?php if($isSuperAdmin){ // role ?>
+					<li class="submenu">
+						<a href="/admin/my-users"><i class="fa fa-fw fa-bars"></i><span><?= __('MyUsers') ?></span> </a>
+					</li>
+<?php } ?>
+
 				</ul>
 				<div class="clearfix"></div>
 			</div>        
