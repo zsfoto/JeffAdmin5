@@ -19,7 +19,7 @@ $action = $this->request->getParam('action');
 $sidebarMenu = Configure::read('Theme.' . $prefix . '.sidebarMenu');
 
 //$user = $this->request->getAttribute('identity');
-$user = $this->request->getAttribute('identity')->getOriginalData() ?? false;
+$user = $this->request->getAttribute('identity') !== null ? $this->request->getAttribute('identity')->getOriginalData() : false;
 //$isSuperUser = $user->is_superuser;
 $isSuperUser = false;
 

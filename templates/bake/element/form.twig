@@ -270,7 +270,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<div class="mb-3 form-group row select">
 												<label class="col-form-label col-md-2 pt-1 text-start text-md-end" for="{{assocData.property|replace({'_': '-'})}}"><?= __('{{assocData.property|humanize}}') ?>:</label>
 												<div class="col-md-9">
-													<?= $this->Form->control('{{ assocData.property }}._ids', ['class' => 'form-control', 'placeholder' => __('{{field|humanize}}'), 'options' => ${{ assocData.variable }}, 'data-live-search' => false, 'data-actions-box' => false, 'data-container' => 'body', 'data-size' => '6']); ?>
+													<?= $this->Form->control('{{ assocData.property }}._ids', ['class' => 'form-control', 'placeholder' => __('{{ assocData.property|humanize }}'), 'options' => ${{ assocData.variable }}, 'data-live-search' => false, 'data-actions-box' => false, 'data-container' => 'body', 'data-size' => '6']); ?>
 												</div>
 											</div>
 											{{- "\n" }}

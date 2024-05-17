@@ -15,7 +15,8 @@ class AppController extends BaseController
 	public $action;
 	public $paging;
 	public $config;
-
+	public $version;
+	
     /**
      * Initialization hook method.
      *
@@ -64,6 +65,9 @@ class AppController extends BaseController
 		$this->set('prefix', $this->prefix);
 		$this->set('paging', $this->paging);
 
+		$this->version = Configure::read()['JeffAdmin']['version'];
+		$this->set('version', $this->version);
+		
 	}
 
 }
