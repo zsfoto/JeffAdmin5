@@ -300,6 +300,13 @@ $config = array_merge($global_config, $local_config);
 			let id = $(this).attr("row-id")
 			window.location.href = '<?= $this->Url->build(['controller' => $controller, 'action' => $config['action_db_click']]) ?>/' + id;
 		})
+
+		// Fixing CakePhp's paginator numbers
+		$('.page-link').each( function(){
+			if($(this).text() == '1'){
+				$(this).attr('href', $(this).attr('href') + '?page=1');
+			}
+		});
 		
 	})
 <?php $this->Html->scriptEnd(); ?>
