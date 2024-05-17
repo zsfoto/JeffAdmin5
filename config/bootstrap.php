@@ -11,7 +11,7 @@
 //die('aaaaaaaa');
 use Cake\Core\Configure;
 
-Configure::write('JeffAdmin', ['version' => '1.0.15']);
+Configure::write('JeffAdmin', ['version' => '1.0.16']);
 
 try {
     Configure::load('sidebarmenu', 'default');
