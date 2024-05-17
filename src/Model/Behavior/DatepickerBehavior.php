@@ -57,18 +57,22 @@ class DatepickerBehavior extends Behavior
 								$data[$field] = (string) DateTime::parseTime($data[$field], 'HH:mm:ss')->i18nFormat('HH:mm:ss');
 								break;
 							case 'datetime':
-								$date = trim(substr($data[$field], 0, strlen($data[$field])-8));
-								if(substr($date, -1) == '-'){
-									$date = substr($date, 0, strlen($date)-1);
-								}
-								$date = str_replace(" ", "", $date);
-								$date = str_replace(".", "-", $date);
-								$time = substr($data[$field], -8);							
-								$data[$field] = $date . ' ' .  $time;
+								// 0123 45 67 89 01 23
+								// 2020 04 29 06 27 18
+								
+								//$datetime = $data[$field];
+								//$datetime = str_replace(" ", "", $datetime);
+								//$datetime = str_replace(".", "", $datetime);
+								//$datetime = str_replace(":", "", $datetime);
+								//$datetime = substr($datetime, 0, 4) . '-' . substr($datetime, 4, 2) . '-' . substr($datetime, 6, 2) . ' ' . substr($datetime, 8, 2) . ':' . substr($datetime, 10, 2) . ':' . substr($datetime, 12, 2) ;
+								//$data[$field] = $datetime;
+								$data[$field] = (string) DateTime::parseDateTime($data[$field], 'YYYY-MM-dd HH:mm:ss')->i18nFormat('YYYY-MM-dd HH:mm:ss');
 								break;
 						}
 					}
 				}
+				
+				//dd($data);
 				
 				/*
 				if ($locale == 'en_GB') {

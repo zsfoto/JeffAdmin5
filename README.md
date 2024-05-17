@@ -7,10 +7,12 @@ You can install this plugin into your CakePHP application using [composer](https
 The recommended way to install composer packages is:
 
 
+Install CakePHP 5:
 ```
 # composer create-project --prefer-dist cakephp/app:~5.0 my_app_name
 ```
 
+Add plugin JeffAdmin5:
 
 ```
 # composer require zsfoto/jeffadmin5
@@ -32,8 +34,8 @@ The recommended way to install composer packages is:
 			} else {
 				$ip = $_SERVER['REMOTE_ADDR'];
 			}
-			return false;
-			//return $ip === '127.0.0.1';
+			return $ip === '127.0.0.1';
+			//return false;
 		});
 
         //$this->addPlugin(\CakeDC\Users\Plugin::class);

@@ -23,7 +23,8 @@
     public function initialize(): void
     {
         parent::initialize();
-
+		//$this->config['paginate_limit'] = 10;
+		
 	}
 
     /**
@@ -33,6 +34,12 @@
      */
     public function index($clearFilter = null)
     {
+		//Configure::write('Theme.admin.config.header_buttons_in_action.index', 
+		//	array_merge(Configure::read('Theme.admin.config.header_buttons_in_action.index'), 
+		//		['back' => false, 'add' => true, 'edit' => false, 'save' => false, 'view' => false, 'delete' => false]
+		//	)
+		//);
+
 		$this->set('title', __('Browse the') . ': ' . __('{{ currentModelName }}'));
 
 		$queryParams = $this->request->getQuery();
@@ -49,16 +56,6 @@
 			}
 			$showSearchBar	 = true;
 		}
-
-		
-		// ############ Ha nem lenne megadva az URL-ben a page QUERY paraméter, akkor beállítja ##########################		
-		$page = $this->request->getQuery('page');
-		if($page === null){
-			return $this->redirect(['controller' => $this->controller, 'action' => 'index', '?' => array_merge(['page' => 1], $queryParams) ]);
-		}
-		$this->session->write('Layout.' . $this->controller . '.page', $page);
-		// ########## /.Ha nem lenne megadva az URL-ben a page QUERY paraméter, akkor beállítja ##########################
-
 
 		// ############################# /.SORT ORDER & PAGE ###############################
 		if($this->session->check('Layout.' . $this->controller . '.queryparams')){
@@ -96,7 +93,12 @@
 			$this->session->write('Layout.' . $this->controller . '.queryparams', json_encode($this->queryParamsInSession));
 		}
 
-		$this->paginate['{{ currentModelName }}']['order'] = [$sort => $direction];
+		if($page === null){
+			return $this->redirect(['controller' => $this->controller, 'action' => 'index', '?' => array_merge(['page' => 1], $queryParams) ]);
+		}
+
+		$this->paginate['{{ currentModelName }}']['page'] 	= $page;
+		$this->paginate['{{ currentModelName }}']['order'] 	= [$sort => $direction];
 		// ############################# /.SORT ORDER & PAGE ###############################
 
 		// ############################# SEARCH ############################################

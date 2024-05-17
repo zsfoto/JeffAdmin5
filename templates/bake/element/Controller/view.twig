@@ -26,6 +26,12 @@
      */
     public function view($id = null)
     {
+		//Configure::write('Theme.admin.config.header_buttons_in_action.view', 
+		//	array_merge(Configure::read('Theme.admin.config.header_buttons_in_action.view'), 
+		//		['back' => true, 'add' => true, 'edit' => true, 'save' => false, 'view' => false, 'delete' => true]
+		//	)
+		//);
+
 		$this->set('title', __('View the') . ': ' . __('{{ singularName }}') . ' ' . __('record'));
         ${{ singularName }} = $this->{{ currentModelName }}->get($id, contain: {{ Bake.exportArray(allAssociations)|raw }});
 		$this->session->write('Layout.' . $this->controller . '.LastId', $id);

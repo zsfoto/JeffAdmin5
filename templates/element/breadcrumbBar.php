@@ -25,11 +25,8 @@ if($session->check('Layout.' . $controller . '.LastId')){
 if($session->check('Layout.' . $controller . '.queryparams')){
 	$sort = json_decode($session->read('Layout.' . $controller . '.queryparams'))->sort ?? 'id';
 	$direction = json_decode($session->read('Layout.' . $controller . '.queryparams'))->direction ?? 'asc';
+	$page = json_decode($session->read('Layout.' . $controller . '.queryparams'))->page ?? 1;
 }
-if($session->check('Layout.' . $controller . '.page')){
-	$page = json_decode($session->read('Layout.' . $controller . '.page')) ?? '1';
-}
-
 $queryParams = ['page' => $page, 'sort' => $sort, 'direction' => $direction];
 
 $config = Configure::read('Theme.' . $prefix . '.config');

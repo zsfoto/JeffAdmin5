@@ -50,6 +50,7 @@
 				</li>
 */ ?>
 
+<?php if(isset($user)) { ?>
 				<li class="dropdown list-inline-item notif">
 					<a class="nav-link dropdown-toggle nav-user" data-bs-toggle="dropdown"  href="#" role="button" aria-haspopup="false" aria-expanded="false">
 						<?= $this->Html->image('jeffAdmin5./assets/images/avatars/admin.png', ['alt' => 'Profile image', 'class' => 'avatar-rounded']); ?>
@@ -88,6 +89,7 @@
 						<i class="fa fa-fw fa-sign-out"></i>
 					</a>
 				</li>
+<?php } ?>
 
 			</ul>
 
