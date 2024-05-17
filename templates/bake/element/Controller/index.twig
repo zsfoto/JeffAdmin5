@@ -164,7 +164,7 @@
 					'controller' => $this->controller,
 					'action' => 'index',
 					'?' => [
-						'page'		=> 1,
+						'page'		=> $paging['pageCount'],
 						'direction'	=> $direction ?? null,
 						'sort'		=> $sort ?? null,
 					],
