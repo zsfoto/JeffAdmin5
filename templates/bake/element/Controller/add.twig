@@ -12,6 +12,10 @@
  * @since         2.0.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
+ 
+ // https://stackoverflow.com/questions/64465219/cakephp-bake-templates-controller
+ // https://discourse.cakephp.org/t/cakephp-bake-templates-controller/8534
+ 
 #}
 {% set compact = ["'#{singularName}'"] %}
     /**
@@ -26,18 +30,27 @@
 		//		['back' => true, 'add' => false, 'edit' => false, 'save' => true, 'view' => false, 'delete' => false]
 		//	)
 		//);
-
+		
 		$this->set('title', __('Add new') . ': ' . __('{{ singularName }}') . ' ' . __('record'));
         ${{ singularName }} = $this->{{ currentModelName }}->newEmptyEntity();
         if ($this->request->is('post')) {
 			$data = $this->request->getData();
+			//debug($data);
             ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $data);
+			//debug(${{ singularName }});
+			//die();
             if ($this->{{ currentModelName }}->save(${{ singularName }})) {
                 //$this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'), ['plugin' => 'JeffAdmin5']);
                 $this->Flash->success(__('The save has been: OK'), ['plugin' => 'JeffAdmin5']);
 				$this->session->write('Layout.' . $this->controller . '.LastId', ${{ singularName }}->id);
 
-                return $this->redirect(['action' => 'index']);
+                //return $this->redirect(['action' => 'add']);
+                return $this->redirect([
+					'controller' => $this->controller,
+					'action' => 'index',
+					'#' => ${{ singularName }}->id
+				]);
+
             }
             //$this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
             $this->Flash->error(__('The save has been not. Please check the datas and try again.'), ['plugin' => 'JeffAdmin5']);
@@ -48,7 +61,7 @@
 {%- for assoc in associations %}
     {%- set otherName = Bake.getAssociatedTableAlias(modelObj, assoc) %}
     {%- set otherPlural = otherName|variable %}
-        ${{ otherPlural }} = $this->{{ currentModelName }}->{{ otherName }}->find('list', limit: 200, order: ['pos' => 'asc', 'name' => 'asc'])->all();
+        ${{ otherPlural }} = $this->{{ currentModelName }}->{{ otherName }}->find('list', conditions: ['visible' => true], limit: 200, order: ['pos' => 'asc', 'name' => 'asc'])->all();
         {{- "\n" }}
     {%- set compact = compact|merge(["'#{otherPlural}'"]) %}
 {% endfor %}
