@@ -434,26 +434,26 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 {%- set fieldData = Bake.columnData(field, schema) %}
 {%- if fieldData.type in ['date'] %}
 {% if action in ['add'] %}
-	jeffAdminInitDatePicker('{{ field|replace({' ': '', '_': '-'} }}')
+	jeffAdminInitDatePicker('{{ field|replace({' ': '', '_': '-'}) }}')
 {% endif %}
 {% if action in ['edit'] %}
-	jeffAdminInitDatePicker('{{ field|replace({' ': '', '_': '-'} }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . ${{ singularVar }}->{{ field }}->format('Y-m-d') . "'" : "" ?>)
+	jeffAdminInitDatePicker('{{ field|replace({' ': '', '_': '-'}) }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . ${{ singularVar }}->{{ field }}->format('Y-m-d') . "'" : "" ?>)
 {% endif %}
 {% endif %}
 {%- if fieldData.type in ['time'] %}
 {% if action in ['add'] %}
-	jeffAdminInitTimePicker('{{ field|replace({' ': '', '_': '-'} }}')
+	jeffAdminInitTimePicker('{{ field|replace({' ': '', '_': '-'}) }}')
 {% endif %}
 {% if action in ['edit'] %}
-	jeffAdminInitTimePicker('{{ field|replace({' ': '', '_': '-'} }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . ${{ singularVar }}->{{ field }}->format('H:i:s') . "'" : "" ?>)
+	jeffAdminInitTimePicker('{{ field|replace({' ': '', '_': '-'}) }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . ${{ singularVar }}->{{ field }}->format('H:i:s') . "'" : "" ?>)
 {% endif %}
 {% endif %}
 {%- if fieldData.type in ['datetime'] %}
 {% if action in ['add'] %}
-	jeffAdminInitDateTimePicker('{{ field|replace({' ': '', '_': '-'} }}')
+	jeffAdminInitDateTimePicker('{{ field|replace({' ': '', '_': '-'}) }}')
 {% endif %}
 {% if action in ['edit'] %}
-	jeffAdminInitDateTimePicker('{{ field|replace({' ': '', '_': '-'} }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . ${{ singularVar }}->{{ field }}->format('Y-m-d H:i:s') . "'" : "" ?>)
+	jeffAdminInitDateTimePicker('{{ field|replace({' ': '', '_': '-'}) }}'<?= ${{ singularVar }}->{{ field }} !== null ? ", '" . ${{ singularVar }}->{{ field }}->format('Y-m-d H:i:s') . "'" : "" ?>)
 {% endif %}
 {% endif %}
 {% endif %}
