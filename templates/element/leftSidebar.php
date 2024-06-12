@@ -49,11 +49,15 @@ if($isSuperUser){
 */ ?>
 <?php foreach($sidebarMenu as $prefix => $menus){ ?>
 <?php 	foreach($menus as $menu){ ?>
-<?php		if($menu['type'] == 'menu'){ ?>
+<?php		if($menu['type'] == 'menu'){
+					$class = '';
+					if ($menu['controller'] == $controller) {
+						$class = ' class="active"';
+					}
+?>
 					<li class="submenu">
-						<a href="<?= $this->Url->build(['prefix' => $prefix, 'controller' => $menu['controller'], 'action' => $menu['action']], ['fullBase' => true]) ?>"><i class="fa fa-fw fa-bars"></i><span> <?= $menu['title'] ?> </span> </a>
+						<a href="<?= $this->Url->build(['prefix' => $prefix, 'controller' => $menu['controller'], 'action' => $menu['action']], ['fullBase' => true]) ?>"<?= $class ?>><i class="fa fa-fw fa-bars"></i><span> <?= $menu['title'] ?> </span> </a>
 					</li>
-
 <?php 		} // foreach menu: OK?>
 <?php /*
 	#######################################################################################################################################################
