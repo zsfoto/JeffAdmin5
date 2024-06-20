@@ -15,6 +15,7 @@ $local_config = [
 	'show_id' 			=> true,
 	'show_pos' 			=> false,
 	'show_counters'		=> false,
+	'show_button_delete'=> false,
 	'action_db_click'	=> 'edit',	// none, edit or view
 	// ... more config params in: \JeffAdmin5\config\jeffadmin5.php
 ];
@@ -182,12 +183,6 @@ $config = array_merge($global_config, $local_config);
 <?php } ?>
 
 
-
-
-
-
-<?php /* */ ?>
-
 <?php if($config['show_button_view'] || $config['show_button_edit'] || $config['show_button_delete'] ){ ?>
 
 											<td class="actions">
@@ -196,7 +191,7 @@ $config = array_merge($global_config, $local_config);
 												<?php //= $this->Html->link('<i class="fa fa-eye"></i>', ['plugin' => 'JeffAdmin5', 'prefix' => 'admin', 'controller' => 'Setups', 'action' => 'view', $setup->id], ['escape' => false, 'role' => 'button', 'class' => 'btn btn-warning btn-sm', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('View this item'), 'data-original-title' => __('View this item')]) ?>
 <?php } ?>
 
-<?php if($config['show_button_edit']){ ?>
+<?php if($config['show_button_edit'] && $setup->editable){ ?>
 												<?= $this->Html->link('<i class="fa fa-edit"></i>', ['plugin' => 'JeffAdmin5', 'action' => 'edit', $setup->id], ['escape' => false, 'role' => 'button', 'class' => 'btn btn-primary btn-sm', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => __('Edit this item'), 'data-original-title' => __('Edit this item')]) ?>
 <?php } ?>
 

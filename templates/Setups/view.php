@@ -62,7 +62,7 @@ $config = array_merge($global_config, $local_config);
 									<div class="tab-content" id="tabContent"><!-- T.1. -->
 										
 										<div class="tab-pane fade show active" id="tabPanelMain" role="tabpanel" aria-labelledby="tab-first" tabindex="0">
-<?php if($config['show_id']){ ?>
+<?php if(isset($config['show_id']) && $config['show_id']){ ?>
 											<div class="row"><!-- 3. -->
 												<label class="col-sm-2 col-form-label p-1 text-start text-sm-end">#<?= __('id') ?>:</label>
 												<div class="col-sm-10 p-1">
@@ -135,7 +135,7 @@ $config = array_merge($global_config, $local_config);
 	#################################################################                  #########################################################################
 	############################################################################################################################################################
 */ ?>
-<?php if($config['show_related_tables']): ?>
+<?php if(isset($config['show_related_tables']) && $config['show_related_tables']): ?>
 <?php endif // $config['show_related_tables'] ?>
 
 <?php

@@ -158,8 +158,9 @@ class SetupComponent extends Component
 			//$circularletter = $this->Circularletters->patchEntity($circularletter, $data);
 			$setup->user_id	= 'init';
 			$setup->slug 	= $slug;
-			$setup->name 	= $data['name'];
-			$setup->type 	= $data['type'];
+			$setup->name 	= $data['name'] 	?? __('New value');
+			$setup->type 	= $data['type'] 	?? 'string';
+			$setup->editable= $data['editable']	?? true;
 		}else{
 			$setup = $this->setupTable->patchEntity($setup, $data);
 		}
