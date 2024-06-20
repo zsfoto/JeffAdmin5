@@ -8,20 +8,20 @@ The recommended way to install composer packages is:
 
 
 Install CakePHP 5:
-```
+```bash
 # composer create-project --prefer-dist cakephp/app:~5.0 my_app_name
 ```
 
 Add plugin JeffAdmin5:
 
-```
+```bash
 # composer require zsfoto/jeffadmin5
 ```
 
 ###Edit the next files:
 
 **src/Application.php**
-```
+```php
     public function bootstrap(): void
     {
 		...
@@ -48,7 +48,7 @@ Add plugin JeffAdmin5:
 ```
 
 **In src/view/AppView.php:**
-```
+```php
 /* ############################ Don't use yet #########################
     public function initialize(): void
     {
@@ -64,7 +64,7 @@ Add plugin JeffAdmin5:
 
 **Add to admin path in config/routes.php:**
 
-```
+```php
     $routes->prefix('Admin', function (RouteBuilder $builder) {
         $builder->scope('/', function (RouteBuilder $builder) {
             //$builder->setExtensions(['json', 'xml', 'xlsx']);
@@ -75,7 +75,7 @@ Add plugin JeffAdmin5:
 ```
 
 **Add this line to end of the config/bootstrap.php file:**
-```
+```php
 Configure::write('Bake.theme', 'jeffAdmin5');
 
 Configure::write('Session', [
@@ -89,7 +89,7 @@ Configure::write('Session', [
 **src/Controller/Admin/AppController.php:**
 ```
 #cp (or copy) src/Controller/AppController.php src/Controller/Admin/AppController.php
-```
+```php
 and update content:
 ```
 namespace App\Controller\Admin;
@@ -105,21 +105,21 @@ class AppController extends JeffAdmin5
 
 **Configuration of side menu and operations:**
 And configure it!
-```
+```bash
 #cp (or copy) /vendor/zsfoto/jeffadmin5/config/jeffadmin5.php /config/jeffadmin5.php
 #cp (or copy) /vendor/zsfoto/jeffadmin5/config/sidebarmenu.php /config/sidebarmenu.php
 ```
 
 
 **In bake dont forget the admin prefix:**
-```
+```bash
 # cake bake model table
 # cake bake controller table --prefix=admin
 # cake bake template table --prefix=admin
 ```
 
 ### Create Setups table
-```
+```sql
 CREATE TABLE `setups` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` varchar(36) NOT NULL DEFAULT 'init',
@@ -127,6 +127,7 @@ CREATE TABLE `setups` (
   `slug` varchar(200) NOT NULL,
   `value` longtext NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'string',
+  `editable` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci COMMENT='Setups table';
@@ -138,5 +139,29 @@ ALTER TABLE `setups`
 
 ALTER TABLE `setups`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+```
+
+####Use Setup value
+```php
+		$get_setup_value = $this->Setup->getValue(
+        	// Slug:
+        	'dev_mode', [
+        		// Readable name:
+				'name' => 'Teszt value of DEV mode',
+            	// Types: int, integer, number, float, real, string, text, richtext, date, time, datetime
+				'type' => 'bool',
+            	// Value:
+				'value' => true
+			]
+		);
+
+		// Foe example:
+		$setup_value = $this->Setup->getValue( 'for_eample', [
+				'name' => 'For example stored value',
+				'type' => 'bool',
+				'value' => true
+			]
+		);
+
 ```
 
