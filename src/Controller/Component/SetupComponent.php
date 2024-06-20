@@ -60,7 +60,7 @@ class SetupComponent extends Component
      */
 	public function initialize(array $config): void
     {
-		$this->setupTable = FactoryLocator::get('Table')->get('Setups');
+		$this->setupTable = FactoryLocator::get('Table')->get('JeffAdmin5.Setups');
 		
 	}
 
