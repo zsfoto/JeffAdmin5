@@ -117,3 +117,26 @@ And configure it!
 # cake bake controller table --prefix=admin
 # cake bake template table --prefix=admin
 ```
+
+### Create Setups table
+```
+CREATE TABLE `setups` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` varchar(36) NOT NULL DEFAULT 'init',
+  `name` varchar(200) NOT NULL,
+  `slug` varchar(200) NOT NULL,
+  `value` longtext NOT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'string',
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci COMMENT='Setups table';
+
+ALTER TABLE `setups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD KEY `user_id` (`user_id`);
+
+ALTER TABLE `setups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+```
+
