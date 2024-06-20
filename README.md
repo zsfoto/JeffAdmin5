@@ -1,4 +1,5 @@
 # JeffAdmin5 plugin for CakePHP
+Latest version: 1.0.26
 
 ## Installation
 
@@ -6,13 +7,12 @@ You can install this plugin into your CakePHP application using [composer](https
 
 The recommended way to install composer packages is:
 
-
-Install CakePHP 5:
+**Install CakePHP 5:**
 ```bash
 # composer create-project --prefer-dist cakephp/app:~5.0 my_app_name
 ```
 
-Add plugin JeffAdmin5:
+**Add plugin JeffAdmin5:**
 
 ```bash
 # composer require zsfoto/jeffadmin5
@@ -54,7 +54,7 @@ Add plugin JeffAdmin5:
     {
         parent::initialize();
 
-        ...
+		...
         $this->loadHelper('JeffAdmin5.Form');
 		...
     }
@@ -87,11 +87,12 @@ Configure::write('Session', [
 
 
 **src/Controller/Admin/AppController.php:**
-```
+```bash
 #cp (or copy) src/Controller/AppController.php src/Controller/Admin/AppController.php
-```php
-and update content:
 ```
+
+**and update content:**
+```php
 namespace App\Controller\Admin;
 
 use Cake\Core\Configure;
@@ -143,25 +144,25 @@ ALTER TABLE `setups`
 
 ####Use Setup value
 ```php
-		$get_setup_value = $this->Setup->getValue(
-        	// Slug:
-        	'dev_mode', [
-        		// Readable name:
-				'name' => 'Teszt value of DEV mode',
-            	// Types: int, integer, number, float, real, string, text, richtext, date, time, datetime
-				'type' => 'bool',
-            	// Value:
-				'value' => true
-			]
-		);
+$get_setup_value = $this->Setup->getValue(
+    'dev_mode', // Slug:
+    [
+        'name' => 'Teszt value of DEV mode',	// Readable name:
+        'type' => 'bool',	// Types:
+        					// int, integer, number, float, real, string, text, richtext, date, time, datetime
+        'value' => true,	// Value
+        'editable' => true	// Editable on admin page. Default value: true
+    ]
+);
 
-		// Foe example:
-		$setup_value = $this->Setup->getValue( 'for_eample', [
-				'name' => 'For example stored value',
-				'type' => 'bool',
-				'value' => true
-			]
-		);
+// Foe example:
+$setup_value = $this->Setup->getValue( 'for_eample', [
+        'name' => 'For example stored value',
+        'type' => 'bool',
+        'value' => true,
+        'editable' => false
+    ]
+);
 
 ```
 
