@@ -16,31 +16,6 @@ if($prefix == null || $prefix == ''){
 }
 $controller = $this->request->getParam('controller');
 $action = $this->request->getParam('action');
-$plugin = $this->request->getParam('plugin');
-if($controller == 'Setups'){
-	$prefix = 'admin';
-	$prefixUrl = $prefix;
-	$isSuperUser = false;
-}
-
-$prefixUrl = '';
-if ($plugin == 'JeffAdmin5' && $controller == 'Setups') {
-	$prefixUrl = '/admin';
-}
-
-//echo "<br><br><br><br><br><br><br><br>";
-	
-//if(($prefix == null || $prefix == '')){ // && ($plugin != 'JeffAdmin5' && $controller != 'Setups')){
-//	$prefix = 'admin';
-//	$prefixUrl = $prefix;
-//}
-
-//if( !isset($prefixUrl[0]) || $prefixUrl[0] !== '/'){
-//	$prefixUrl = '/' . $prefix;
-//}
-//dd($prefixUrl);
-
-//dd(Configure::read('Theme.' . $prefix . '.sidebarMenu')['Admin']);
 $sidebarMenu = Configure::read('Theme.' . $prefix . '.sidebarMenu');
 
 //$user = $this->request->getAttribute('identity');
@@ -72,7 +47,7 @@ if($isSuperUser){
 	##################################################           MenuItem from coonfig           ##########################################################
 	#######################################################################################################################################################
 */ ?>
-<?php foreach($sidebarMenu as $pfx => $menus){ ?>
+<?php foreach($sidebarMenu as $prefix => $menus){ ?>
 <?php 	foreach($menus as $menu){ ?>
 <?php		if($menu['type'] == 'menu'){
 					$class = '';
@@ -81,10 +56,7 @@ if($isSuperUser){
 					}
 ?>
 					<li class="submenu">
-						<?php /* 
-						<a href="<?= $this->Url->build(['prefix' => $prefix, 'plugin' => null, 'controller' => $menu['controller'], 'action' => $menu['action']], ['fullBase' => true]) ?>"<?= $class ?>><i class="fa fa-fw fa-bars"></i><span> <?= $menu['title'] ?> </span> </a>
-						*/ ?>
-						<a href="<?= $prefixUrl ?><?= $this->Url->build(['plugin' => null, 'controller' => $menu['controller'], 'action' => $menu['action']], ['fullBase' => false]) ?>"<?= $class ?>><i class="fa fa-fw fa-bars"></i><span> <?= $menu['title'] ?> </span> </a>
+						<a href="<?= $this->Url->build(['prefix' => $prefix, 'controller' => $menu['controller'], 'action' => $menu['action']], ['fullBase' => true]) ?>"<?= $class ?>><i class="fa fa-fw fa-bars"></i><span> <?= $menu['title'] ?> </span> </a>
 					</li>
 <?php 		} // foreach menu: OK?>
 <?php /*
@@ -101,7 +73,7 @@ if($isSuperUser){
 <?php
 						foreach($menu['items'] as $submenu){
 							$class = '';
-							if ($plugin == null && $submenu['controller'] == $controller) {
+							if ($submenu['controller'] == $controller) {
 								$class = ' class="active"';
 								break;
 							}
@@ -117,7 +89,7 @@ if($isSuperUser){
 						$class = ' class="active"';
 					}
 ?>
-							<li<?= $class ?>><a href="<?= $prefixUrl ?><?= $this->Url->build(['plugin' => null, 'controller' => $submenu['controller'], 'action' => $submenu['action']], ['fullBase' => false]) ?>"><?= $submenu['title'] ?></a></li>
+							<li<?= $class ?>><a href="<?= $this->Url->build(['prefix' => $prefix, 'controller' => $submenu['controller'], 'action' => $submenu['action']], ['fullBase' => true]) ?>"><?= $submenu['title'] ?></a></li>
 <?php			} ?>
 						</ul>
 					</li>
@@ -158,7 +130,7 @@ if($isSuperUser){
 						$class = ' class="active"';
 					}
 ?>
-							<li<?= $class ?>><a href="<?= $prefixUrl ?><?= $this->Url->build(['prefix' => $prefix, 'controller' => $camelizedTable, 'action' => 'index'], ['fullBase' => false]) ?>"><?= __(Inflector::humanize($table)) ?></a></li>
+							<li<?= $class ?>><a href="<?= $this->Url->build(['prefix' => $prefix, 'controller' => $camelizedTable, 'action' => 'index'], ['fullBase' => true]) ?>"><?= __(Inflector::humanize($table)) ?></a></li>
 <?php			} ?>
 						</ul>
 					</li>
@@ -172,25 +144,9 @@ if($isSuperUser){
 
 <?php if($isSuperAdmin){ // role ?>
 					<li class="submenu">
-						<a href="<?= $prefixUrl ?>/my-users"><i class="fa fa-fw fa-bars"></i><span><?= __('MyUsers') ?></span> </a>
+						<a href="/admin/my-users"><i class="fa fa-fw fa-bars"></i><span><?= __('MyUsers') ?></span> </a>
 					</li>
 <?php } ?>
-
-
-<?php 
-					$class = '';
-					if ($plugin == 'JeffAdmin5' && $controller == 'Setups') {
-						$class = ' class="active"';
-					}
-?>
-
-					<li class="submenu">						
-						<?php // 'plugin' => 'JeffAdmin5',  ?>
-						<?php /*
-							<a href="/jeff-admin5/setups"<?= $class ?>><i class="fa fa-fw fa-cog"></i><span> <?= __('Setups') ?> </span> </a>
-						*/ ?>
-						<a href="/jeff-admin5/setups"<?= $class ?>><i class="fa fa-fw fa-cog"></i><span> <?= __('Setups') ?> </span> </a>
-					</li>
 
 				</ul>
 				<div class="clearfix"></div>

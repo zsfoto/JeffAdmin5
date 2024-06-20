@@ -35,9 +35,17 @@ class AppController extends BaseController
 		$this->queryParamsInSession = json_decode('{}');
 
 		$this->prefix = 'main';
+		
 		if($this->request->getParam('prefix') !== null){
 			$this->prefix 	= strtolower($this->request->getParam('prefix'));	// A főoldali prefix alias neve a configban 'main'
 		}
+		
+		// Így csak az admin prefixben lehet. Mert nem kérdezhető le a prefix, vagy passz...
+		$this->prefix = 'admin';
+		if($this->request->getParam('controller') == 'Setups'){
+			$this->prefix = 'admin';
+		}
+		
 		$this->session 		= $this->getRequest()->getSession();
 		$this->controller 	= $this->request->getParam('controller');
 		$this->action 		= $this->request->getParam('action');		
