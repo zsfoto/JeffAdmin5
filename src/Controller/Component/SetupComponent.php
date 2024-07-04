@@ -156,7 +156,7 @@ class SetupComponent extends Component
 		if($setup === null){
 			$setup = $this->setupTable->newEmptyEntity();
 			//$circularletter = $this->Circularletters->patchEntity($circularletter, $data);
-			$setup->user_id	= 'init';
+			$setup->user_id	= 'default';
 			$setup->slug 	= $slug;
 			$setup->name 	= $data['name'] 	?? __('New value');
 			$setup->type 	= $data['type'] 	?? 'string';
