@@ -76,7 +76,7 @@ if($isSuperUser){
 <?php 	foreach($menus as $menu){ ?>
 <?php		if($menu['type'] == 'menu'){
 					$class = '';
-					if ($menu['controller'] == $controller) {
+					if ($menu['controller'] == $controller && $menu['action'] == $action) {
 						$class = ' class="active"';
 					}
 ?>
@@ -101,7 +101,7 @@ if($isSuperUser){
 <?php
 						foreach($menu['items'] as $submenu){
 							$class = '';
-							if ($plugin == null && $submenu['controller'] == $controller) {
+							if ($plugin == null && $submenu['controller'] == $controller && $submenu['action'] == $action) {
 								$class = ' class="active"';
 								break;
 							}
@@ -113,8 +113,8 @@ if($isSuperUser){
 <?php $active= '';
 				foreach($menu['items'] as $submenu){
 					$class = '';
-					if ($submenu['controller'] == $controller) {
-						$class = ' class="active"';
+					if ($submenu['controller'] == $controller && $submenu['action'] == $action) {
+						$class = ' class="active"'; // config="' . $submenu['controller'] . ', ' . $action . '"' ;
 					}
 ?>
 							<li<?= $class ?>><a href="<?= $prefixUrl ?><?= $this->Url->build(['plugin' => null, 'controller' => $submenu['controller'], 'action' => $submenu['action']], ['fullBase' => false]) ?>"><?= $submenu['title'] ?></a></li>
