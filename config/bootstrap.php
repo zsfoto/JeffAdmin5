@@ -8,10 +8,11 @@
  * @copyright Copyright 2010 - 2018, Cake Development Corporation (https://www.cakedc.com)
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-//die('aaaaaaaa');
 use Cake\Core\Configure;
 
-Configure::write('JeffAdmin', ['version' => '1.0.32']);
+Configure::write('JeffAdmin', [
+	'version' => '1.0.33'
+]);
 
 try {
     Configure::load('sidebarmenu', 'default');
