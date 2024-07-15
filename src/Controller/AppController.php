@@ -15,6 +15,8 @@ class AppController extends BaseController
 	public $action;
 	public $paging;
 	public $config;
+	public $setupTypes;
+	public $dev_mode;
 	public $version;
 	
     /**
@@ -31,6 +33,19 @@ class AppController extends BaseController
         parent::initialize();
 
 		$this->viewBuilder()->setLayout('jeffAdmin5.default');
+
+		$this->setupTypes = [
+			'array' => __('Array'),
+			'bool' => __('Bool'),
+			'float' => __('Float'),
+			'int' => __	('Integer'),
+			'string' => __('String'),
+			'object' => __('Object'),
+			'date' => __('Date'),
+			'time' => __('Time'),
+			'datetime' => __('DateTime'),
+		];
+		$this->set('setupTypes', $this->setupTypes);
 
 		$this->queryParamsInSession = json_decode('{}');
 

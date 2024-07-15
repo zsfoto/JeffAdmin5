@@ -115,7 +115,7 @@ class SetupsController extends AppController
 		}
 		// ############################# SEARCH ############################################		
 
-		$conditions = ['user_id' => 'init'];
+		$conditions = ['user_id' => 'default'];
 
 		// ############################# QUERY #############################################
 		if($search !== ''){
