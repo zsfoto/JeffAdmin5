@@ -83,13 +83,13 @@
 
 					</div>
 				</li>
+<?php } ?>
 
 				<li class="list-inline-item">
 					<a href="/logout" class="nav-link nav-user" role="button" aria-haspopup="false" aria-expanded="false">
 						<i class="fa fa-fw fa-sign-out"></i>
 					</a>
 				</li>
-<?php } ?>
 
 			</ul>
 
