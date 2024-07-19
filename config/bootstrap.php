@@ -10,7 +10,7 @@
  */
 use Cake\Core\Configure;
 
-Configure::write('JeffAdmin', ['version' => '1.0.34']);
+Configure::write('JeffAdmin', ['version' => '1.0.35']);
 
 try {
     Configure::load('sidebarmenu', 'default');
