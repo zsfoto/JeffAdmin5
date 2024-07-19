@@ -107,3 +107,25 @@ a:hover {
   color: #094075;
 }
 
+.title {
+	margin-top: -36px;
+}
+
+/* KeyCloak button */
+.btn.btn-social.btn-keycloak {
+  color: black;
+  border: 1px solid gray;
+  margin-top: 16px;
+  width: 100%;
+  background-color: #bfb;
+  margin-top: 0px;
+}
+
+.btn-keycloak::before {
+	font-family:'FontAwesome';
+	margin-right: 6px;
+	margin-left: -14px;
+	content: "\f084";
+	color: green;
+	font-weight: normal;
+}
