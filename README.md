@@ -166,3 +166,9 @@ $setup_value = $this->Setup->getValue( 'for_eample', [
 
 ```
 
+Don't forget to add the app_local.php:
+```php
+	// This app version
+	'Programversion' => '1.0.0',
+```
+
