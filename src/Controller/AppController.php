@@ -18,6 +18,7 @@ class AppController extends BaseController
 	public $setupTypes;
 	public $dev_mode;
 	public $version;
+	public $programversion;
 	
     /**
      * Initialization hook method.
@@ -90,6 +91,9 @@ class AppController extends BaseController
 
 		$this->version = Configure::read()['JeffAdmin']['version'];
 		$this->set('version', $this->version);
+
+		$this->programversion = Configure::read()['Programversion'];
+		$this->set('programversion', $this->programversion);
 		
 	}
 
