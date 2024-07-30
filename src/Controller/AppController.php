@@ -92,7 +92,7 @@ class AppController extends BaseController
 		$this->version = Configure::read()['JeffAdmin']['version'];
 		$this->set('version', $this->version);
 
-		$this->programversion = Configure::read()['Programversion'];
+		$this->programversion = Configure::read()['Programversion'] ?? null;
 		$this->set('programversion', $this->programversion);
 		
 	}
