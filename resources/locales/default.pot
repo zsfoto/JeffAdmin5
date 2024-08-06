@@ -2159,3 +2159,6 @@ msgstr ""
 
 msgid "Site details"
 msgstr "Oldal alapadatai"
+
+msgid "index"
+msgstr "lista"
