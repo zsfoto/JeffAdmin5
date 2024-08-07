@@ -154,10 +154,12 @@
 		} catch (NotFoundException $e) {
 			// Do something here like redirecting to first or last page.
 			// $e->getPrevious()->getAttributes('pagingParams') will give you required info.
+			$this->Flash->warning(__($e->getMessage()), ['plugin' => 'JeffAdmin5']);
 			$paging = $e->getPrevious()->getAttributes('pagingParams')['pagingParams'];
 			$requestedPage = $paging['requestedPage'];
 
-			// Ha érvénytelen oldalra akar lapozni az URL-ben, akkor az 1. oldalra irányít át.
+			// HU: Ha érvénytelen oldalra akar lapozni az URL-ben, akkor az 1. oldalra irányít át.
+			// EN: If you want to page to an invalid page in the URL, it redirects to page 1.
 			if ($paging['pageCount'] < $paging['requestedPage']){
                 return $this->redirect([
 					'controller' => $this->controller,

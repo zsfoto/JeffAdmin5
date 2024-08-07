@@ -22,16 +22,23 @@
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        ${{ singularName }} = $this->{{ currentModelName }}->get($id);
-        if ($this->{{ currentModelName }}->delete(${{ singularName }})) {
+		$this->request->allowMethod(['post', 'delete']);
+
+		try {
+			${{ singularName }} = $this->{{ currentModelName }}->get((int) $id);
+		} catch (\Cake\Datasource\Exception\RecordNotFoundException $exeption) {
+			$this->Flash->warning(__($exeption->getMessage()), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect(['action' => 'index']);
+		}
+
+		if ($this->{{ currentModelName }}->delete(${{ singularName }})) {
 			$this->session->delete('Layout.' . $this->controller . '.LastId');
-            //$this->Flash->success(__('The {{ singularHumanName|lower }} has been deleted.'), ['plugin' => 'JeffAdmin5']);
-            $this->Flash->success(__('The has been deleted.'), ['plugin' => 'JeffAdmin5']);
-        } else {
-            //$this->Flash->error(__('The {{ singularHumanName|lower }} could not be deleted. Please, try again.'), ['plugin' => 'JeffAdmin5']);
-            $this->Flash->error(__('The has been deleted. Please check the datas and try again.'), ['plugin' => 'JeffAdmin5']);
-        }
+			//$this->Flash->success(__('The {{ singularHumanName|lower }} has been deleted.'), ['plugin' => 'JeffAdmin5']);
+			$this->Flash->success(__('The has been deleted.'), ['plugin' => 'JeffAdmin5']);
+		} else {
+			//$this->Flash->error(__('The {{ singularHumanName|lower }} could not be deleted. Please, try again.'), ['plugin' => 'JeffAdmin5']);
+			$this->Flash->error(__('The has been deleted. Please check the datas and try again.'), ['plugin' => 'JeffAdmin5']);
+		}
 
         return $this->redirect(['action' => 'index']);
     }

@@ -33,31 +33,37 @@
 		//		['back' => true, 'add' => true, 'edit' => false, 'save' => true, 'view' => true, 'delete' => true]
 		//	)
 		//);
-		
+
+		try {
+			${{ singularName }} = $this->{{ currentModelName }}->get((int) $id, contain: {{ Bake.exportArray(belongsToMany)|raw }});
+		} catch (\Cake\Datasource\Exception\RecordNotFoundException $exeption) {
+			$this->Flash->warning(__($exeption->getMessage()), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect(['action' => 'index']);
+		}
+
 		$this->set('title', __('Edit the') . ': ' . __('{{ singularName }}') . ' ' . __('record'));
 		$this->session->write('Layout.' . $this->controller . '.LastId', $id);
-		
-        ${{ singularName }} = $this->{{ currentModelName }}->get($id, contain: {{ Bake.exportArray(belongsToMany)|raw }});
-        if ($this->request->is(['patch', 'post', 'put'])) {
+			
+		if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
 			//debug($data);
-            ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $data);
+			${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $data);
 			//debug(${{ singularName }});
 			//die();
-            if ($this->{{ currentModelName }}->save(${{ singularName }})) {
-                //$this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'), ['plugin' => 'JeffAdmin5']);
-                $this->Flash->success(__('The save has been: OK'), ['plugin' => 'JeffAdmin5']);
+			if ($this->{{ currentModelName }}->save(${{ singularName }})) {
+				//$this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'), ['plugin' => 'JeffAdmin5']);
+				$this->Flash->success(__('The save has been: OK'), ['plugin' => 'JeffAdmin5']);
 
-                //return $this->redirect(['action' => 'index']);
-                return $this->redirect([
+				//return $this->redirect(['action' => 'index']);
+				return $this->redirect([
 					'controller' => $this->controller,
 					'action' => 'index',
 					'#' => ${{ singularName }}->id
 				]);
 
-            }
-            //$this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
-            $this->Flash->error(__('The save has been not. Please check the datas and try again.'), ['plugin' => 'JeffAdmin5']);
+			}
+			//$this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
+			$this->Flash->error(__('The save has been not. Please check the datas and try again.'), ['plugin' => 'JeffAdmin5']);
         }
 {% for assoc in belongsTo|merge(belongsToMany) %}
     {%- set otherName = Bake.getAssociatedTableAlias(modelObj, assoc) %}

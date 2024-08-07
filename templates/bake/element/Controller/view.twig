@@ -32,9 +32,15 @@
 		//	)
 		//);
 
+		try {
+			${{ singularName }} = $this->{{ currentModelName }}->get((int) $id, contain: {{ Bake.exportArray(allAssociations)|raw }});
+		} catch (\Cake\Datasource\Exception\RecordNotFoundException $exeption) {
+			$this->Flash->warning(__($exeption->getMessage()), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect(['action' => 'index']);
+		}
+
 		$this->set('title', __('View the') . ': ' . __('{{ singularName }}') . ' ' . __('record'));
-        ${{ singularName }} = $this->{{ currentModelName }}->get($id, contain: {{ Bake.exportArray(allAssociations)|raw }});
 		$this->session->write('Layout.' . $this->controller . '.LastId', $id);
 		$name = ${{ singularName }}->name;
-        $this->set(compact('{{ singularName }}', 'id', 'name'));
+		$this->set(compact('{{ singularName }}', 'id', 'name'));
     }
