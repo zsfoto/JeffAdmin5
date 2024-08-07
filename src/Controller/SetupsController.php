@@ -186,7 +186,13 @@ class SetupsController extends AppController
 		//);
 
 		$this->set('title', __('View the') . ': ' . __('setup') . ' ' . __('record'));
-        $setup = $this->Setups->get($id, contain: []);
+		try {
+			$setup = $this->Setups->get((int) $id, contain: []);
+		} catch (\Cake\Datasource\Exception\RecordNotFoundException $exeption) {
+			$this->Flash->warning(__($exeption->getMessage()), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect(['action' => 'index']);
+		}
+
 		$this->session->write('Layout.' . $this->controller . '.LastId', $id);
 		$name = $setup->name;
         $this->set(compact('setup', 'id', 'name'));
@@ -249,8 +255,14 @@ class SetupsController extends AppController
 		
 		$this->set('title', __('Edit the') . ': ' . __('setup') . ' ' . __('record'));
 		$this->session->write('Layout.' . $this->controller . '.LastId', $id);
-		
-        $setup = $this->Setups->get($id, contain: []);
+
+		try {
+			$setup = $this->Setups->get((int) $id, contain: []);
+		} catch (\Cake\Datasource\Exception\RecordNotFoundException $exeption) {
+			$this->Flash->warning(__($exeption->getMessage()), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect(['action' => 'index']);
+		}
+
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
 			//dd($data);
@@ -286,7 +298,14 @@ class SetupsController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $setup = $this->Setups->get($id);
+
+		try {
+			$setup = $this->Setups->get((int) $id);
+		} catch (\Cake\Datasource\Exception\RecordNotFoundException $exeption) {
+			$this->Flash->warning(__($exeption->getMessage()), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect(['action' => 'index']);
+		}
+
         if ($this->Setups->delete($setup)) {
 			$this->session->delete('Layout.' . $this->controller . '.LastId');
             //$this->Flash->success(__('The setup has been deleted.'), ['plugin' => 'JeffAdmin5']);
