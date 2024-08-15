@@ -5,6 +5,55 @@ Latest version: 1.0.26
 
 You can install this plugin into your CakePHP application using [composer](https://getcomposer.org).
 
+
+##With Translate
+
+```sql
+CREATE TABLE `i18n` (
+  `id` int(11) NOT NULL,
+  `locale` varchar(6) NOT NULL,
+  `model` varchar(255) NOT NULL,
+  `foreign_key` int(10) NOT NULL,
+  `field` varchar(255) NOT NULL,
+  `content` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `langs` (
+  `id` int(11) NOT NULL,
+  `pos` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `lang` varchar(6) NOT NULL,
+  `visible` tinyint(1) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Languages table';
+
+INSERT INTO `langs` (`id`, `pos`, `name`, `lang`, `visible`) VALUES
+(1, 1, 'Magyar', 'hu', 1),
+(2, 500, 'Angol GB', 'en_GB', 1),
+(3, 500, 'Italian', 'it', 0),
+(4, 500, 'Deutsch', 'de', 1),
+(5, 600, 'Croatian', 'hr', 1);
+
+ALTER TABLE `i18n`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `I18N_LOCALE_FIELD` (`locale`,`model`,`foreign_key`,`field`),
+  ADD KEY `I18N_FIELD` (`model`,`foreign_key`,`field`);
+
+ALTER TABLE `langs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `lang` (`lang`),
+  ADD UNIQUE KEY `Unique_Languages` (`name`,`lang`),
+  ADD KEY `pos` (`pos`);
+
+ALTER TABLE `i18n`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `langs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+```
+
+
+
+
 The recommended way to install composer packages is:
 
 **Install CakePHP 5:**
