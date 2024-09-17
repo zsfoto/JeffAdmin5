@@ -168,7 +168,7 @@ $config = array_merge($global_config, $local_config);
 	//$classLastVisited = '';
 ?>
 
-										<tr row-id="<?= ${{ singularVar }}->id ?>"<?php if(${{ singularVar }}->id == $layout{{ pluralHumanName|replace({' ': ''}) }}LastId){ echo 'class="table-tr-last-id"'; } ?>" prefix="<?= $prefix ?>" controller="<?= $controller ?>" action="<?= $action ?>" aria-expanded="true">
+										<tr row-id="<?= ${{ singularVar }}->id ?>"<?php if(${{ singularVar }}->id == $layout{{ pluralHumanName|replace({' ': ''}) }}LastId){ echo 'class="table-tr-last-id"'; } ?> prefix="<?= $prefix ?>" controller="<?= $controller ?>" action="<?= $action ?>" aria-expanded="true">
 											<td class="row-id-anchor" value="<?= ${{ singularVar }}->id ?>"><a name="<?= ${{ singularVar }}->id ?>" class="anchor"></a></td>
 <?php if($config['show_id']){ ?>
 											<td class="number id" value="<?= ${{ singularVar }}->id ?>"><?= h(${{ singularVar }}->id) ?><a name="<?= ${{ singularVar }}->id ?>"></a></td>
