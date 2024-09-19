@@ -354,15 +354,18 @@ n
 {% for alias, details in relations %}
 {% set otherSingularVar = alias|variable %}
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
+<?php $acticeClass = " active"; ?>
 <?php if (!empty(${{ singularVar }}->{{ details.property }})): ?>
 {% set tabCounter = tabCounter + 1 %}
 {% 	set activeTabClass = '' %}
 {% if tabCounter == 1 %}
 {% 	set activeTabClass = ' active' %}
 {% endif %}
-											<button class="nav-link{{ activeTabClass }}" id="nav-{{ details.property }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ details.property }}" type="button" role="tab" aria-controls="nav-{{ details.property }}" aria-selected="true">
+
+											<button class="nav-link<?= $acticeClass ?>" id="nav-{{ details.property }}-tab" data-bs-toggle="tab" data-bs-target="#nav-{{ details.property }}" type="button" role="tab" aria-controls="nav-{{ details.property }}" aria-selected="true">
 												<?= __('{{ otherPluralHumanName }}') ?>
 											</button>
+<?php 	$acticeClass = ""; ?>
 <?php endif ?>
 {% endfor %}
 										</div>
@@ -378,14 +381,15 @@ n
 {% for alias, details in relations %}
 {% set otherSingularVar = alias|variable %}
 {% set otherPluralHumanName = details.controller|underscore|humanize %}
+<?php $acticeClass = " show active"; ?>
 <?php if (!empty(${{ singularVar }}->{{ details.property }})): ?>
-
 {% set tabContentCounter = tabContentCounter + 1 %}
 {% set activeTabContentClass = '' %}
 {% if tabContentCounter == 1 %}
 {% 	set activeTabContentClass = ' show active' %}
 {% endif %}
-									<div class="tab-pane fade{{ activeTabContentClass }} p-0" id="nav-{{ details.property }}" role="tabpanel" aria-labelledby="nav-{{ details.property }}-tab" tabindex="0">
+
+									<div class="tab-pane fade<?= $acticeClass ?> p-0" id="nav-{{ details.property }}" role="tabpanel" aria-labelledby="nav-{{ details.property }}-tab" tabindex="0">
 
 										<table class="table table-responsive-xl table-hover table-striped" style="">
 											<thead class="thead-info">
@@ -486,6 +490,7 @@ n
 										</table>
 
 									</div><!-- /tab pane -->
+<?php 	$acticeClass = ""; ?>
 <?php endif ?>
 {% endfor %}
 
