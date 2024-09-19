@@ -23,7 +23,7 @@
     public function initialize(): void
     {
         parent::initialize();
-		//$this->config['paginate_limit'] = 10;		
+		//$this->config['paginate_limit'] = 1000;
 	}
 
     /**
@@ -150,6 +150,7 @@
 		// ############################# PAGINATE ############################################
 		try {
 			$this->paginate['{{ currentModelName }}']['limit'] = $this->config['paginate_limit'];
+			$this->paginate['{{ currentModelName }}']['maxLimit'] = $this->config['paginate_limit'];
 			${{ pluralName }} = $this->paginate($query);
 		} catch (NotFoundException $e) {
 			// Do something here like redirecting to first or last page.
