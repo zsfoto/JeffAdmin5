@@ -14,6 +14,8 @@
  */
 #}
 {% set belongsTo = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
+	public $defaultOrder = [];
+	public $conditions 	 = [];
 
     /**
      * Initialize controller
@@ -24,6 +26,8 @@
     {
         parent::initialize();
 		//$this->config['paginate_limit'] = 1000;
+		//$this->defaultOrder 	= ['Uploads.modified' => 'desc'];
+		//$this->conditions 	= ['visible' => true];
 	}
 
     /**
@@ -97,12 +101,11 @@
 		}
 
 		$this->paginate['{{ currentModelName }}']['page'] 	= $page;
-
 		
 		if($sort !== null && $direction !== null){
 			$this->paginate['{{ currentModelName }}']['order'] 	= [$sort => $direction];
 		}else{
-			$this->paginate['Uploads']['order'] 	= [$this->defaultOrder];
+			$this->paginate['{{ currentModelName }}']['order'] 	= [$this->defaultOrder];
 		}
 		
 		// ############################# /.SORT ORDER & PAGE ###############################
@@ -119,8 +122,6 @@
 		}
 		// ############################# /.SEARCH ############################################		
 
-		$conditions = [];
-
 		// ############################# QUERY #############################################
 		if($search !== ''){
 			$showSearchBar	 = true;
@@ -136,6 +137,7 @@
 				]);
 {% else %}
 			$query = $this->{{ currentModelName }}->find()
+				->contain({{ Bake.exportArray(belongsTo)|raw }})
 				->where([
 					'OR' => [
 						'name LIKE' => '%' . $search .  '%',
@@ -146,9 +148,9 @@
 {% endif %}
 		}else{
 {% if belongsTo %}
-			$query = $this->{{ currentModelName }}->find()->contain({{ Bake.exportArray(belongsTo)|raw }})->where($conditions);
+			$query = $this->{{ currentModelName }}->find()->contain({{ Bake.exportArray(belongsTo)|raw }})->where($this->conditions);
 {% else %}
-			$query = $this->{{ currentModelName }}->find()->where($conditions);
+			$query = $this->{{ currentModelName }}->find()->where($this->conditions);
 {% endif %}
 		}
 		// ############################# /.QUERY ###########################################
