@@ -56,7 +56,7 @@
 			$showSearchBar	 = true;
 		}
 
-		// ############################# /.SORT ORDER & PAGE ###############################
+		// ############################# SORT ORDER & PAGE ###############################
 		if($this->session->check('Layout.' . $this->controller . '.queryparams')){
 			$this->queryParamsInSession = json_decode($this->session->read('Layout.' . $this->controller . '.queryparams'));
 		}
@@ -97,7 +97,14 @@
 		}
 
 		$this->paginate['{{ currentModelName }}']['page'] 	= $page;
-		$this->paginate['{{ currentModelName }}']['order'] 	= [$sort => $direction];
+
+		
+		if($sort !== null && $direction !== null){
+			$this->paginate['{{ currentModelName }}']['order'] 	= [$sort => $direction];
+		}else{
+			$this->paginate['Uploads']['order'] 	= [$this->defaultOrder];
+		}
+		
 		// ############################# /.SORT ORDER & PAGE ###############################
 
 		// ############################# SEARCH ############################################
@@ -110,7 +117,7 @@
 			$search = $this->request->getData()['search'];
 			$this->session->write('Layout.' . $this->controller . '.search', $search);
 		}
-		// ############################# SEARCH ############################################		
+		// ############################# /.SEARCH ############################################		
 
 		$conditions = [];
 
