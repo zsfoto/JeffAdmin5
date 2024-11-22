@@ -33,10 +33,9 @@ class DatepickerBehavior extends Behavior
 		//$name = $tableSchema->name();
 		
 		foreach($data as $field => $value){	// Nincs benne a created és a modified mező. Hmm!
-
 			$type = $tableSchema->getColumnType($field);
 			if (in_array($type, ['date', 'time', 'datetime'])) {
-				if ($locale == 'hu_HU') {
+				if (in_array($locale, ['hu', 'hu_HU'])) {
 					if(trim($data[$field]) !== ''){
 						switch( $type ){
 							case 'date': 
@@ -64,6 +63,7 @@ class DatepickerBehavior extends Behavior
 								//$datetime = str_replace(" ", "", $datetime);
 								//$datetime = str_replace(".", "", $datetime);
 								//$datetime = str_replace(":", "", $datetime);
+								//dd($datetime);
 								//$datetime = substr($datetime, 0, 4) . '-' . substr($datetime, 4, 2) . '-' . substr($datetime, 6, 2) . ' ' . substr($datetime, 8, 2) . ':' . substr($datetime, 10, 2) . ':' . substr($datetime, 12, 2) ;
 								//$data[$field] = $datetime;
 								$data[$field] = (string) DateTime::parseDateTime($data[$field], 'YYYY-MM-dd HH:mm:ss')->i18nFormat('YYYY-MM-dd HH:mm:ss');
@@ -85,6 +85,7 @@ class DatepickerBehavior extends Behavior
 
 			} // in_array types
 		}	// /.foreach
+		//dd($data);
 		
 	}
 	
