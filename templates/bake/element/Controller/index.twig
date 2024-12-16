@@ -14,6 +14,9 @@
  */
 #}
 {% set belongsTo = Bake.aliasExtractor(modelObj, 'BelongsTo') %}
+	//public $defaultOrder 	 = ['Pagecategories.name' => 'asc', 'Pages.pos' => 'asc'];	// For example
+	public $defaultOrder 	 = ['id' => 'asc'];
+
     /**
      * Initialize controller
      *
