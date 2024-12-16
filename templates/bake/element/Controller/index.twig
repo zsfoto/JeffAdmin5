@@ -105,7 +105,7 @@
 		if($sort !== null && $direction !== null){
 			$this->paginate['{{ currentModelName }}']['order'] 	= [$sort => $direction];
 		}else{
-			$this->paginate['{{ currentModelName }}']['order'] 	= [$this->defaultOrder];
+			$this->paginate['{{ currentModelName }}']['order'] 	= $this->defaultOrder;
 		}
 		
 		// ############################# /.SORT ORDER & PAGE ###############################
