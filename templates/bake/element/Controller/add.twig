@@ -25,11 +25,9 @@
      */
     public function add()
     {
-		//Configure::write('Theme.admin.config.header_buttons_in_action.add', 
-		//	array_merge(Configure::read('Theme.admin.config.header_buttons_in_action.add'), 
-		//		['back' => true, 'add' => false, 'edit' => false, 'save' => true, 'view' => false, 'delete' => false]
-		//	)
-		//);
+		//Configure::write('Theme.admin.config.header_buttons_in_action.add', array_merge(Configure::read('Theme.admin.config.header_buttons_in_action.add'), 
+		//	['back' => true, 'add' => false, 'edit' => false, 'save' => true, 'view' => false, 'delete' => false]
+		//));
 		
 		$this->set('title', __('Add new') . ': ' . __('{{ singularName }}') . ' ' . __('record'));
         ${{ singularName }} = $this->{{ currentModelName }}->newEmptyEntity();
@@ -37,9 +35,14 @@
 			$data = $this->request->getData();
 			//debug($data);
             ${{ singularName }} = $this->{{ currentModelName }}->patchEntity(${{ singularName }}, $data);
-			//debug(${{ singularName }});
-			//die();
-            if ($this->{{ currentModelName }}->save(${{ singularName }})) {
+			//dd(${{ singularName }});
+			/*
+				if(...){
+					${{ singularName }}->setErrors('field', __('Message'));
+				}
+			*/
+			//dd(${{ singularName }}->getErrors());
+            if (!${{ singularName }}->hasErrors() && $this->{{ currentModelName }}->save(${{ singularName }})) {
                 //$this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'), ['plugin' => 'JeffAdmin5']);
                 $this->Flash->success(__('The save has been: OK'), ['plugin' => 'JeffAdmin5']);
 				$this->session->write('Layout.' . $this->controller . '.LastId', ${{ singularName }}->id);

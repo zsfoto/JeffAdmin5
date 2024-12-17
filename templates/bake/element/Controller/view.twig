@@ -26,11 +26,9 @@
      */
     public function view($id = null)
     {
-		//Configure::write('Theme.admin.config.header_buttons_in_action.view', 
-		//	array_merge(Configure::read('Theme.admin.config.header_buttons_in_action.view'), 
-		//		['back' => true, 'add' => true, 'edit' => true, 'save' => false, 'view' => false, 'delete' => true]
-		//	)
-		//);
+		//Configure::write('Theme.admin.config.header_buttons_in_action.view', array_merge(Configure::read('Theme.admin.config.header_buttons_in_action.view'), 
+		//	['back' => true, 'add' => true, 'edit' => true, 'save' => false, 'view' => false, 'delete' => true]
+		//));
 
 		try {
 			${{ singularName }} = $this->{{ currentModelName }}->get((int) $id, contain: {{ Bake.exportArray(allAssociations)|raw }});

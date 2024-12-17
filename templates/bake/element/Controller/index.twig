@@ -35,11 +35,9 @@
      */
     public function index($clearFilter = null)
     {
-		//Configure::write('Theme.admin.config.header_buttons_in_action.index', 
-		//	array_merge(Configure::read('Theme.admin.config.header_buttons_in_action.index'), 
-		//		['back' => false, 'add' => true, 'edit' => false, 'save' => false, 'view' => false, 'delete' => false]
-		//	)
-		//);
+		//Configure::write('Theme.admin.config.header_buttons_in_action.index', array_merge(Configure::read('Theme.admin.config.header_buttons_in_action.index'), 
+		//	['back' => false, 'add' => true, 'edit' => false, 'save' => false, 'view' => false, 'delete' => false]
+		//));
 
 		$this->set('title', __('Browse the') . ': ' . __('{{ currentModelName }}'));
 		
