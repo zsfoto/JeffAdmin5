@@ -42,6 +42,13 @@ class SetupsController extends AppController
 		//	)
 		//);
 
+		$identity = $this->getRequest()->getAttribute('identity');
+		$identity = $identity->getOriginalData();
+		if($identity->is_superuser !== true){
+			$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect($this->request->referer());
+		}
+
 		$this->set('title', __('Browse the') . ': ' . __('Setups'));
 
 		$queryParams = $this->request->getQuery();
@@ -185,6 +192,13 @@ class SetupsController extends AppController
 		//	)
 		//);
 
+		$identity = $this->getRequest()->getAttribute('identity');
+		$identity = $identity->getOriginalData();
+		if($identity->is_superuser !== true){
+			$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect($this->request->referer());
+		}
+
 		$this->set('title', __('View the') . ': ' . __('setup') . ' ' . __('record'));
 		try {
 			$setup = $this->Setups->get((int) $id, contain: []);
@@ -210,6 +224,13 @@ class SetupsController extends AppController
 		//		['back' => true, 'add' => false, 'edit' => false, 'save' => true, 'view' => false, 'delete' => false]
 		//	)
 		//);
+
+		$identity = $this->getRequest()->getAttribute('identity');
+		$identity = $identity->getOriginalData();
+		if($identity->is_superuser !== true){
+			$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect($this->request->referer());
+		}
 		
 		$this->set('title', __('Add new') . ': ' . __('setup') . ' ' . __('record'));
         $setup = $this->Setups->newEmptyEntity();
@@ -252,6 +273,13 @@ class SetupsController extends AppController
 		//		['back' => true, 'add' => true, 'edit' => false, 'save' => true, 'view' => true, 'delete' => true]
 		//	)
 		//);
+
+		$identity = $this->getRequest()->getAttribute('identity');
+		$identity = $identity->getOriginalData();
+		if($identity->is_superuser !== true){
+			$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect($this->request->referer());
+		}
 		
 		$this->set('title', __('Edit the') . ': ' . __('setup') . ' ' . __('record'));
 		$this->session->write('Layout.' . $this->controller . '.LastId', $id);
@@ -297,6 +325,13 @@ class SetupsController extends AppController
      */
     public function delete($id = null)
     {
+		$identity = $this->getRequest()->getAttribute('identity');
+		$identity = $identity->getOriginalData();
+		if($identity->is_superuser !== true){
+			$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
+			return $this->redirect($this->request->referer());
+		}
+
         $this->request->allowMethod(['post', 'delete']);
 
 		try {

@@ -33,6 +33,8 @@ class AppController extends BaseController
     public function initialize(): void
     {
         parent::initialize();
+		
+		$this->loadComponent('Flash');
 
 		$this->viewBuilder()->setLayout('jeffAdmin5.default');
 

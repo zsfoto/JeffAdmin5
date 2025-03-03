@@ -7,7 +7,7 @@
 
 	<section class="login-content">
 		<div class="logo">
-			<h1><?= __('PDF számlák') ?></h1>
+			<h1><?= __('Login') ?></h1>
 		</div>
 
 		<div class="login-box">
@@ -15,9 +15,9 @@
 			<?= $this->Form->create(null, ['class'=>"login-form"]) ?>
 				<h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i><?= __('Sign In') ?></h3>
 				<div class="form-group">
-					<label for="email" class="control-label"><?= __('E-mail cím') ?></label>
+					<label for="username" class="control-label"><?= __('E-mail cím') ?></label>
 					<!--input class="form-control" type="text" placeholder="Email" autofocus-->
-					<?= $this->Form->control('email', ['label'=>FALSE, 'class'=>'form-control', 'placeholder'=>__('E-mail'), 'data-error'=>__('Input valid email'), 'required'=>'required', 'autofocus'=>true]) ?>
+					<?= $this->Form->control('username', ['label'=>FALSE, 'class'=>'form-control', 'placeholder'=>__('E-mail'), 'data-error'=>__('Input valid email'), 'required'=>'required', 'autofocus'=>true]) ?>
 				</div>
 				<div class="form-group">
 					<label class="control-label"><?= __('Password') ?></label>
