@@ -42,11 +42,13 @@ class SetupsController extends AppController
 		//	)
 		//);
 
-		$identity = $this->getRequest()->getAttribute('identity');
-		$identity = $identity->getOriginalData();
-		if($identity->is_superuser !== true){
-			$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
-			return $this->redirect($this->request->referer());
+		$identity = $this->getRequest()->getAttribute('identity') ?? null;
+		if($identity !== null){
+		    $identity = $identity->getOriginalData();
+            if($identity->is_superuser !== true){
+				$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
+				return $this->redirect($this->request->referer());
+			}
 		}
 
 		$this->set('title', __('Browse the') . ': ' . __('Setups'));
@@ -226,10 +228,12 @@ class SetupsController extends AppController
 		//);
 
 		$identity = $this->getRequest()->getAttribute('identity');
-		$identity = $identity->getOriginalData();
-		if($identity->is_superuser !== true){
-			$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
-			return $this->redirect($this->request->referer());
+		if($identity !== null){
+			$identity = $identity->getOriginalData();
+			if($identity->is_superuser !== true){
+				$this->Flash->warning(__('You do not have permission to perform this operation!'), ['plugin' => 'JeffAdmin5']);
+				return $this->redirect($this->request->referer());
+			}
 		}
 		
 		$this->set('title', __('Add new') . ': ' . __('setup') . ' ' . __('record'));
