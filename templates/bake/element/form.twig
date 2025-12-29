@@ -165,7 +165,7 @@ $this->assign('title', __('{{ action|humanize }}') . ' ' . __('{{ singularHumanN
 											<div class="mb-3 form-group row text required">
 												<label class="col-form-label col-md-2 pt-1 text-start text-md-end{{ required }}" for="{{field|replace({'_': '-'})}}"><?= __('{{field|humanize}}') ?>:</label>
 												<div class="col-md-9">
-													<?= $this->Form->control('{{ field }}', ['label' => __('{{field|humanize}}'), 'placeholder' => __('{{field|humanize}}'), 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
+													<?= $this->Form->control('{{ field }}', ['label' => false, 'placeholder' => __('{{field|humanize}}'), 'class' => 'form-control', 'empty' => {{ empty }}{{ value }}{{ autococus }}]); ?>
 
 												</div>
 											</div>
