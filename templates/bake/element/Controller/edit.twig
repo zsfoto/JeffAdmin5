@@ -55,7 +55,7 @@
 			//dd(${{ singularName }}->getErrors());
 			if (!${{ singularName }}->hasErrors() && $this->{{ currentModelName }}->save(${{ singularName }})) {
 				//$this->Flash->success(__('The {{ singularHumanName|lower }} has been saved.'), ['plugin' => 'JeffAdmin5']);
-				$this->Flash->success(__('The save has been: OK'), ['plugin' => 'JeffAdmin5']);
+				$this->Flash->success(__(Save: OK'), ['plugin' => 'JeffAdmin5']);
 
 				//return $this->redirect(['action' => 'index']);
 				return $this->redirect([
@@ -66,7 +66,7 @@
 
 			}
 			//$this->Flash->error(__('The {{ singularHumanName|lower }} could not be saved. Please, try again.'), ['plugin' => 'JeffAdmin5']);
-			$this->Flash->error(__('The save has been not. Please check the datas and try again.'), ['plugin' => 'JeffAdmin5']);
+			$this->Flash->error(__('Failed to save. Please check datas and try again.'), ['plugin' => 'JeffAdmin5']);
         }
 {% for assoc in belongsTo|merge(belongsToMany) %}
     {%- set otherName = Bake.getAssociatedTableAlias(modelObj, assoc) %}
