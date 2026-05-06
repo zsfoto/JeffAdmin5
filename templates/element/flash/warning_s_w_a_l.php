@@ -10,6 +10,6 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 ?>
 		Swal.fire({
 		  title: "<?= __("Warning") ?>",
-		  text: "<?= $message ?>",
+		  html: "<?= $message ?>",
 		  icon: "warning"
 		});
